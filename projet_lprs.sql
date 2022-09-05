@@ -155,7 +155,7 @@ ADD CONSTRAINT `fk_creer_offre_offre` FOREIGN KEY(`ref_offre`) REFERENCES `offre
 ADD CONSTRAINT `fk_creer_offre_entreprise` FOREIGN KEY(`ref_entreprise`) REFERENCES `entreprise`(`id_entreprise`);
 
 ALTER TABLE `postule` 
-ADD CONSTRAINT `fk_postule_offre` FOREIGN KEY(`ref_evenement`) REFERENCES `offre` (`id_offre`),
+ADD CONSTRAINT `fk_postule_offre` FOREIGN KEY(`ref_offre`) REFERENCES `offre` (`id_offre`),
 ADD CONSTRAINT `fk_postule_etudiant` FOREIGN KEY(`ref_etudiant`) REFERENCES `etudiant` (`id_etudiant`);
 
 ALTER TABLE `organise` 
