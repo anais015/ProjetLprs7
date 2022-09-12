@@ -169,9 +169,13 @@ ADD CONSTRAINT `fk_connexion_etudiant` FOREIGN KEY(`ref_etudiant`) REFERENCES `e
 
 ALTER TABLE `etudiant` CHANGE `valide` `valide` BOOLEAN NOT NULL DEFAULT FALSE;
 ALTER TABLE `entreprise` CHANGE `valide` `valide` BOOLEAN NOT NULL DEFAULT FALSE;
+ALTER TABLE `evenement` CHANGE `valide` `valide` BOOLEAN NOT NULL DEFAULT FALSE;
 
 ALTER TABLE `rdv` CHANGE `ref_etudiant` `ref_etudiant` INT(11) NULL;
-
+ALTER TABLE `evenement` CHANGE `ref_salle` `ref_salle` INT(11) NULL;
+ALTER TABLE `evenement` CHANGE `ref_entreprise` `ref_entreprise` INT(11) NULL;
+ALTER TABLE `evenement` CHANGE `ref_etudiant` `ref_etudiant` INT(11) NULL;
+ALTER TABLE `evenement` CHANGE `ref_administrateur` `ref_administrateur` INT(11) NULL;
 
 
 
