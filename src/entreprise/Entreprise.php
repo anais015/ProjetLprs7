@@ -10,29 +10,16 @@ class Entreprise extends Utilisateur
     private $role_societe;
     private $valide;
 
-    public function __construct($id,$nom,$prenom,$email,$password,$nom_entreprise,$cp_entreprise,$role_societe,$rue_entreprise,$ville_entreprise,$valide){
+    public function __construct(array $donnees){
 
-        parent::__construct($id,$nom,$prenom,$email,$password);
-
-        $this->setId($id);
-        $this->setNom($nom);
-        $this->setPrenom($prenom);
-        $this->setEmail($email);
-        $this->setPassword($password);
-
-        $this->setNomEntreprise($nom_entreprise);
-        $this->setRueEntreprise($rue_entreprise);
-        $this->setCpEntreprise($cp_entreprise);
-        $this->setRoleSociete($role_societe);
-        $this->setValide($valide);
-        $this->setVilleEntreprise($ville_entreprise);
+        parent::__construct($donnees);
 
     }
 
     /**
      * @return mixed
      */
-    public function getNomEntreprise()
+    public function getNom_entreprise()
     {
         return $this->nom_entreprise;
     }
@@ -40,7 +27,7 @@ class Entreprise extends Utilisateur
     /**
      * @param mixed $nom_entreprise
      */
-    public function setNomEntreprise($nom_entreprise)
+    public function setNom_entreprise($nom_entreprise)
     {
         $this->nom_entreprise = $nom_entreprise;
     }
@@ -48,7 +35,7 @@ class Entreprise extends Utilisateur
     /**
      * @return mixed
      */
-    public function getRueEntreprise()
+    public function getRue_entreprise()
     {
         return $this->rue_entreprise;
     }
@@ -56,7 +43,7 @@ class Entreprise extends Utilisateur
     /**
      * @param mixed $rue_entreprise
      */
-    public function setRueEntreprise($rue_entreprise)
+    public function setRue_entreprise($rue_entreprise)
     {
         $this->rue_entreprise = $rue_entreprise;
     }
@@ -64,7 +51,7 @@ class Entreprise extends Utilisateur
     /**
      * @return mixed
      */
-    public function getVilleEntreprise()
+    public function getVille_entreprise()
     {
         return $this->ville_entreprise;
     }
@@ -72,7 +59,7 @@ class Entreprise extends Utilisateur
     /**
      * @param mixed $ville_entreprise
      */
-    public function setVilleEntreprise($ville_entreprise)
+    public function setVille_entreprise($ville_entreprise)
     {
         $this->ville_entreprise = $ville_entreprise;
     }
@@ -80,7 +67,7 @@ class Entreprise extends Utilisateur
     /**
      * @return mixed
      */
-    public function getCpEntreprise()
+    public function getCp_entreprise()
     {
         return $this->cp_entreprise;
     }
@@ -88,7 +75,7 @@ class Entreprise extends Utilisateur
     /**
      * @param mixed $cp_entreprise
      */
-    public function setCpEntreprise($cp_entreprise)
+    public function setCp_entreprise($cp_entreprise)
     {
         $this->cp_entreprise = $cp_entreprise;
     }
@@ -96,7 +83,7 @@ class Entreprise extends Utilisateur
     /**
      * @return mixed
      */
-    public function getRoleSociete()
+    public function getRole_societe()
     {
         return $this->role_societe;
     }
@@ -104,7 +91,7 @@ class Entreprise extends Utilisateur
     /**
      * @param mixed $role_societe
      */
-    public function setRoleSociete($role_societe)
+    public function setRole_societe($role_societe)
     {
         $this->role_societe = $role_societe;
     }
