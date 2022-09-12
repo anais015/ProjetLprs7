@@ -167,7 +167,8 @@ ADD CONSTRAINT `fk_connexion_administrateur` FOREIGN KEY(`ref_administrateur`) R
 ADD CONSTRAINT `fk_connexion_entreprise` FOREIGN KEY(`ref_entreprise`) REFERENCES `entreprise`(`id_entreprise`),
 ADD CONSTRAINT `fk_connexion_etudiant` FOREIGN KEY(`ref_etudiant`) REFERENCES `etudiant`(`id_etudiant`);
 
-
+ALTER TABLE `etudiant` CHANGE `valide` `valide` BOOLEAN NOT NULL DEFAULT FALSE;
+ALTER TABLE `entreprise` CHANGE `valide` `valide` BOOLEAN NOT NULL DEFAULT FALSE;
 
 
 
