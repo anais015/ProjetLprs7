@@ -22,7 +22,7 @@ class Administrateur extends Utilisateur
             "nom"=>$this->getNom(),
             "prenom"=>$this->getPrenom(),
             "mail"=>$this->getEmail(),
-            "mdp"=>$this->getPassword()
+            "mdp"=>$this->getMot_de_passe()
         ));
     }
 }

@@ -6,7 +6,7 @@ abstract class Utilisateur
     protected $nom;
     protected $prenom;
     protected $email;
-    protected $password;
+    protected $mot_de_passe;
 
     protected function __construct(array $donnees)
     {
@@ -63,14 +63,14 @@ abstract class Utilisateur
         $this->email = $email;
     }
 
-    protected function getPassword()
+    protected function getMot_de_passe()
     {
-        return $this->password;
+        return $this->mot_de_passe;
     }
 
-    protected function setPassword($password)
+    protected function setMot_de_passe($mot_de_passe)
     {
-        $this->password = $password;
+        $this->mot_de_passe = $mot_de_passe;
     }
 
 }
