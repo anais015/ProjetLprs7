@@ -7,97 +7,87 @@ class Rdv
     private $heure;
     private $lieu;
     private $accepte;
+    private $refOffre;
+    private $refEntreprise;
+    private $refEtudiant;
 
-    public function __construct($id, $date, $heure, $lieu, $accepte)
+    public function __construct(array $donnees)
     {
-        $this->id = $id;
-        $this->date = $date;
-        $this->heure = $heure;
-        $this->lieu = $lieu;
-        $this->accepte = $accepte;
+        $this->hydrate($donnees);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getId()
+    public function hydrate(array $donnees)
     {
+        foreach ($donnees as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
+    }
+
+    public function getId() {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
+    public function setId($id): void {
         $this->id = $id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDate()
-    {
+    public function getDate() {
         return $this->date;
     }
 
-    /**
-     * @param mixed $date
-     */
-    public function setDate($date)
-    {
+    public function setDate($date): void {
         $this->date = $date;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getHeure()
-    {
+    public function getHeure() {
         return $this->heure;
     }
 
-    /**
-     * @param mixed $heure
-     */
-    public function setHeure($heure)
-    {
+    public function setHeure($heure): void {
         $this->heure = $heure;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLieu()
-    {
+    public function getLieu() {
         return $this->lieu;
     }
 
-    /**
-     * @param mixed $lieu
-     */
-    public function setLieu($lieu)
-    {
+    public function setLieu($lieu): void {
         $this->lieu = $lieu;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAccepte()
-    {
+    public function getAccepte() {
         return $this->accepte;
     }
 
-    /**
-     * @param mixed $accepte
-     */
-    public function setAccepte($accepte)
-    {
+    public function setAccepte($accepte): void {
         $this->accepte = $accepte;
     }
 
+    public function getRefOffre() {
+        return $this->refOffre;
+    }
 
+    public function setRefOffre($refOffre): void {
+        $this->refOffre = $refOffre;
+    }
 
+    public function getRefEntreprise() {
+        return $this->refEntreprise;
+    }
+
+    public function setRefEntreprise($refEntreprise): void {
+        $this->refEntreprise = $refEntreprise;
+    }
+
+    public function getRefEtudiant() {
+        return $this->refEtudiant;
+    }
+
+    public function setRefEtudiant($refEtudiant): void {
+        $this->refEtudiant = $refEtudiant;
+    }
 
 }
