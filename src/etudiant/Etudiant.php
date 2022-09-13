@@ -14,7 +14,7 @@ class Etudiant extends Utilisateur
         return $this->domaine_etude;
     }
 
-    public function setDomaineEtude($domaine_etude): void {
+    public function setDomaine_etude($domaine_etude): void {
         $this->domaine_etude = $domaine_etude;
     }
 
@@ -78,7 +78,7 @@ class Etudiant extends Utilisateur
         $sql = 'UPDATE etudiant SET nom =:nom, prenom=:prenom, email=:email, domaine_etude=:domaine_etude WHERE  id_etudiant =:id_etudiant';
         $request = $bdd->prepare($sql);
         $execute=$request->execute(array(
-            'id_etudiant'=>$this->id_etudiant,
+            'id_etudiant'=>$this->id,
             'nom'=> $this->nom,
             'prenom'=> $this->prenom,
             'email'=> $this->email,
