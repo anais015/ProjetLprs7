@@ -4,10 +4,37 @@ class Etudiant extends Utilisateur
 {
     private $domaine_etude;
     private $valide;
+    private Evenement $evenement;
 
     public function __construct(array $donnees){
         parent::__construct($donnees);
     }
+
+    public function getDomaineEtude() {
+        return $this->domaine_etude;
+    }
+
+    public function setDomaineEtude($domaine_etude): void {
+        $this->domaine_etude = $domaine_etude;
+    }
+
+    public function getValide() {
+        return $this->valide;
+    }
+
+    public function setValide($valide): void {
+        $this->valide = $valide;
+    }
+
+    public function getEvenement(): Evenement {
+        return $this->evenement;
+    }
+
+    public function setEvenement(Evenement $evenement): void {
+        $this->evenement = $evenement;
+    }
+
+
 
     public function inscription($bdd){
         $sql ='SELECT * FROM etudiant WHERE email = :email ';
