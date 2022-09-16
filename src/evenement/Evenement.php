@@ -109,6 +109,30 @@ class Evenement
         $this->refAdmin = $refAdmin;
     }
 
+    public function modifierEvenement ($bdd){
+        $sql='UPDATE evenement SET nom=:nom, description=:description, date=:date, heure=:heure, duree=:duree
+              WHERE id_evenement=:id_evenement';
+        $request=$bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'nom'=> $this->nom,
+            'description'=> $this->description,
+            'date'=> $this->date,
+            'heure'=> $this->heure,
+            'duree'=> $this->duree,
+            'id_evenement'=>$this->id
+        ));
+        if ($execute) return true;
+        else return false;
+    }
+
+    public function supprimerEvenement ($bdd){
+        $sql='DELETE FROM evenement WHERE id_evenement=:id_evenement';
+        $request=$bdd->prepare($sql);
+        $execute=$request->execute(array('id_evenement'=>$this->id));
+        if($execute) return true;
+        else return false;
+    }
+
     public function etudiantOrganiseEvenement ($bdd){
         $sql ='SELECT * FROM evenement WHERE date=:date AND heure=:heure AND ref_etudiant=:ref_etudiant';
         $request = $bdd->prepare($sql);
