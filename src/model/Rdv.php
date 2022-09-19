@@ -34,6 +34,16 @@ class Rdv
         return $request->fetchall();
     }
 
+    public function creation($bdd){
+        $sql='INSERT INTO rdv (date, heure, lieux) VALUES :date, :heure,:lieux';
+        $request = $bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'date' => $this->date,
+            'heure' => $this->heure,
+            'lieux' =>$this->lieux
+        ));
+    }
+
     public function getId() {
         return $this->id;
     }

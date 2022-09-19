@@ -40,6 +40,18 @@ class Offre
         return $request->fetchall();
     }
 
+    public function creation($bdd){
+        $sql='INSERT INTO offre (titre, description, domaine, refType) 
+        VALUES :titre, :description, :domaine, :ref_type';
+        $request = $bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'titre' => $this->titre,
+            'description' => $this->description,
+            'domaine' =>$this->domaine,
+            'refType' => $this->refType
+        ));
+    }
+
     /**
      * @return mixed
      */
