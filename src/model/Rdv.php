@@ -5,7 +5,7 @@ class Rdv
     private $id;
     private $date;
     private $heure;
-    private $lieu;
+    private $lieux;
     private $accepte;
     private $refOffre;
     private $refEntreprise;
@@ -50,12 +50,12 @@ class Rdv
         $this->heure = $heure;
     }
 
-    public function getLieu() {
-        return $this->lieu;
+    public function getLieux() {
+        return $this->lieux;
     }
 
-    public function setLieu($lieu): void {
-        $this->lieu = $lieu;
+    public function setLieux($lieux): void {
+        $this->lieux = $lieux;
     }
 
     public function getAccepte() {

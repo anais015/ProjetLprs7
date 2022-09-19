@@ -13,7 +13,6 @@ class Entreprise extends Utilisateur
     public function __construct(array $donnees){
 
         parent::__construct($donnees);
-
     }
 
     /**
@@ -112,5 +111,47 @@ class Entreprise extends Utilisateur
         $this->valide = $valide;
     }
 
+    public function connexion($bdd){
+        $sql='SELECT * FROM entreprise WHERE email=:email AND mot_de_passe=:mot_de_passe AND valide=1';
+        $request = $bdd->prepare($sql);
+        $execute = $request->execute(array(
+            'email'=>$this->email,
+            'mot_de_passe'=>$this->mot_de_passe
+        ));
+        if ($execute){
+            $result=$request->fetch();
+            if(is_array($result)) return $result;
+            else return false;
+        }
+        else return false;
+    }
 
+    public function inscription($bdd){
+        $sql ='SELECT * FROM entreprise WHERE email = :email ';
+        $request = $bdd->prepare($sql);
+        $execute = $request->execute(array('email'=> $this->email));
+        if($execute) {
+            $result = $request->fetch();
+            if (is_array($result)) return false;
+        }
+        else {
+            $sql='INSERT INTO entreprise (nom, prenom ,nom_entreprise, 
+                        rue_entreprise, ville_entreprise, cp_entreprise, email, mot_de_passe, role_societe) 
+            VALUES (:nom, :prenom, :nom_entreprise, :rue_entreprise, :ville_entreprise, :cp_entreprise, :email, :mot_de_passe, :role_societe)';
+            $request = $bdd->prepare($sql);
+            $execute=$request->execute(array(
+                'nom'=> $this->nom,
+                'prenom'=> $this->prenom,
+                'nom_entreprise'=> $this->nom_entreprise,
+                'rue_entreprise'=> $this->rue_entreprise,
+                'ville_entreprise' => $this->ville_entreprise,
+                'cp_entreprise' => $this->cp_entreprise,
+                'email'=> $this->email,
+                'mot_de_passe'=> $this->mot_de_passe,
+                'role_societe' => $this->role_societe
+            ));
+            if($execute)return true;
+            else return false;
+        }
+    }
 }
