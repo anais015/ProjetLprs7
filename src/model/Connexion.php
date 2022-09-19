@@ -1,10 +1,8 @@
 <?php
 
-class Connexion
+class  Connexion
 {
     private $idconnexion;
-    private $date;
-    private $heure;
     private $refetudiant;
     private $refadministrateur;
     private $refentreprise;
@@ -23,6 +21,27 @@ class Connexion
         }
     }
 
+    public function ajoutConnexionEtudiant(BDD $bdd){
+        $req=$bdd->getBdd()->prepare('INSERT INTO connexion(date, heure, ref_etudiant) VALUES (CURDATE(),CURTIME(),:refetudiant)');
+        $req->execute(array(
+            "refetudiant"=>$this->getRefetudiant()
+        ));
+    }
+
+    public function ajoutConnexionEntreprise(BDD $bdd){
+        $req=$bdd->getBdd()->prepare('INSERT INTO connexion(date, heure, ref_entreprise) VALUES (CURDATE(),CURTIME(),:refentreprise)');
+        $req->execute(array(
+            "refentreprise"=>$this->getRefentreprise()
+        ));
+    }
+
+    public function ajoutConnexionAdministrateur(BDD $bdd){
+        $req=$bdd->getBdd()->prepare('INSERT INTO connexion(date, heure, ref_administrateur) VALUES (CURDATE(),CURTIME(),:refadministrateur)');
+        $req->execute(array(
+            "refadministrateur"=>$this->getRefadministrateur()
+        ));
+    }
+
     /**
      * @return mixed
      */
@@ -37,38 +56,6 @@ class Connexion
     public function setIdconnexion($idconnexion)
     {
         $this->idconnexion = $idconnexion;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * @param mixed $date
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getHeure()
-    {
-        return $this->heure;
-    }
-
-    /**
-     * @param mixed $heure
-     */
-    public function setHeure($heure)
-    {
-        $this->heure = $heure;
     }
 
     /**

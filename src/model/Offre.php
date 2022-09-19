@@ -7,6 +7,7 @@ class Offre
     private $description;
     private $domaine;
     private $accepte;
+    private $refType;
 
     /**
      * @param $id
@@ -15,13 +16,40 @@ class Offre
      * @param $domaine
      * @param $accepte
      */
-    public function __construct($id, $titre, $description, $domaine, $accepte)
+
+    public function __construct(array $donnees)
     {
-        $this->id = $id;
-        $this->titre = $titre;
-        $this->description = $description;
-        $this->domaine = $domaine;
-        $this->accepte = $accepte;
+        $this->hydrate($donnees);
+    }
+
+    public function hydrate(array $donnees)
+    {
+        foreach ($donnees as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
+    }
+
+    public function affichage($bdd){
+        $sql='SELECT * FROM offre';
+        $request = $bdd->prepare($sql);
+        $execute = $request->execute(array(
+        ));
+        return $request->fetchall();
+    }
+
+    public function creation($bdd){
+        $sql='INSERT INTO offre (titre, description, domaine, refType) 
+        VALUES :titre, :description, :domaine, :ref_type';
+        $request = $bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'titre' => $this->titre,
+            'description' => $this->description,
+            'domaine' =>$this->domaine,
+            'refType' => $this->refType
+        ));
     }
 
     /**
@@ -104,6 +132,20 @@ class Offre
         $this->accepte = $accepte;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRefType()
+    {
+        return $this->refType;
+    }
 
+    /**
+     * @param mixed $refType
+     */
+    public function setRefType($refType): void
+    {
+        $this->refType = $refType;
+    }
 
 }
