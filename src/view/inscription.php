@@ -16,7 +16,9 @@ if(isset($_POST['selectIdentity'])) {
                 <input type='email' placeholder='Email' name='email' required>
 
                 <label for='password'><b>Mot de passe</b></label>
-                <input type='password' placeholder='Password' name='password' required>";
+                <input type='password' placeholder='Password' name='password' required>
+                <input type='submit' name='inscription' id='inscription'>
+            </form>";
     }
     if ($_POST['selectIdentity'] == 'entreprise') {
         $placeHolder = 'Entreprise';
@@ -47,7 +49,9 @@ if(isset($_POST['selectIdentity'])) {
                 <input type='email' placeholder='Email' name='email' required>
 
                 <label for='password'><b>Mot de passe</b></label>
-                <input type='password' placeholder='Password' name='password' required>";
+                <input type='password' placeholder='Password' name='password' required>
+                <input type='submit' name='inscription' id='inscription'>
+            </form>";
     }
 
     if ($_POST['selectIdentity'] == 'etudiant') {
@@ -67,7 +71,9 @@ if(isset($_POST['selectIdentity'])) {
                 <input type='email' placeholder='Email' name='email' required>
 
                 <label for='password'><b>Mot de passe</b></label>
-                <input type='password' placeholder='Password' name='password' required>";
+                <input type='password' placeholder='Password' name='password' required>
+                <input type='submit' name='inscription' id='inscription'>
+            </form>";
     }
 }
 ?>
@@ -101,9 +107,7 @@ if(isset($_POST['selectIdentity'])) {
                     <option value="etudiant">Etudiant</option>
                 </select>
             </form>
-                <?=$table;?>
-                <input type='submit' name='inscription' id='inscription'>Enregistrer</input>
-            </form>
+            <?=$table;?>
 
         </div>
     </div>
