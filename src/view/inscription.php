@@ -5,7 +5,7 @@ if(isset($_POST['selectIdentity'])) {
     if ($_POST['selectIdentity'] == 'administrateur') {
         $placeHolder = 'Administrateur';
         $table .= "
-                <form action='' method='POST'>    
+                <form action='../traitement/administration/inscriptionadmin.php' method='POST'>    
                 <label for='nom'><b>Nom</b></label>
                 <input type='text' placeholder='Nom' name='nom'  required>
                 
