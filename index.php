@@ -13,9 +13,9 @@
 <nav>
     <div class="bottom-row">
         <a href="">Accueil</a>
-        <a href="connexion.php">Se Connecter</a>
-        <a href="inscription.php">S'inscrire</a>
-        <a href="contact.php">Contact</a>
+        <a href="src/view/connexion.php">Se Connecter</a>
+        <a href="src/view/inscription.php">S'inscrire</a>
+        <a href="#">Contact</a>
     </div>
 </nav>
 
