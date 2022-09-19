@@ -171,7 +171,7 @@ ALTER TABLE `etudiant` CHANGE `valide` `valide` BOOLEAN NOT NULL DEFAULT FALSE;
 ALTER TABLE `entreprise` CHANGE `valide` `valide` BOOLEAN NOT NULL DEFAULT FALSE;
 
 ALTER TABLE `rdv` CHANGE `ref_etudiant` `ref_etudiant` INT(11) NULL;
-
+ALTER TABLE `rdv` CHANGE `accepte` `accepte` TINYINT(1) NULL;
 
 
 
