@@ -1,6 +1,6 @@
 <?php
 
-class Connexion
+class  Connexion
 {
     private $idconnexion;
     private $date;
@@ -21,6 +21,27 @@ class Connexion
                 $this->$method($value);
             }
         }
+    }
+
+    public function ajoutConnexionEtudiant(BDD $bdd){
+        $req=$bdd->getBdd()->prepare('INSERT INTO connexion(date, heure, refetudiant) VALUES (CURDATE(),CURTIME(),:refetudiant)');
+        $req->execute(array(
+            "refetudiant"=>$this->getRefetudiant()
+        ));
+    }
+
+    public function ajoutConnexionEntreprise(BDD $bdd){
+        $req=$bdd->getBdd()->prepare('INSERT INTO connexion(date, heure, refentreprise) VALUES (CURDATE(),CURTIME(),:refentreprise)');
+        $req->execute(array(
+            "refentreprise"=>$this->getRefentreprise()
+        ));
+    }
+
+    public function ajoutConnexionAdministrateur(BDD $bdd){
+        $req=$bdd->getBdd()->prepare('INSERT INTO connexion(date, heure, refadministrateur) VALUES (CURDATE(),CURTIME(),:refadministrateur)');
+        $req->execute(array(
+            "refadministrateur"=>$this->getRefadministrateur()
+        ));
     }
 
     /**
