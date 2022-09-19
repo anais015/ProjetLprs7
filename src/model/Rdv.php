@@ -26,6 +26,14 @@ class Rdv
         }
     }
 
+    public function affichage($bdd){
+        $sql='SELECT * FROM rdv WHERE ref_entreprise=?, ref_etudiant=?';
+        $request = $bdd->prepare($sql);
+        $execute = $request->execute(array(
+        ));
+        return $request->fetchall();
+    }
+
     public function getId() {
         return $this->id;
     }
