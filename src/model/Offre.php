@@ -31,6 +31,14 @@ class Offre
         }
     }
 
+    public function affichage($bdd){
+        $sql='SELECT * FROM offre';
+        $request = $bdd->prepare($sql);
+        $execute = $request->execute(array(
+        ));
+        return $request->fetchall();
+    }
+
     /**
      * @return mixed
      */
@@ -110,7 +118,5 @@ class Offre
     {
         $this->accepte = $accepte;
     }
-
-
 
 }
