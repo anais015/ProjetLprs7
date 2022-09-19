@@ -1,6 +1,6 @@
 <?php
 
-class Connexion
+class  Connexion
 {
     private $idconnexion;
     private $date;
