@@ -154,4 +154,24 @@ class Entreprise extends Utilisateur
             else return false;
         }
     }
+
+    public function modification ($bdd){
+        $sql = 'UPDATE entreprise SET nom =:nom, prenom=:prenom, nom_entreprise=:nom_entreprise,
+                      rue_entreprise=:rue_entreprise, ville_entreprise=:ville_entreprise, cp_entreprise=:cp_entreprise,
+                      email=:email, role_societe=:role_societe WHERE id_entreprise =:id_entreprise';
+        $request = $bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'id_entreprise'=>$this->id,
+            'nom'=> $this->nom,
+            'prenom'=> $this->prenom,
+            'nom_entreprise'=> $this->nom_entreprise,
+            'rue_entreprise'=> $this->rue_entreprise,
+            'ville_entreprise' => $this->ville_entreprise,
+            'cp_entreprise' => $this->cp_entreprise,
+            'email'=> $this->email,
+            'role_societe' => $this->role_societe
+        ));
+        if($execute) return true;
+        else return false;
+    }
 }
