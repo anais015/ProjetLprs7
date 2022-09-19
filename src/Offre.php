@@ -15,13 +15,20 @@ class Offre
      * @param $domaine
      * @param $accepte
      */
-    public function __construct($id, $titre, $description, $domaine, $accepte)
+
+    public function __construct(array $donnees)
     {
-        $this->id = $id;
-        $this->titre = $titre;
-        $this->description = $description;
-        $this->domaine = $domaine;
-        $this->accepte = $accepte;
+        $this->hydrate($donnees);
+    }
+
+    public function hydrate(array $donnees)
+    {
+        foreach ($donnees as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
     }
 
     /**
