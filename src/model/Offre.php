@@ -7,6 +7,7 @@ class Offre
     private $description;
     private $domaine;
     private $accepte;
+    private $refType;
 
     /**
      * @param $id
@@ -117,6 +118,22 @@ class Offre
     public function setAccepte($accepte)
     {
         $this->accepte = $accepte;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRefType()
+    {
+        return $this->refType;
+    }
+
+    /**
+     * @param mixed $refType
+     */
+    public function setRefType($refType): void
+    {
+        $this->refType = $refType;
     }
 
 }
