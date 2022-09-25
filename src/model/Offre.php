@@ -7,6 +7,7 @@ class Offre
     private $description;
     private $domaine;
     private $accepte;
+    private $refType;
 
     /**
      * @param $id
@@ -37,6 +38,18 @@ class Offre
         $execute = $request->execute(array(
         ));
         return $request->fetchall();
+    }
+
+    public function creation($bdd){
+        $sql='INSERT INTO offre (titre, description, domaine, refType) 
+        VALUES :titre, :description, :domaine, :ref_type';
+        $request = $bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'titre' => $this->titre,
+            'description' => $this->description,
+            'domaine' =>$this->domaine,
+            'refType' => $this->refType
+        ));
     }
 
     /**
@@ -117,6 +130,22 @@ class Offre
     public function setAccepte($accepte)
     {
         $this->accepte = $accepte;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRefType()
+    {
+        return $this->refType;
+    }
+
+    /**
+     * @param mixed $refType
+     */
+    public function setRefType($refType): void
+    {
+        $this->refType = $refType;
     }
 
 }

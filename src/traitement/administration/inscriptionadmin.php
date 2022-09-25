@@ -6,6 +6,6 @@ $admin = new Administrateur(array(
     'nom'=>$_POST['nom'],
     'prenom'=>$_POST['prenom'],
     'email'=>$_POST['email'],
-    'mot_de_passe'=>$_POST['mot_de_passe']
+    'mot_de_passe'=>$_POST['password']
 ));
 $admin->ajoutAdmin($bdd);
