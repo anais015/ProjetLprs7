@@ -20,6 +20,11 @@ class Type
         }
     }
 
+    public function getAllType(BDD $bdd){
+        $req = $bdd->getBdd()->query('SELECT * FROM type');
+        return $req->fetchAll();
+    }
+
     /**
      * @return mixed
      */
