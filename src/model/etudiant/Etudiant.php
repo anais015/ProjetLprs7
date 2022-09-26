@@ -1,5 +1,6 @@
 <?php
 
+
 class Etudiant extends Utilisateur
 {
     private $domaine_etude;
@@ -108,5 +109,10 @@ class Etudiant extends Utilisateur
             else return false;
         }
         else return false;
+    }
+
+    public function getPendingAccount(Bdd $bdd){
+        $req = $bdd->getBdd()->query('SELECT * FROM etudiant WHERE valide=0');
+        return $req->fetchAll();
     }
 }

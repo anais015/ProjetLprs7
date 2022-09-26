@@ -29,6 +29,11 @@ class Evenement
         }
     }
 
+    public function getPendingEvent(Bdd $bdd){
+        $req = $bdd->getBdd()->query('SELECT * FROM evenement WHERE valide=0');
+        return $req->fetchAll();
+    }
+
     public function getNom() {
         return $this->nom;
     }

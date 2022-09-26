@@ -1,5 +1,4 @@
 <?php
-require_once '../Utilisateur.php';
 
 class Entreprise extends Utilisateur
 {
@@ -13,6 +12,11 @@ class Entreprise extends Utilisateur
     public function __construct(array $donnees){
 
         parent::__construct($donnees);
+    }
+
+    public function getPendingAccount(Bdd $bdd){
+        $req = $bdd->getBdd()->query('SELECT * FROM entreprise WHERE valide=0');
+        return $req->fetchAll();
     }
 
     /**
