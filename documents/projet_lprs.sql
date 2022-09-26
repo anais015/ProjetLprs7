@@ -173,6 +173,10 @@ ALTER TABLE `entreprise` CHANGE `valide` `valide` BOOLEAN NOT NULL DEFAULT FALSE
 ALTER TABLE `rdv` CHANGE `ref_etudiant` `ref_etudiant` INT(11) NULL;
 ALTER TABLE `rdv` CHANGE `accepte` `accepte` TINYINT(1) NULL;
 
+ALTER TABLE `connexion` CHANGE `ref_administrateur` `ref_administrateur` INT(11) NULL;
+ALTER TABLE `connexion` CHANGE `ref_entreprise` `ref_entreprise` INT(11) NULL;
+ALTER TABLE `connexion` CHANGE `ref_etudiant` `ref_etudiant` INT(11) NULL;
+
 
 
 
