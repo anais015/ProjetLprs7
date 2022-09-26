@@ -14,7 +14,7 @@ if(isset($_POST['selectIdentity'])) {
 
     if ($_POST['selectIdentity'] == 'etudiant') {
         $placeHolder = 'Etudiant';
-        $cible .="";
+        $cible .="../traitement/etudiant/traitementConnexion.php";
     }
     else $cible .="#";
 }

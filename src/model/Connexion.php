@@ -21,88 +21,67 @@ class  Connexion
         }
     }
 
-    public function ajoutConnexionEtudiant(BDD $bdd){
-        $req=$bdd->getBdd()->prepare('INSERT INTO connexion(date, heure, ref_etudiant) VALUES (CURDATE(),CURTIME(),:refetudiant)');
-        $req->execute(array(
-            "refetudiant"=>$this->getRefetudiant()
-        ));
+    public function getIdconnexion()
+    {
+        return $this->idconnexion;
     }
 
-    public function ajoutConnexionEntreprise(BDD $bdd){
+    public function setIdconnexion($idconnexion)
+    {
+        $this->idconnexion = $idconnexion;
+    }
+
+    public function getRefetudiant()
+    {
+        return $this->refetudiant;
+    }
+
+    public function setRefetudiant($refetudiant)
+    {
+        $this->refetudiant = $refetudiant;
+    }
+
+    public function getRefadministrateur()
+    {
+        return $this->refadministrateur;
+    }
+
+    public function setRefadministrateur($refadministrateur)
+    {
+        $this->refadministrateur = $refadministrateur;
+    }
+
+    public function getRefentreprise()
+    {
+        return $this->refentreprise;
+    }
+
+    public function setRefentreprise($refentreprise)
+    {
+        $this->refentreprise = $refentreprise;
+    }
+
+    public function ajoutConnexionEtudiant($bdd){
+        $req=$bdd->prepare('INSERT INTO connexion(date, heure, ref_etudiant) VALUES (CURDATE(),CURTIME(),:refetudiant)');
+        $execute = $req->execute(array(
+            "refetudiant"=>$this->getRefetudiant()
+        ));
+        if ($execute) return true;
+        else return false;
+    }
+
+    public function ajoutConnexionEntreprise($bdd){
         $req=$bdd->getBdd()->prepare('INSERT INTO connexion(date, heure, ref_entreprise) VALUES (CURDATE(),CURTIME(),:refentreprise)');
         $req->execute(array(
             "refentreprise"=>$this->getRefentreprise()
         ));
     }
 
-    public function ajoutConnexionAdministrateur(BDD $bdd){
+    public function ajoutConnexionAdministrateur($bdd){
         $req=$bdd->getBdd()->prepare('INSERT INTO connexion(date, heure, ref_administrateur) VALUES (CURDATE(),CURTIME(),:refadministrateur)');
         $req->execute(array(
             "refadministrateur"=>$this->getRefadministrateur()
         ));
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIdconnexion()
-    {
-        return $this->idconnexion;
-    }
-
-    /**
-     * @param mixed $idconnexion
-     */
-    public function setIdconnexion($idconnexion)
-    {
-        $this->idconnexion = $idconnexion;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRefetudiant()
-    {
-        return $this->refetudiant;
-    }
-
-    /**
-     * @param mixed $refetudiant
-     */
-    public function setRefetudiant($refetudiant)
-    {
-        $this->refetudiant = $refetudiant;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRefadministrateur()
-    {
-        return $this->refadministrateur;
-    }
-
-    /**
-     * @param mixed $refadministrateur
-     */
-    public function setRefadministrateur($refadministrateur)
-    {
-        $this->refadministrateur = $refadministrateur;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRefentreprise()
-    {
-        return $this->refentreprise;
-    }
-
-    /**
-     * @param mixed $refentreprise
-     */
-    public function setRefentreprise($refentreprise)
-    {
-        $this->refentreprise = $refentreprise;
-    }
 }
