@@ -23,14 +23,14 @@ if(isset($_POST['selectIdentity'])) {
     if ($_POST['selectIdentity'] == 'entreprise') {
         $placeHolder = 'Entreprise';
         $table .= "
-                <form action='' method='POST'>    
+                <form action='../traitement/traitementEntreprise.php' method='POST'>    
                 <label for='nom'><b>Nom</b></label>
                 <input type='text' placeholder='Nom' name='nom'  required>
                 
                 <label for='prenom'><b>Prénom</b></label>
                 <input type='text' placeholder='Prénom' name='prenom' required>
                 
-                <label for='role'><b>Rôle</b></label>
+                <label for='role'><b>Rôle de la société</b></label>
                 <input type='text' placeholder='Role' name='role' required>
                 
                 <label for='nomEntreprise'><b>Nom Entreprise</b></label>
