@@ -5,6 +5,7 @@ class Etudiant extends Utilisateur
     private $domaine_etude;
     private $valide;
     private Evenement $evenement;
+    private Connexion $connexion;
 
     public function __construct(array $donnees){
         parent::__construct($donnees);
@@ -34,15 +35,14 @@ class Etudiant extends Utilisateur
         $this->evenement = $evenement;
     }
 
-
-
     public function inscription($bdd){
         $sql ='SELECT * FROM etudiant WHERE email = :email ';
         $request = $bdd->prepare($sql);
-        $execute = $request->execute(array('email'=> $this->email));
-        if($execute) {
-            $result = $request->fetch();
-            if (is_array($result)) return false;
+        $request->execute(array('email'=> $this->email));
+        $result = $request->fetch();
+
+        if(is_array($result)) {
+            return false;
         }
         else {
             $sql='INSERT INTO etudiant (nom, prenom, email, mot_de_passe, domaine_etude) VALUES (:nom, :prenom, :email, :mot_de_passe, :domaine_etude)';
@@ -59,19 +59,39 @@ class Etudiant extends Utilisateur
         }
     }
 
-    public function connexion($bdd){
-        $sql='SELECT * FROM etudiant WHERE email=:email AND mot_de_passe=:mot_de_passe AND valide=1';
+    public function connexion($bdd, $passwordSaisi){
+//        $sql='SELECT * FROM etudiant WHERE email=:email AND mot_de_passe=:mot_de_passe AND valide=1';
+        $sql='SELECT * FROM etudiant WHERE email=:email AND valide=1';
         $request = $bdd->prepare($sql);
         $execute = $request->execute(array(
-            'email'=>$this->email,
-            'mot_de_passe'=>$this->mot_de_passe
+            'email'=>$this->email
+//            'mot_de_passe'=>$this->mot_de_passe
         ));
         if ($execute){
             $result=$request->fetch();
-            if(is_array($result)) return $result;
-            else return false;
+            if(is_array($result)) {
+                $this->setId($result['id_etudiant']);
+                var_dump($this->id);
+                if (password_verify($passwordSaisi, $result['mot_de_passe'])) {
+                    $this->connexion=new Connexion(array('refetudiant'=>$this->id));
+                    var_dump($this->connexion);
+                    $ajoutConnexion = $this->connexion->ajoutConnexionEtudiant($bdd);
+                    var_dump($ajoutConnexion);
+                    return $result;
+                } else {
+                    echo "prb password";
+                    return false;
+                }
+            }
+            else {
+                echo "pas fetch";
+                return false;
+            }
         }
-        else return false;
+        else {
+            echo "pas execute";
+                return false;
+            }
     }
 
     public function modification ($bdd){
