@@ -5,13 +5,14 @@ if(isset($_SESSION['id_admin'])){
     $page = "Vous n'êtes pas connecté en tant qu'administrateur";
 }
 ?>
-<html>
+<html lang="fr">
 <head>
     <title>Administrateur</title>
 </head>
 <body>
     <div style="margin: auto 0;text-align: center;">
-        <?=$page;?>
+        <?=$page;?><br>
+        <a href="attributionsalle.php">Attribution de salle</a>
     </div>
 </body>
 </html>
