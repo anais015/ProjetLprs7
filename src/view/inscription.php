@@ -23,33 +23,33 @@ if(isset($_POST['selectIdentity'])) {
     if ($_POST['selectIdentity'] == 'entreprise') {
         $placeHolder = 'Entreprise';
         $table .= "
-                <form action='' method='POST'>    
+                <form action='../traitement/traitementEntreprise.php' method='POST'>    
                 <label for='nom'><b>Nom</b></label>
                 <input type='text' placeholder='Nom' name='nom'  required>
                 
                 <label for='prenom'><b>Prénom</b></label>
                 <input type='text' placeholder='Prénom' name='prenom' required>
                 
-                <label for='role'><b>Rôle</b></label>
-                <input type='text' placeholder='Role' name='role' required>
+                <label for='role'><b>Rôle de la société</b></label>
+                <input type='text' placeholder='Role' name='role_societe' required>
                 
                 <label for='nomEntreprise'><b>Nom Entreprise</b></label>
-                <input type='text' placeholder='Nom Entreprise' name='nomEntreprise'  required>
+                <input type='text' placeholder='Nom de l Entreprise' name='nom_entreprise'  required>
                 
                 <label for='rue'><b>Rue</b></label>
-                <input type='text' placeholder='Rue' name='rue'  required>
+                <input type='text' placeholder='Rue' name='rue_entreprise'  required>
                 
                 <label for='ville'><b>Ville</b></label>
-                <input type='text' placeholder='Ville' name='ville'  required>
+                <input type='text' placeholder='Ville' name='ville_entreprise'  required>
                 
                 <label for='cp'><b>Code Postal</b></label>
-                <input type='text' placeholder='Code Postal' name='cp'  required>
+                <input type='text' placeholder='Code Postal' name='cp_entreprise'  required>
                 
                 <label for='email'><b>Email</b></label>
                 <input type='email' placeholder='Email' name='email' required>
 
                 <label for='password'><b>Mot de passe</b></label>
-                <input type='password' placeholder='Password' name='password' required>
+                <input type='password' placeholder='Password' name='mot_de_passe' required>
                 <input type='submit' name='inscription' id='inscription'>
             </form>";
     }
@@ -57,7 +57,7 @@ if(isset($_POST['selectIdentity'])) {
     if ($_POST['selectIdentity'] == 'etudiant') {
         $placeHolder = 'Etudiant';
         $table .= "
-                <form action='' method='POST'>    
+                <form action='../traitement/etudiant/traitementInscription.php' method='POST'>    
                 <label for='nom'><b>Nom</b></label>
                 <input type='text' placeholder='Nom' name='nom'  required>
                 
@@ -65,7 +65,7 @@ if(isset($_POST['selectIdentity'])) {
                 <input type='text' placeholder='Prénom' name='prenom' required>
                 
                 <label for='domaine'><b>Domaine</b></label>
-                <input type='text' placeholder='Domaine détude' name='domaine' required>
+                <input type='text' placeholder=\"Domaine d'étude\" name='domaine' required>
                 
                 <label for='email'><b>Email</b></label>
                 <input type='email' placeholder='Email' name='email' required>
