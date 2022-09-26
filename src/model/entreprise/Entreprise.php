@@ -8,9 +8,10 @@ class Entreprise extends Utilisateur
     private $cp_entreprise;
     private $role_societe;
     private $valide;
+    private Evenement $evenement;
+    private Rdv $rdv;
 
     public function __construct(array $donnees){
-
         parent::__construct($donnees);
     }
 
@@ -117,13 +118,13 @@ class Entreprise extends Utilisateur
 
     public function connexion($bdd){
         $sql='SELECT * FROM entreprise WHERE email=:email AND mot_de_passe=:mot_de_passe AND valide=1';
-        $request = $bdd->prepare($sql);
-        $execute = $request->execute(array(
+        $req = $bdd->prepare($sql);
+        $execute = $req->execute(array(
             'email'=>$this->email,
             'mot_de_passe'=>$this->mot_de_passe
         ));
         if ($execute){
-            $result=$request->fetch();
+            $result=$req->fetch();
             if(is_array($result)) return $result;
             else return false;
         }
@@ -132,18 +133,18 @@ class Entreprise extends Utilisateur
 
     public function inscription($bdd){
         $sql ='SELECT * FROM entreprise WHERE email = :email ';
-        $request = $bdd->prepare($sql);
-        $execute = $request->execute(array('email'=> $this->email));
+        $req = $bdd->prepare($sql);
+        $execute = $req->execute(array('email'=> $this->email));
         if($execute) {
-            $result = $request->fetch();
+            $result = $req->fetch();
             if (is_array($result)) return false;
         }
         else {
             $sql='INSERT INTO entreprise (nom, prenom ,nom_entreprise, 
                         rue_entreprise, ville_entreprise, cp_entreprise, email, mot_de_passe, role_societe) 
             VALUES (:nom, :prenom, :nom_entreprise, :rue_entreprise, :ville_entreprise, :cp_entreprise, :email, :mot_de_passe, :role_societe)';
-            $request = $bdd->prepare($sql);
-            $execute=$request->execute(array(
+            $req = $bdd->prepare($sql);
+            $execute=$req->execute(array(
                 'nom'=> $this->nom,
                 'prenom'=> $this->prenom,
                 'nom_entreprise'=> $this->nom_entreprise,
@@ -163,8 +164,8 @@ class Entreprise extends Utilisateur
         $sql = 'UPDATE entreprise SET nom =:nom, prenom=:prenom, nom_entreprise=:nom_entreprise,
                       rue_entreprise=:rue_entreprise, ville_entreprise=:ville_entreprise, cp_entreprise=:cp_entreprise,
                       email=:email, role_societe=:role_societe WHERE id_entreprise =:id_entreprise';
-        $request = $bdd->prepare($sql);
-        $execute=$request->execute(array(
+        $req = $bdd->prepare($sql);
+        $execute=$req->execute(array(
             'id_entreprise'=>$this->id,
             'nom'=> $this->nom,
             'prenom'=> $this->prenom,
