@@ -15,6 +15,7 @@ if (count($pendingevent)>1){
     <title>Attribution</title>
 </head>
 <body>
+    <a href="vueadmin.php">Retour</a>
     <?=$page?>
 </body>
 </html>

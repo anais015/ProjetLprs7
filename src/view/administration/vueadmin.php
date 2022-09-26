@@ -10,6 +10,7 @@ if(isset($_SESSION['id_admin'])){
     <title>Administrateur</title>
 </head>
 <body>
+    <a href="../../../index.php">Retour</a>
     <div style="margin: auto 0;text-align: center;">
         <?=$page;?><br>
         <a href="attributionsalle.php">Attribution de salle</a>
