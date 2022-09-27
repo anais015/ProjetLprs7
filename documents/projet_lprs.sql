@@ -177,7 +177,8 @@ ALTER TABLE `connexion` CHANGE `ref_administrateur` `ref_administrateur` INT(11)
 ALTER TABLE `connexion` CHANGE `ref_entreprise` `ref_entreprise` INT(11) NULL;
 ALTER TABLE `connexion` CHANGE `ref_etudiant` `ref_etudiant` INT(11) NULL;
 
-
-
-
-
+ALTER TABLE `evenement` CHANGE `valide` `valide` TINYINT(1) NOT NULL DEFAULT '0';
+ALTER TABLE `evenement` CHANGE `ref_salle` `ref_salle` INT(11) NULL;
+ALTER TABLE `evenement` CHANGE `ref_entreprise` `ref_entreprise` INT(11) NULL;
+ALTER TABLE `evenement` CHANGE `ref_etudiant` `ref_etudiant` INT(11) NULL;
+ALTER TABLE `evenement` CHANGE `ref_administrateur` `ref_administrateur` INT(11) NULL;
