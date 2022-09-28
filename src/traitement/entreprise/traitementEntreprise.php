@@ -4,9 +4,9 @@ require_once "../../model/entreprise/Entreprise.php";
 require_once "../../model/bdd/Bdd.php";
 
 $connexion = new Bdd();
-var_dump($connexion);
+//var_dump($connexion);
 $bdd = $connexion->getBdd();
-var_dump($bdd);
+//var_dump($bdd);
 
 if(isset($_POST['inscription'])) {
     $entreprise = new Entreprise(array(
@@ -20,9 +20,9 @@ if(isset($_POST['inscription'])) {
         'mot_de_passe' => $_POST['mot_de_passe'],
         'role_societe' => $_POST['role_societe']
     ));
-    var_dump($entreprise);
+    //var_dump($entreprise);
     $ins = $entreprise->inscription($bdd);
-    var_dump($ins);
+    //var_dump($ins);
 
 } else {
     echo "la valeur n'existe pas ! ";
