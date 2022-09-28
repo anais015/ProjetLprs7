@@ -14,7 +14,7 @@
         <a href="../../index.php">Accueil</a>
         <a href="connexion.php">Trouver un job</a>
         <a href="inscription.php">Trouver un événement</a>
-        <a href="inscription.php">Organizer un événement</a>
+        <a href="organizerEvenement.php">Organizer un événement</a>
         <a href="#">Contact</a>
 
         <a href="connexion.php">Mes événement</a>
@@ -24,8 +24,6 @@
         <a href="inscription.php">Se déconnecter</a>
     </div>
 </nav>
-
-
 </body>
 </html>
 
