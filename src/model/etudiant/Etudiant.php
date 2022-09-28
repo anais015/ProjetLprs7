@@ -42,9 +42,7 @@ class Etudiant extends Utilisateur
         $request->execute(array('email'=> $this->email));
         $result = $request->fetch();
 
-        if(is_array($result)) {
-            return false;
-        }
+        if(is_array($result)) return false;
         else {
             $sql='INSERT INTO etudiant (nom, prenom, email, mot_de_passe, domaine_etude) VALUES (:nom, :prenom, :email, :mot_de_passe, :domaine_etude)';
             $request = $bdd->prepare($sql);
@@ -61,38 +59,23 @@ class Etudiant extends Utilisateur
     }
 
     public function connexion($bdd, $passwordSaisi){
-//        $sql='SELECT * FROM etudiant WHERE email=:email AND mot_de_passe=:mot_de_passe AND valide=1';
         $sql='SELECT * FROM etudiant WHERE email=:email AND valide=1';
         $request = $bdd->prepare($sql);
         $execute = $request->execute(array(
             'email'=>$this->email
-//            'mot_de_passe'=>$this->mot_de_passe
         ));
         if ($execute){
             $result=$request->fetch();
             if(is_array($result)) {
                 $this->setId($result['id_etudiant']);
-                var_dump($this->id);
+                //var_dump($this->id);
                 if (password_verify($passwordSaisi, $result['mot_de_passe'])) {
                     $this->connexion=new Connexion(array('refetudiant'=>$this->id));
-                    var_dump($this->connexion);
-                    $ajoutConnexion = $this->connexion->ajoutConnexionEtudiant($bdd);
-                    var_dump($ajoutConnexion);
+                    $this->connexion->ajoutConnexionEtudiant($bdd);
                     return $result;
-                } else {
-                    echo "prb password";
-                    return false;
-                }
-            }
-            else {
-                echo "pas fetch";
-                return false;
-            }
-        }
-        else {
-            echo "pas execute";
-                return false;
-            }
+                } else return false;
+            } else return false;
+        } else return false;
     }
 
     public function modification ($bdd){
