@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once "../../model/bdd/Bdd.php";
 require_once "../../model/Utilisateur.php";
 require_once "../../model/etudiant/Etudiant.php";
@@ -11,19 +13,19 @@ $bdd = $cnx->getBdd();
 //var_dump($_POST);
 
 if(isset($_POST['connexion'])) {
-//    $password = $_POST['password'];
-//    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
     $etudiant = new Etudiant(array(
         'email' => $_POST['email'],
-//        'mot_de_passe' => $hashed_password
     ));
-    var_dump($etudiant);
+//    var_dump($etudiant);
     $connexion=$etudiant->connexion($bdd,$_POST['password']);
     var_dump($connexion);
-//    if (!$inscription) $erreur=true;
-//    var_dump($erreur);
+
+    if ($connexion) {
+        $_SESSION['etudiant']=$connexion;
+        header("location:../../view/etudiant/accueil.php");
+    } else $erreur=true;
 }
+
 ?>
 <html>
 <head>
@@ -31,7 +33,7 @@ if(isset($_POST['connexion'])) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Connexion</title>
 </head>
 <body>
 <nav>
@@ -51,11 +53,6 @@ if(isset($_POST['connexion'])) {
     <input type="hidden"> &#9888; Erreur : Veuillez réessayer.
     <a href="../../view/connexion.php">Revenir à la page de connexion</a>
 </div>
-<div class="container" id="alert"
-    <?php
-    if (!$connexion) header("location:../../view/etudiant/accueil.php")
-    ?>
 
-</div>
 </body>
 </html>
