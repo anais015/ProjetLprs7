@@ -23,33 +23,33 @@ if(isset($_POST['selectIdentity'])) {
     if ($_POST['selectIdentity'] == 'entreprise') {
         $placeHolder = 'Entreprise';
         $table .= "
-                <form action='../traitement/traitementEntreprise.php' method='POST'>    
+                <form action='../traitement/entreprise/traitementEntreprise.php' method='POST'>    
                 <label for='nom'><b>Nom</b></label>
                 <input type='text' placeholder='Nom' name='nom'  required>
                 
                 <label for='prenom'><b>Prénom</b></label>
                 <input type='text' placeholder='Prénom' name='prenom' required>
                 
-                <label for='role'><b>Rôle de la société</b></label>
+                <label for='role_entreprise'><b>Rôle de la société</b></label>
                 <input type='text' placeholder='Role' name='role_societe' required>
                 
-                <label for='nomEntreprise'><b>Nom Entreprise</b></label>
+                <label for='nom_entreprise'><b>Nom Entreprise</b></label>
                 <input type='text' placeholder='Nom de l Entreprise' name='nom_entreprise'  required>
                 
-                <label for='rue'><b>Rue</b></label>
+                <label for='rue_entreprise'><b>Rue</b></label>
                 <input type='text' placeholder='Rue' name='rue_entreprise'  required>
                 
-                <label for='ville'><b>Ville</b></label>
+                <label for='ville_entreprise'><b>Ville</b></label>
                 <input type='text' placeholder='Ville' name='ville_entreprise'  required>
                 
-                <label for='cp'><b>Code Postal</b></label>
+                <label for='cp_entreprise'><b>Code Postal</b></label>
                 <input type='text' placeholder='Code Postal' name='cp_entreprise'  required>
                 
                 <label for='email'><b>Email</b></label>
                 <input type='email' placeholder='Email' name='email' required>
 
-                <label for='password'><b>Mot de passe</b></label>
-                <input type='password' placeholder='Password' name='mot_de_passe' required>
+                <label for='mot_de_passe'><b>Mot de passe</b></label>
+                <input type='password' placeholder='Mot de passe' name='mot_de_passe' required>
                 <input type='submit' name='inscription' id='inscription'>
             </form>";
     }
