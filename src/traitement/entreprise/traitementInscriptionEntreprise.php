@@ -31,3 +31,5 @@ if(isset($_POST['inscription'])) {
 if(isset($_POST['connexion'])) {
 
 }
+
+?>
