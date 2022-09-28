@@ -11,7 +11,7 @@ class Evenement
     private $valide;
     private $refSalle;
     private $refEntreprise;
-    private $refEtudiant;
+    private $ref_etudiant;
     private $refAdmin;
 
     public function __construct(array $donnees)
@@ -98,12 +98,12 @@ class Evenement
         $this->refEntreprise = $refEntreprise;
     }
 
-    public function getRefEtudiant() {
-        return $this->refEtudiant;
+    public function getRef_etudiant() {
+        return $this->ref_etudiant;
     }
 
-    public function setRefEtudiant($refEtudiant): void {
-        $this->refEtudiant = $refEtudiant;
+    public function setRef_etudiant($ref_etudiant): void {
+        $this->ref_etudiant = $ref_etudiant;
     }
 
     public function getRefAdmin() {
@@ -141,16 +141,15 @@ class Evenement
     public function etudiantOrganiseEvenement ($bdd){
         $sql ='SELECT * FROM evenement WHERE date=:date AND heure=:heure AND ref_etudiant=:ref_etudiant';
         $request = $bdd->prepare($sql);
-        $execute = $request->execute(array(
+        $request->execute(array(
             'date'=> $this->date,
             'heure'=> $this->heure,
-            'ref_etudiant'=>$this->refEtudiant));
-        if($execute) {
-            $result = $request->fetch();
-            if (is_array($result)) return false;
-        }
+            'ref_etudiant'=>$this->ref_etudiant));
+        $result = $request->fetch();
+        if (is_array($result)) return false;
+
         else {
-            $sql='INSERT INTO evenement (nom, description, date, heure, duree) VALUES (:nom, :description, :date, :heure, :duree)';
+            $sql='INSERT INTO evenement (nom, description, date, heure, duree, ref_etudiant) VALUES (:nom, :description, :date, :heure, :duree, :ref_etudiant)';
             $request = $bdd->prepare($sql);
             $execute=$request->execute(array(
                 'nom'=> $this->nom,
@@ -158,7 +157,7 @@ class Evenement
                 'date'=> $this->date,
                 'heure'=> $this->heure,
                 'duree'=> $this->duree,
-                'ref_etudiant'=>$this->refEtudiant
+                'ref_etudiant'=>$this->ref_etudiant
             ));
             if($execute) return true;
             else return false;
@@ -170,7 +169,8 @@ class Evenement
         $request = $bdd->prepare($sql);
         $execute = $request->execute(array(
             'ref_evenement'=> $this->id,
-            'ref_etudiant'=> $this->refEtudiant));
+            'ref_etudiant'=> $this->ref_etudiant));
+
         if($execute) {
             $result = $request->fetch();
             if (is_array($result)) return false;
@@ -180,7 +180,7 @@ class Evenement
             $request = $bdd->prepare($sql);
             $execute=$request->execute(array(
                 'ref_evenement'=> $this->id,
-                'ref_etudiant'=> $this->refEtudiant
+                'ref_etudiant'=> $this->ref_etudiant
             ));
             if($execute) return true;
             else return false;
