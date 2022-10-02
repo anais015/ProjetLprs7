@@ -12,16 +12,16 @@
 <nav>
     <div class="bottom-row">
         <a href="../../index.php">Accueil</a>
-        <a href="connexion.php">Trouver un job</a>
-        <a href="inscription.php">Trouver un événement</a>
+        <a href="trouverJob.php">Trouver un job</a>
+        <a href="trouverEvenement.php">Trouver un événement</a>
         <a href="organizerEvenement.php">Organizer un événement</a>
         <a href="#">Contact</a>
 
-        <a href="connexion.php">Mes événement</a>
-        <a href="inscription.php">Mes candidatures</a>
-        <a href="inscription.php">Mes rendez-vous</a>
-        <a href="connexion.php">Mon compte</a>
-        <a href="inscription.php">Se déconnecter</a>
+        <a href="listeEvenement.php">Mes événement</a>
+        <a href="candidature.php">Mes candidatures</a>
+        <a href="rdv.php">Mes rendez-vous</a>
+        <a href="monCompte.php">Mon compte</a>
+        <a href="deconnexion.php">Se déconnecter</a>
     </div>
 </nav>
 </body>
