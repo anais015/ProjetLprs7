@@ -122,12 +122,16 @@ class Entreprise extends Utilisateur
         $execute = $req->execute(array(
             'email'=>$this->email
         ));
-        if ($execute){
-            $result=$req->fetch();
-            if(is_array($result)) return $result;
-            else return false;
+        if ($execute) {
+            $result = $req->fetch();
+            /*if (is_array($result)) {
+                $this->setId($result['id_etudiant']);
+                $this->connexion = new Connexion(array('refentreprise' => $this->id));
+                $ajoutLaConnexion = $this->connexion->ajoutConnexionEntreprise($bdd);
+
+            }*/
+            return $result;
         }
-        else return false;
     }
 
     public function inscription($bdd){
