@@ -7,7 +7,7 @@ $salles = $salle->getAllSalle($bdd);
 $page = "";
 $table = "<table><thead><tr><th>ID</th><th>Nom</th><th>Capacité</th></tr></thead><tbody>";
 foreach ($salles as $salle){
-    $table .= "<tr><td>".$salle['idsalle']."</td><td>".$salle['nom']."</td><td>".$salle['nombre_place']."</td>";
+    $table .= "<tr><td>".$salle['id_salle']."</td><td>".$salle['nom']."</td><td>".$salle['nombre_place']."</td>";
 }
 $table .= "</tbody></table>";
 ?>
