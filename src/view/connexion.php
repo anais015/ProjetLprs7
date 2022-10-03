@@ -9,7 +9,7 @@ if(isset($_POST['selectIdentity'])) {
     }
     if ($_POST['selectIdentity'] == 'entreprise') {
         $placeHolder = 'Entreprise';
-        $cible .="";
+        $cible .="../traitement/entreprise/traitementConnexionEntreprise.php";
     }
 
     if ($_POST['selectIdentity'] == 'etudiant') {
