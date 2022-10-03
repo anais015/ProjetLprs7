@@ -18,7 +18,21 @@ class Salle
                 $this->$method($value);
             }
         }
-}
+    }
+
+    public function getAllSalle(BDD $bdd){
+        $req = $bdd->getBdd()->query('SELECT * FROM salle');
+        return $req->fetchAll();
+    }
+
+    public function ajoutSalle(BDD $bdd){
+        $req = $bdd->getBdd()->prepare('INSERT INTO salle(nom, nombre_place) VALUES (:nom,:nombre_place)');
+        $req->execute(array(
+            "nom"=>$this->getNom(),
+            "nombre_place"=>$this->getNombrePlace()
+        ));
+    }
+
 
     /**
      * @return mixed
