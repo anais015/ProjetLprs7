@@ -28,8 +28,6 @@ if(isset($_POST['inscription'])) {
     echo "la valeur n'existe pas ! ";
 }
 
-if(isset($_POST['connexion'])) {
 
-}
 
 ?>
