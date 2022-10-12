@@ -11,13 +11,13 @@
 <body>
 <nav>
     <div class="bottom-row">
-        <a href="../../index.php">Accueil</a>
+        <a href="">Accueil</a>
         <a href="trouverJob.php">Trouver un job</a>
         <a href="trouverEvenement.php">Trouver un événement</a>
         <a href="organizerEvenement.php">Organizer un événement</a>
         <a href="#">Contact</a>
 
-        <a href="listeEvenement.php">Mes événement</a>
+        <a href="listeEvenement.php">Mes événements</a>
         <a href="candidature.php">Mes candidatures</a>
         <a href="rdv.php">Mes rendez-vous</a>
         <a href="monCompte.php">Mon compte</a>
