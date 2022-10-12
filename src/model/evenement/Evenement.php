@@ -34,6 +34,16 @@ class Evenement
         return $req->fetchAll();
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
     public function getNom() {
         return $this->nom;
     }
@@ -116,7 +126,7 @@ class Evenement
 
     public function modifierEvenement ($bdd){
         $sql='UPDATE evenement SET nom=:nom, description=:description, date=:date, heure=:heure, duree=:duree
-              WHERE id_evenement=:id_evenement';
+              WHERE id_evenement=:id';
         $request=$bdd->prepare($sql);
         $execute=$request->execute(array(
             'nom'=> $this->nom,
@@ -124,7 +134,7 @@ class Evenement
             'date'=> $this->date,
             'heure'=> $this->heure,
             'duree'=> $this->duree,
-            'id_evenement'=>$this->id
+            'id'=>$this->id
         ));
         if ($execute) return true;
         else return false;
@@ -170,7 +180,6 @@ class Evenement
         $execute = $request->execute(array(
             'ref_evenement'=> $this->id,
             'ref_etudiant'=> $this->ref_etudiant));
-
         if($execute) {
             $result = $request->fetch();
             if (is_array($result)) return false;
@@ -185,6 +194,36 @@ class Evenement
             if($execute) return true;
             else return false;
         }
+    }
+    public function selectParId($bdd){
+        $sql='SELECT * FROM evenement WHERE id_evenement=:id';
+        $request=$bdd->prepare($sql);
+        $request->execute(array('id'=>$this->id));
+        $result=$request->fetch();
+        if(is_array($result)) return $result;
+        else return false;
+    }
+
+    public function listEventOrganise($bdd){
+        $sql='SELECT e.id_evenement, e.nom , e.date, e.heure, e.duree, e.valide, s.nom FROM evenement AS e
+    LEFT JOIN salle AS s
+              ON e.ref_salle = s.id_salle 
+              WHERE e.date>NOW() AND e.ref_etudiant=:ref_etudiant
+              ORDER BY e.date';
+        $request= $bdd->prepare($sql);
+        $request->execute(array('ref_etudiant'=> $this->ref_etudiant));
+        $result = $request->fetchAll();
+        if(is_array($result)) return $result;
+        else return false;
+    }
+
+    public function historique($bdd){
+        $sql='SELECT * FROM evenement WHERE date<NOW() AND valide=1 AND ref_etudiant=:ref_etudiant ORDER BY date DESC';
+        $request= $bdd->prepare($sql);
+        $request->execute(array('ref_etudiant'=> $this->ref_etudiant));
+        $result = $request->fetchAll();
+        if(is_array($result)) return $result;
+        else return false;
     }
 
 }
