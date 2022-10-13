@@ -1,49 +1,71 @@
 <?php
+session_start();
+require_once "../../model/bdd/Bdd.php";
+require_once "../../model/Utilisateur.php";
+require_once "../../model/etudiant/Etudiant.php";
+require_once "../../model/Connexion.php";
+require_once "../../model/evenement/Evenement.php";
+
+$cnx = new Bdd();
+$bdd = $cnx->getBdd();
+$tbHistorique='';
+$tbOrganiser='';
+$tbParticiper='';
+$etat='';
+$salle='';
+$event=new Evenement(array('ref_etudiant'=>$_SESSION['etudiant']['id_etudiant']));
+$historique=$event->historique($bdd);
+foreach ($historique as $value){
+     $tbHistorique .="<tr>
+                        <td>".$value['nom']."</td>
+                        <td>".$value['date']."</td>
+                        <td>".$value['heure']."</td>
+                        <td><form action='' method='post'>
+                            <button value='".$value['id_evenement']."'>Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>";
+
+}
+$listOrganise= $event->listEventOrganise($bdd);
+foreach ($listOrganise as $value){
+    if ($value['valide']==0) $etat = 'En attente';
+    else $etat='Validé';
+    if (is_null($value[6])) $salle = 'En attente';
+    else $salle=$value[6];
+    $tbOrganiser .="<tr>
+                        <td>".$value[1]."</td>
+                        <td>".$value['date']."</td>
+                        <td>".$value['heure']."</td>
+                        <td>".$value['duree']."</td>
+                        <td>".$salle."</td>
+                        <td>".$etat."</td>
+                        <td>
+                            <form action='modifierEvenement.php' method='post'>
+                                <button name='modifier' value='".$value['id_evenement']."'>Modifier</button>
+                            </form>
+                            <button name='annuler' id='".$value['id_evenement']."'>Annuler</button>
+                        </td>
+                           
+                    </tr>";
+}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        .tab {
-            overflow: hidden;
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
-        }
-        .tab button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-            font-size: 17px;
-        }
-        .tab button:hover {
-            background-color: #ddd;
-        }
-        .tab button.active {
-            background-color: #ccc;
-        }
-        .tabcontent {
-            display: none;
-            padding: 6px 12px;
-            border: 1px solid #ccc;
-            border-top: none;
-        }
-    </style>
+    <link rel="stylesheet" href="../../style/style.css">
 </head>
 <body>
 <nav>
     <div class="bottom-row">
-        <a href="../../index.php">Accueil</a>
+        <a href="accueil.php">Accueil</a>
         <a href="trouverJob.php">Trouver un job</a>
         <a href="trouverEvenement.php">Trouver un événement</a>
         <a href="organizerEvenement.php">Organizer un événement</a>
         <a href="#">Contact</a>
 
-        <a href="listeEvenement.php">Mes événement</a>
+        <a href="listeEvenement.php">Mes événements</a>
         <a href="candidature.php">Mes candidatures</a>
         <a href="rdv.php">Mes rendez-vous</a>
         <a href="monCompte.php">Mon compte</a>
@@ -55,6 +77,7 @@
 <div class="tab">
     <button class="tablinks" onclick="openTab(event, 'À organiser')">À organiser</button>
     <button class="tablinks" onclick="openTab(event, 'À participer')">À participer</button>
+    <button class="tablinks" onclick="openTab(event, 'Historique')">Historique</button>
 </div>
 
 <div id="À organiser" class="tabcontent">
@@ -66,19 +89,10 @@
             <th>Heure</th>
             <th>Durée</th>
             <th>Salle</th>
+            <th>État</th>
             <th>Action</th>
         </tr>
-        <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>20-10-2022</td>
-            <td>10:00</td>
-            <td>2:00</td>
-            <td>Germany</td>
-            <td>
-                <button>Modifier</button>
-                <button>Annuler</button>
-            </td>
-        </tr>
+        <?=$tbOrganiser?>
     </table>
 </div>
 
@@ -103,6 +117,19 @@
             <td>Germany</td>
             <td><button>Annuler</button></td>
         </tr>
+    </table>
+</div>
+
+<div id="Historique" class="tabcontent">
+    <h3>Historique</h3>
+    <table>
+        <tr>
+            <th>Titre du événement</th>
+            <th>Date</th>
+            <th>Heure</th>
+            <th>Action</th>
+        </tr>
+        <?=$tbHistorique;?>
     </table>
 </div>
 

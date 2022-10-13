@@ -38,13 +38,13 @@ if (isset($_POST['enregistrer'])){
 <body>
 <nav>
     <div class="bottom-row">
-        <a href="../../index.php">Accueil</a>
+        <a href="accueil.php">Accueil</a>
         <a href="trouverJob.php">Trouver un job</a>
         <a href="trouverEvenement.php">Trouver un événement</a>
         <a href="organizerEvenement.php">Organizer un événement</a>
         <a href="#">Contact</a>
 
-        <a href="listeEvenement.php">Mes événement</a>
+        <a href="listeEvenement.php">Mes événements</a>
         <a href="candidature.php">Mes candidatures</a>
         <a href="rdv.php">Mes rendez-vous</a>
         <a href="monCompte.php">Mon compte</a>
@@ -74,7 +74,7 @@ if (isset($_POST['enregistrer'])){
         <input type='text' placeholder="Nom de l'événement" name='nom'  required>
 
         <label for='description'><b>Description</b></label>
-        <input type='text' placeholder='Description' name='description' required>
+        <input type="text" name='description' placeholder="Description" required>
 
         <label for='date'><b>Date</b></label>
         <input type='date' placeholder='Date' name='date' required>

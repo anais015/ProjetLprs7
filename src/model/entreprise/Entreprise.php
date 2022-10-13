@@ -116,46 +116,54 @@ class Entreprise extends Utilisateur
         $this->valide = $valide;
     }
 
-    public function connexion($bdd){
-        $sql='SELECT * FROM entreprise WHERE email=:email AND mot_de_passe=:mot_de_passe AND valide=1';
+    public function connexion($bdd, $MDPSaisi){
+        $sql='SELECT * FROM entreprise WHERE email=:email AND valide=1';
         $req = $bdd->prepare($sql);
-        $execute = $req->execute(array(
-            'email'=>$this->email,
-            'mot_de_passe'=>$this->mot_de_passe
+        $req->execute(array(
+            'email'=>$this->email
         ));
-        if ($execute){
-            $result=$req->fetch();
-            if(is_array($result)) return $result;
-            else return false;
-        }
-        else return false;
+        $res = $req->fetch();
+
+
+
+        if(is_array($res)) {
+            $this->setId($res['id_entreprise']);
+           /*if ($MDPSaisi == $res['mot_de_passe']) {
+
+                $this->conn = new Connexion(array('refentreprise'=>$this->id));
+                $this->conn->ajoutConnexionEntreprise($bdd);
+                return $res;
+            } else return false;*/
+            return $res;
+        } else return false;
     }
 
     public function inscription($bdd){
         $sql ='SELECT * FROM entreprise WHERE email = :email ';
         $req = $bdd->prepare($sql);
-        $execute = $req->execute(array('email'=> $this->email));
-        if($execute) {
-            $result = $req->fetch();
-            if (is_array($result)) return false;
+        $req->execute(array('email'=> $this->email));
+        $res = $req->fetch();
+
+        if (is_array($res)) {
+            return false;
         }
         else {
-            $sql='INSERT INTO entreprise (nom, prenom ,nom_entreprise, 
+            $sql = 'INSERT INTO entreprise (nom, prenom ,nom_entreprise, 
                         rue_entreprise, ville_entreprise, cp_entreprise, email, mot_de_passe, role_societe) 
             VALUES (:nom, :prenom, :nom_entreprise, :rue_entreprise, :ville_entreprise, :cp_entreprise, :email, :mot_de_passe, :role_societe)';
             $req = $bdd->prepare($sql);
-            $execute=$req->execute(array(
-                'nom'=> $this->nom,
-                'prenom'=> $this->prenom,
-                'nom_entreprise'=> $this->nom_entreprise,
-                'rue_entreprise'=> $this->rue_entreprise,
+            $execute = $req->execute(array(
+                'nom' => $this->nom,
+                'prenom' => $this->prenom,
+                'nom_entreprise' => $this->nom_entreprise,
+                'rue_entreprise' => $this->rue_entreprise,
                 'ville_entreprise' => $this->ville_entreprise,
                 'cp_entreprise' => $this->cp_entreprise,
-                'email'=> $this->email,
-                'mot_de_passe'=> $this->mot_de_passe,
+                'email' => $this->email,
+                'mot_de_passe' => $this->mot_de_passe,
                 'role_societe' => $this->role_societe
             ));
-            if($execute)return true;
+            if ($execute) return true;
             else return false;
         }
     }

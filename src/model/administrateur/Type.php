@@ -25,6 +25,13 @@ class Type
         return $req->fetchAll();
     }
 
+    public function ajoutType(BDD $bdd){
+        $req = $bdd->getBdd()->prepare('INSERT INTO type(nom) VALUES (:nom)');
+        $req->execute(array(
+            "nom"=>$this->getNom()
+        ));
+    }
+
     /**
      * @return mixed
      */

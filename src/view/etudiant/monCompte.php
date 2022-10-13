@@ -6,12 +6,12 @@ require_once "../../model/etudiant/Etudiant.php";
 require_once "../../model/Connexion.php";
 require_once "../../model/evenement/Evenement.php";
 
-$erreur=false;
-$modifie=false;
-
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();
-//var_dump($_SESSION['etudiant']['id_etudiant']);
+
+$etudiant = new Etudiant(array('id'=>$_SESSION['etudiant']['id_etudiant']));
+$selectedEtudiant=$etudiant->selectParId($bdd);
+
 ?>
 <html>
 <head>
@@ -24,13 +24,13 @@ $bdd = $cnx->getBdd();
 <body>
 <nav>
     <div class="bottom-row">
-        <a href="../../index.php">Accueil</a>
+        <a href="accueil.php">Accueil</a>
         <a href="trouverJob.php">Trouver un job</a>
         <a href="trouverEvenement.php">Trouver un événement</a>
         <a href="organizerEvenement.php">Organizer un événement</a>
         <a href="#">Contact</a>
 
-        <a href="listeEvenement.php">Mes événement</a>
+        <a href="listeEvenement.php">Mes événements</a>
         <a href="candidature.php">Mes candidatures</a>
         <a href="rdv.php">Mes rendez-vous</a>
         <a href="monCompte.php">Mon compte</a>
@@ -38,34 +38,49 @@ $bdd = $cnx->getBdd();
     </div>
 </nav>
 
-<form action='' method='POST'>
+<h2>Mon Compte</h2>
+
+<form action='../../traitement/etudiant/traitementModification.php' method='POST'>
     <fieldset>
-        <legend>Information personnelle</legend>
-        <label for='nom'><b>Nom</b></label>
-        <input type='text' placeholder='Nom' name='nom' value="" required>
-
-        <label for='prenom'><b>Prénom</b></label>
-        <input type='text' placeholder='Prénom' name='prenom' value="" required>
-
-        <label for='domaine'><b>Domaine</b></label>
-        <input type='text' placeholder="Domaine d'étude" name='domaine' value="" required>
-        <input type='submit' name='modifierInfo' value="Modifier" id='modifierInfo'>
+        <legend>Information Personnelle</legend>
+        <div>
+            <label for='nom'><b>Nom</b></label>
+            <input type='text' placeholder='Nom' name='nom' value="<?=$selectedEtudiant['nom'];?>" >
+        </div>
+        <div>
+            <label for='prenom'><b>Prénom</b></label>
+            <input type='text' placeholder='Prénom' name='prenom' value="<?=$selectedEtudiant['prenom'];?>" >
+        </div>
+        <div>
+            <label for='domaine'><b>Domaine</b></label>
+            <input type='text' placeholder="Domaine d'étude" name='domaine' value="<?=$selectedEtudiant['domaine_etude'];?>" >
+        </div>
+            <input type='submit' name='modifierInfo' id='modifierInfo' value="Modifier">
     </fieldset>
     <fieldset>
         <legend>Email</legend>
-        <label for='email'><b>Email</b></label>
-        <input type='email' placeholder='Email' name='email' value="" required>
-        <input type='submit' name='modifierEmail' value="Modifier email" id='modifierEmail'>
+        <div>
+            <label for='email'><b>Email</b></label>
+            <input type='email' placeholder='Email' name='email' >
+        </div>
+        <div>
+            <label for='pw'><b>Mot de passe</b></label>
+            <input type='password' placeholder='Saisissez votre mot de passe pour changer votre adresse email' name='pw' >
+        </div>
+            <input type='submit' name='modifierEmail' id='modifierEmail' value="Modifier Email">
     </fieldset>
     <fieldset>
         <legend>Mot de passe</legend>
-        <label for='oldPassword'><b>Ancien mot de passe</b></label>
-        <input type='password' placeholder='Ancien mot de passe' name='oldPassword' required>
-        <label for='newPassword'><b>Nouveau mot de passe</b></label>
-        <input type='password' placeholder='Nouveau mot de passe' name='newPassword' required>
-        <input type='submit' name='modifierPw' value="Modifier mot de passe" id='modifierPw'>
+        <div>
+            <label for='old'><b>Ancien mot de passe</b></label>
+            <input type='password' placeholder='Ancien mot de passe' name='old' >
+        </div>
+        <div>
+            <label for='new'><b>Nouveau mot de passe</b></label>
+            <input type='password' placeholder='Nouveau mot de passe' name='new' >
+        </div>
+            <input type='submit' name='modifierPw' id='modifierPw' value="Modifier Mot de passe">
     </fieldset>
-
 </form>
 </body>
 </html>

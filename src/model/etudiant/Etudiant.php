@@ -68,7 +68,6 @@ class Etudiant extends Utilisateur
             $result=$request->fetch();
             if(is_array($result)) {
                 $this->setId($result['id_etudiant']);
-                //var_dump($this->id);
                 if (password_verify($passwordSaisi, $result['mot_de_passe'])) {
                     $this->connexion=new Connexion(array('refetudiant'=>$this->id));
                     $this->connexion->ajoutConnexionEtudiant($bdd);
@@ -78,40 +77,76 @@ class Etudiant extends Utilisateur
         } else return false;
     }
 
-    public function modification ($bdd){
-        $sql = 'UPDATE etudiant SET nom =:nom, prenom=:prenom, email=:email, domaine_etude=:domaine_etude WHERE  id_etudiant =:id_etudiant';
+    public function selectParId($bdd){
+        $sql='SELECT * FROM etudiant WHERE id_etudiant=:id';
+        $request = $bdd->prepare($sql);
+        $execute = $request->execute(array(
+            'id'=>$this->id
+        ));
+        if ($execute){
+            $result=$request->fetch();
+            if(is_array($result)) return $result;
+            else return false;
+        } else return false;
+    }
+
+    public function modifierInfo ($bdd){
+        $sql = 'UPDATE etudiant SET nom =:nom, prenom=:prenom, domaine_etude=:domaine_etude WHERE id_etudiant =:id_etudiant';
         $request = $bdd->prepare($sql);
         $execute=$request->execute(array(
-            'id_etudiant'=>$this->id,
             'nom'=> $this->nom,
             'prenom'=> $this->prenom,
-            'email'=> $this->email,
-            'domaine_etude'=> $this->domaine_etude
+            'domaine_etude'=> $this->domaine_etude,
+            'id_etudiant'=>$this->id
         ));
         if($execute) return true;
         else return false;
     }
 
-    private function verificationPassword ($bdd)
-    {
-        $sql = 'SELECT mot_de_passe FROM etudiant WHERE email = :email ';
+    public function modifierEmail ($bdd, $passwordSaisi){
+        $sql ='SELECT * FROM etudiant WHERE email = :email ';
         $request = $bdd->prepare($sql);
-        $execute = $request->execute(array('email' => $this->email));
-        if ($execute) {
-            $result = $request->fetch();
-            if (is_array($result)) return true;
-        } else return false;
+        $request->execute(array('email'=> $this->email));
+        $result = $request->fetch();
+        if(is_array($result)) return false;
+        else {
+            $sql ='SELECT * FROM etudiant WHERE id_etudiant = :id ';
+            $request=$bdd->prepare($sql);
+            $request->execute(array('id'=> $this->id));
+            $result=$request->fetch();
+            if(is_array($result)){
+                if (password_verify($passwordSaisi, $result['mot_de_passe'])){
+                    //echo "password dung";
+                    $sql = 'UPDATE etudiant SET email =:email WHERE id_etudiant =:id';
+                    $request = $bdd->prepare($sql);
+                    $execute=$request->execute(array(
+                        'email'=> $this->email,
+                        'id'=>$this->id
+                    ));
+                    if($execute) return true;
+                    else return false;
+                } else return false;
+            }
+        }
     }
 
-    public function modificationPassword ($bdd){
-        if ($this->verificationPassword($bdd)){
-            $sql = 'UPDATE etudiant SET mot_de_passe =:mot_de_passe WHERE  id_etudiant =:id_etudiant';
-            $request = $bdd->prepare($sql);
-            $execute=$request->execute(array('mot_de_passe'=>$this->mot_de_passe));
-            if ($execute) return true;
-            else return false;
-        }
-        else return false;
+    public function modifierPw ($bdd, $passwordSaisi){
+        $sql ='SELECT * FROM etudiant WHERE id_etudiant = :id ';
+        $request=$bdd->prepare($sql);
+        $request->execute(array('id'=> $this->id));
+        $result=$request->fetch();
+        if(is_array($result)) {
+            if (password_verify($passwordSaisi, $result['mot_de_passe'])) {
+                $sql = 'UPDATE etudiant SET mot_de_passe =:mot_de_passe WHERE id_etudiant =:id';
+                $request = $bdd->prepare($sql);
+                $execute = $request->execute(array(
+                    'mot_de_passe' => $this->mot_de_passe,
+                    'id' => $this->id
+                ));
+                if ($execute) return true;
+                else return false;
+            } else return false;
+        } else return false;
     }
 
     public function getPendingAccount(Bdd $bdd){
