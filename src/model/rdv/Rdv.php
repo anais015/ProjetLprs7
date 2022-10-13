@@ -28,16 +28,16 @@ class Rdv
 
     public function affichage($bdd){
         $sql='SELECT * FROM rdv WHERE ref_entreprise=?, ref_etudiant=?';
-        $request = $bdd->prepare($sql);
-        $execute = $request->execute(array(
+        $req = $bdd->prepare($sql);
+        $execute = $req->execute(array(
         ));
-        return $request->fetchall();
+        return $req->fetchall();
     }
 
     public function creation($bdd){
         $sql='INSERT INTO rdv (date, heure, lieux) VALUES :date, :heure,:lieux';
-        $request = $bdd->prepare($sql);
-        $execute=$request->execute(array(
+        $req = $bdd->prepare($sql);
+        $execute=$req->execute(array(
             'date' => $this->date,
             'heure' => $this->heure,
             'lieux' =>$this->lieux

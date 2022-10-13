@@ -34,17 +34,17 @@ class Offre
 
     public function affichage($bdd){
         $sql='SELECT * FROM offre';
-        $request = $bdd->prepare($sql);
-        $execute = $request->execute(array(
+        $req = $bdd->prepare($sql);
+        $execute = $req->execute(array(
         ));
-        return $request->fetchall();
+        return $req->fetchall();
     }
 
     public function creation($bdd){
         $sql='INSERT INTO offre (titre, description, domaine, refType) 
         VALUES :titre, :description, :domaine, :ref_type';
-        $request = $bdd->prepare($sql);
-        $execute=$request->execute(array(
+        $req = $bdd->prepare($sql);
+        $execute=$req->execute(array(
             'titre' => $this->titre,
             'description' => $this->description,
             'domaine' =>$this->domaine,

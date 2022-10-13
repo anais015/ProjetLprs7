@@ -17,7 +17,7 @@ class Administrateur extends Utilisateur
     }
 
     public function ajoutAdmin(BDD $bdd){
-        $req=$bdd->getBdd()->prepare('INSERT INTO administrateur(nom,prenom,mail,password) VALUES (:nom,:prenom,:mail,:password)');
+        $req=$bdd->getBdd()->prepare('INSERT INTO administrateur(nom,prenom,email,mot_de_passe) VALUES (:nom,:prenom,:mail,:password)');
         $req->execute(array(
             "nom"=>$this->getNom(),
             "prenom"=>$this->getPrenom(),

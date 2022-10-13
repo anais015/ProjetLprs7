@@ -5,10 +5,11 @@ $bdd = new Bdd();
 $typeoffre = new Type(array());
 $typesoffre = $typeoffre->getAllType($bdd);
 $page = "";
+$table = "<table><thead><tr><th>ID</th><th>Nom</th></tr></thead><tbody>";
 foreach ($typesoffre as $type){
-    $html = "<div style='background-color: lightgray'><h3>".$type['nom']."</h3></div>";
-    $page .= $html;
+    $table .= "<tr><td>".$type['id_type']."</td><td>".$type['nom']."</td>";
 }
+$table .= "</tbody></table>";
 ?>
 
 <html lang="fr">
@@ -17,6 +18,7 @@ foreach ($typesoffre as $type){
 </head>
 <body>
     <a href="vueadmin.php">Retour</a>
-    <?=$page?>
+    <a href="ajouttypeoffre.php"><button>Ajouter Type D'offre</button></a>
+    <?=$table?>
 </body>
 </html>
