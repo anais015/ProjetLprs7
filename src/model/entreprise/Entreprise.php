@@ -116,31 +116,35 @@ class Entreprise extends Utilisateur
         $this->valide = $valide;
     }
 
-    public function connexion($bdd){
+    public function connexion($bdd, $MDPSaisi){
         $sql='SELECT * FROM entreprise WHERE email=:email AND valide=1';
         $req = $bdd->prepare($sql);
-        $execute = $req->execute(array(
+        $req->execute(array(
             'email'=>$this->email
         ));
-        if ($execute) {
-            $result = $req->fetch();
-            /*if (is_array($result)) {
-                $this->setId($result['id_etudiant']);
-                $this->connexion = new Connexion(array('refentreprise' => $this->id));
-                $ajoutLaConnexion = $this->connexion->ajoutConnexionEntreprise($bdd);
+        $res = $req->fetch();
 
-            }*/
-            return $result;
-        }
+
+
+        if(is_array($res)) {
+            $this->setId($res['id_entreprise']);
+           /*if ($MDPSaisi == $res['mot_de_passe']) {
+
+                $this->conn = new Connexion(array('refentreprise'=>$this->id));
+                $this->conn->ajoutConnexionEntreprise($bdd);
+                return $res;
+            } else return false;*/
+            return $res;
+        } else return false;
     }
 
     public function inscription($bdd){
         $sql ='SELECT * FROM entreprise WHERE email = :email ';
         $req = $bdd->prepare($sql);
         $req->execute(array('email'=> $this->email));
-        $result = $req->fetch();
+        $res = $req->fetch();
 
-        if (is_array($result)) {
+        if (is_array($res)) {
             return false;
         }
         else {

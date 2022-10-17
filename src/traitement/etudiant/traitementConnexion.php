@@ -38,7 +38,7 @@ if(isset($_POST['connexion'])) {
 <body>
 <nav>
     <div class="bottom-row">
-        <a href="../../../index.php">Accueil</a>
+        <a href="../../view/etudiant/accueil.php">Accueil</a>
         <a href="../../view/connexion.php">Se Connecter</a>
         <a href="../../view/inscription.php">S'inscrire</a>
         <a href="#">Contact</a>
