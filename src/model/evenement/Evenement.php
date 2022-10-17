@@ -34,6 +34,21 @@ class Evenement
         return $req->fetchAll();
     }
 
+    public function assignSalle(Bdd $bdd, $id_salle){
+        $req = $bdd->GetBdd()->prepare('UPDATE evenement SET ref_salle = :id_salle, valide = 1 WHERE id_evenement=:id');
+        $req->execute(array(
+            "id"=>$this->getId(),
+            "id_salle"=>$id_salle
+        ));
+    }
+
+    public function deleteEvent(Bdd $bdd){
+        $req = $bdd->getBdd()->prepare('DELETE FROM evenement WHERE id_evenement=:id');
+        $req->execute(array(
+            "id"=>$this->getId()
+        ));
+    }
+
     public function getId()
     {
         return $this->id;
