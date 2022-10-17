@@ -4,21 +4,36 @@ h1, h4, h2{
 
 label {
     display: block;
+    margin-bottom: 10px;
     font: 1rem 'Fira Sans', sans-serif;
+}
+
+textarea {
+    padding: 10px;
+    max-width: 100%;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
 }
 
 small{
     color: red;
 }
 
-input,
-label {
-    margin: .4rem 0;
+input{
+    padding: 10px;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
 }
 
-#description{
-    width: 200px;
-
+input,
+label,
+textarea {
+    margin: .4rem 0;
+    letter-spacing: 1px;
 }
 
 ul {
