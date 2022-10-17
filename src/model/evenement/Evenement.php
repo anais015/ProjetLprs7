@@ -154,7 +154,9 @@ class Evenement
         $req->execute(array(
             'date'=> $this->date,
             'heure'=> $this->heure,
-            'ref_entreprise'=>$this->ref_entreprise));
+            'ref_entreprise'=>$this->ref_entreprise
+        ));
+
         $res = $req->fetch();
         if (is_array($res)) return false;
 
