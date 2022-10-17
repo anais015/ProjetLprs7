@@ -7,12 +7,14 @@
 </head>
 <body>
 
-<ul>
-    <li><a href="page_accueil.php">Accueil</a></li>
-    <li><a href="modifProfil.php">Modification de profil</a></li>
-    <li><a href="../contact.php">Contact</a></li>
-    <li><a href="deconnexion.php">Déconnexion</a></li>
-</ul>
+<nav>
+    <ul>
+        <li><a href="page_accueil.php">Accueil</a></li>
+        <li><a href="modifProfil.php">Modification de profil</a></li>
+        <li><a href="../contact.php">Contact</a></li>
+        <li><a href="deconnexion.php">Déconnexion</a></li>
+    </ul>
+</nav>
 
 <h1>Création d'un événement</h1>
 
@@ -21,7 +23,7 @@
     <input type='text' placeholder='Nom' name='nom'  required>
 
     <label for='description'><b>Description de l'événement :</b></label>
-    <input type='text' placeholder='description' name='description' id="description" required>
+    <textarea placeholder='Description' name='description' id="description" required></textarea>
 
     <label for='date'><b>Date de l'événement :</b></label>
     <input type='date' placeholder='date' name='date' required>
