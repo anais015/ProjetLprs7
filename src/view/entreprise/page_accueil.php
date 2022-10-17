@@ -22,7 +22,7 @@
 <ul>
     <li><a href="page_accueil.php">Accueil</a></li>
     <li><a href="modifProfil.php">Modification Profil</a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a href="../contact.php">Contact</a></li>
     <li><a href="#">Déconnexion</a></li>
 </ul>
 
