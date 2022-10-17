@@ -1,0 +1,32 @@
+h1, h4, h2{
+    text-align: center;
+}
+
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+small{
+    color: red;
+}
+
+input,
+label {
+    margin: .4rem 0;
+}
+
+#description{
+    width: 200px;
+
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+}
