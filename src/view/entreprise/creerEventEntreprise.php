@@ -18,7 +18,7 @@
 
 <h1>Création d'un événement</h1>
 
-<form action='../../traitement/entreprise/traitementCreerEvent.php' method='POST'>
+<form action='../../traitement/evenement/traitementCreerEventEntreprise.php' method='POST'>
     <label for='nom'><b>Nom de l'événement :</b></label>
     <input type='text' placeholder='Nom' name='nom'  required>
 
