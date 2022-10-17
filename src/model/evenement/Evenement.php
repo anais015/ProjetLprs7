@@ -185,6 +185,28 @@ class Evenement
             else return false;
     }
 
+    public function entrepriseParticiperEvenement($bdd){
+        $sql ='SELECT * FROM participe WHERE ref_evenement=: ref_evenement AND ref_etudiant=:ref_etudiant';
+        $request = $bdd->prepare($sql);
+        $execute = $request->execute(array(
+            'ref_evenement'=> $this->id,
+            'ref_entreprise'=> $this->ref_entreprise));
+        if($execute) {
+            $result = $request->fetch();
+            if (is_array($result)) return false;
+        }
+        else {
+            $sql='INSERT INTO participe (ref_evenement, ref_entreprise) VALUES (:ref_evenement, :ref_etudiant)';
+            $request = $bdd->prepare($sql);
+            $execute=$request->execute(array(
+                'ref_evenement'=> $this->id,
+                'ref_entreprise'=> $this->ref_entreprise
+            ));
+            if($execute) return true;
+            else return false;
+        }
+    }
+
     public function etudiantParticipeEvenement($bdd){
 //        $sql ='SELECT date, heure, ADDTIME(heure,duree) FROM evenement WHERE'
         $sql ='SELECT * FROM participe AS p
