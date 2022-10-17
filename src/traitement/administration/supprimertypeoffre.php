@@ -3,7 +3,7 @@ require_once "../../model/administrateur/Type.php";
 require_once "../../model/bdd/Bdd.php";
 $bdd = new Bdd();
 $typeoffre = new Type(array(
-    'nom'=>$_POST['nom']
+    'idtype'=>$_POST['idtype']
 ));
-$typeoffre->ajoutType($bdd);
+$typeoffre->deleteType($bdd);
 header("Location: ../../view/administration/gestiontypeoffre.php");

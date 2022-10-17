@@ -11,8 +11,8 @@ foreach ($typesoffre as $type){
                 <td>".$type['id_type']."</td>
                 <td>".$type['nom']."</td>
                 <td>
-                <form action='../../traitement/administration/supprimersalle.php' method='post'>
-                    <input hidden value='".$type['id_type']."'>
+                <form action='../../traitement/administration/supprimertypeoffre.php' method='post'>
+                    <input hidden name='idtype' value='".$type['id_type']."'>
                     <button type='submit'>Supprimer</button>
                 </form>
                 </td>";

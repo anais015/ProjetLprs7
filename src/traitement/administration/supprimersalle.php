@@ -2,9 +2,9 @@
 require_once "../../model/Salle.php";
 require_once "../../model/bdd/Bdd.php";
 $bdd = new Bdd();
+var_dump($_POST);
 $salle = new Salle(array(
-    'nom'=>$_POST['nom'],
-    'nombreplace'=>$_POST['nombre_place']
+    'idsalle'=>$_POST['idsalle']
 ));
-$salle->ajoutSalle($bdd);
+echo $salle->deleteSalle($bdd);
 header("Location: ../../view/administration/gestionsalle.php");

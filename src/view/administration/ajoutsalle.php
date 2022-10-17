@@ -7,10 +7,10 @@ $salle = new Salle(array());
 
 <html lang="fr">
 <head>
-    <title>Gestion Type Offre</title>
+    <title>Gestion Salle</title>
 </head>
 <body>
-<a href="vueadmin.php">Retour</a>
+<a href="gestionsalle.php">Retour</a>
 <form action="../../traitement/administration/ajoutsalle.php" method="post">
     <label>Nom :
         <input type="text" name="nom" placeholder="Nom">

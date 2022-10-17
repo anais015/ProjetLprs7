@@ -6,8 +6,7 @@ $bdd = new Bdd();
 $salle = new Salle(array());
 $evenement = new Evenement(array());
 $salles = $salle->getAllSalle($bdd);
-$pendingevents = $evenement->getPendingEvent($bdd); #ajouter méthode pour avoir les event en attente de validation;
-#var_dump($pendingevents);
+$pendingevents = $evenement->getPendingEvent($bdd);
 if (count($pendingevents)>=1){
     $eventlist   = "<b>Liste des événements en attente</b>";
     foreach ($pendingevents as $event) {
