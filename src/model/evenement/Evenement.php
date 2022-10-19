@@ -141,9 +141,9 @@ class Evenement
     }
 
     public function supprimerEvenement ($bdd){
-        $sql='DELETE FROM evenement WHERE id_evenement=:id_evenement';
+        $sql='DELETE FROM evenement WHERE id_evenement=:id';
         $request=$bdd->prepare($sql);
-        $execute=$request->execute(array('id_evenement'=>$this->id));
+        $execute=$request->execute(array('id'=>$this->id));
         if($execute) return true;
         else return false;
     }

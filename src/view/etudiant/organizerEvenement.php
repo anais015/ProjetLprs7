@@ -21,10 +21,10 @@ if (isset($_POST['enregistrer'])){
         'duree'=> $_POST['duree'],
         'ref_etudiant'=>$_SESSION['etudiant']['id_etudiant']
     ));
-    var_dump($event);
+    //var_dump($event);
     $organiser=$event->etudiantOrganiseEvenement($bdd);
     if (!$organiser) $erreur=true;
-    var_dump($organiser);
+    //var_dump($organiser);
 }
 ?>
 <html>

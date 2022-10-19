@@ -8,11 +8,11 @@ require_once "../../model/evenement/Evenement.php";
 
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();
+$erreur = false;
 $tbHistorique='';
 $tbOrganiser='';
 $tbParticiper='';
-$etat='';
-$salle='';
+$etat=''; $salle='';
 $event=new Evenement(array('ref_etudiant'=>$_SESSION['etudiant']['id_etudiant']));
 $historique=$event->historique($bdd);
 foreach ($historique as $value){
@@ -21,7 +21,7 @@ foreach ($historique as $value){
                         <td>".$value['date']."</td>
                         <td>".$value['heure']."</td>
                         <td><form action='' method='post'>
-                            <button value='".$value['id_evenement']."'>Supprimer</button>
+                            <button name='supprimer' value='".$value['id_evenement']."'>Supprimer</button>
                             </form>
                         </td>
                     </tr>";
@@ -44,10 +44,22 @@ foreach ($listOrganise as $value){
                             <form action='modifierEvenement.php' method='post'>
                                 <button name='modifier' value='".$value['id_evenement']."'>Modifier</button>
                             </form>
-                            <button name='annuler' id='".$value['id_evenement']."'>Annuler</button>
+                            <form action='' method='post'>
+                                <button name='annuler' value='".$value['id_evenement']."'>Annuler</button>
+                            </form>
                         </td>
-                           
                     </tr>";
+
+    if (isset($_POST['annuler'])){
+        $event=new Evenement(array('id'=>$_POST['annuler']));
+        $annuler=$event->supprimerEvenement($bdd);
+        if (!$annuler) $erreur=true;
+    }
+    if (isset($_POST['supprimer'])){
+        $event=new Evenement(array('id'=>$_POST['supprimer']));
+        $supprimer=$event->supprimerEvenement($bdd);
+        if (!$supprimer) $erreur=true;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -74,11 +86,29 @@ foreach ($listOrganise as $value){
 </nav>
 <h2>Événement</h2>
 
+<div class="container">
+    <div class="container" id="alert"
+    <?php
+    if (!$erreur) echo 'style="display:none;"';
+    else echo 'style="display:block; background-color:#f8bdc1; text-align: center"';
+    ?>
+    <input type="hidden"> &#9888; Erreur.
+</div>
+<div class="container" id="alert"
+    <?php
+    if (!$organiser) echo 'style="display:none;"';
+    else echo 'style="display:block; background-color:#D3DEA5; text-align: center"';
+    ?>>
+    <input type="hidden"> &#10003; Reussite
+
+</div>
+
 <div class="tab">
     <button class="tablinks" onclick="openTab(event, 'À organiser')">À organiser</button>
     <button class="tablinks" onclick="openTab(event, 'À participer')">À participer</button>
     <button class="tablinks" onclick="openTab(event, 'Historique')">Historique</button>
 </div>
+
 
 <div id="À organiser" class="tabcontent">
     <h3>Événement à organiser</h3>
