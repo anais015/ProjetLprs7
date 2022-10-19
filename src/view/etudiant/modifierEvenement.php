@@ -8,8 +8,9 @@ require_once "../../model/evenement/Evenement.php";
 
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();
-$erreur = false;
 $nom=''; $date=''; $description=''; $heure=''; $duree=''; $id='';
+$modifiedEvent=false;
+$erreur = false;
 //var_dump($_POST);
 if(isset($_POST['modifier'])){
     $event=new Evenement(array('id'=>$_POST['modifier']));
@@ -24,7 +25,7 @@ if(isset($_POST['modifier'])){
     //    var_dump($selectedEvent);
 }
 if(isset($_POST['enregistrer'])){
-    //var_dump($_POST);
+//    var_dump($_POST);
     $event = new Evenement(array(
         'nom'=> $_POST['nom'],
         'description'=>$_POST['description'],
@@ -33,15 +34,14 @@ if(isset($_POST['enregistrer'])){
         'duree'=> $_POST['duree'],
         'id'=>$_POST['id']
     ));
-    //var_dump($event);
+//    var_dump($event);
     $modifiedEvent=$event->modifierEvenement($bdd);
-    //var_dump($modifiedEvent);
+//    var_dump($modifiedEvent);
     $nom=$event->getNom();
     $description=$event->getDescription();
     $date=$event->getDate();
     $heure=$event->getHeure();
     $duree=$event->getDuree();
-    if (!$modifiedEvent) $erreur=true;
 }
 
 ?>
@@ -68,23 +68,23 @@ if(isset($_POST['enregistrer'])){
     </div>
 </nav>
 <h2>Modifier un événement</h2>
-<div class="container" id="alert"
-<?php
-if (!$erreur) echo 'style="display:none;"';
-else echo 'style="display:block; background-color:#f8bdc1; text-align: center"';
-?>
-<input type="hidden"> &#9888; Erreur : Votre modification a échouée.
-</div>
-<div class="container" id="alert"
-    <?php
-    if (!$modifiedEvent) echo 'style="display:none;"';
-    else echo 'style="display:block; background-color:#D3DEA5; text-align: center"';
-    ?>>
-    <input type="hidden"> &#10003; Evenement modifié
-
-</div>
-
 <div>
+    <div>
+        <div class="container" id="alert"
+        <?php
+        if (!$erreur) echo 'style="display:none;"';
+        else echo 'style="display:block; background-color:#f8bdc1; text-align: center"';
+        ?>
+        <input type="hidden"> &#9888; Erreur : Votre modification n'a pas été prise en compte.
+    </div>
+    <div class="container" id="alert"
+        <?php
+        if (!$modifiedEvent) echo 'style="display:none;"';
+        else echo 'style="display:block; background-color:#D3DEA5; text-align: center"';
+        ?>
+        <input type="hidden"> &#10003; Événement mis à jour.
+    </div>
+
 <form action='' method='POST'>
     <input type='hidden' name='id' value="<?=$id?>">
 

@@ -117,24 +117,24 @@ class Entreprise extends Utilisateur
     }
 
     public function connexion($bdd, $MDPSaisi){
+
         $sql='SELECT * FROM entreprise WHERE email=:email AND valide=1';
         $req = $bdd->prepare($sql);
         $req->execute(array(
             'email'=>$this->email
         ));
+
         $res = $req->fetch();
 
-
-
         if(is_array($res)) {
-            $this->setId($res['id_entreprise']);
-           /*if ($MDPSaisi == $res['mot_de_passe']) {
 
+            $this->setId($res['id_entreprise']);
+
+            if (password_verify($MDPSaisi, $res['mot_de_passe'])) {
                 $this->conn = new Connexion(array('refentreprise'=>$this->id));
                 $this->conn->ajoutConnexionEntreprise($bdd);
                 return $res;
-            } else return false;*/
-            return $res;
+            } else return false;
         } else return false;
     }
 
@@ -188,3 +188,5 @@ class Entreprise extends Utilisateur
         else return false;
     }
 }
+
+?>

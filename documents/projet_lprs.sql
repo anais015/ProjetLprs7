@@ -182,3 +182,25 @@ ALTER TABLE `evenement` CHANGE `ref_salle` `ref_salle` INT(11) NULL;
 ALTER TABLE `evenement` CHANGE `ref_entreprise` `ref_entreprise` INT(11) NULL;
 ALTER TABLE `evenement` CHANGE `ref_etudiant` `ref_etudiant` INT(11) NULL;
 ALTER TABLE `evenement` CHANGE `ref_administrateur` `ref_administrateur` INT(11) NULL;
+
+DELIMITER $$
+CREATE TRIGGER `event_duplicate_update` BEFORE UPDATE ON `evenement`
+    FOR EACH ROW BEGIN
+    IF EXISTS (SELECT ref_etudiant,date, heure, ADDTIME(heure,duree) FROM evenement
+    WHERE ref_etudiant=NEW.ref_etudiant AND date = NEW.date AND heure <= NEW.heure AND ADDTIME(heure,duree) > ADDTIME(NEW.heure,NEW.duree)) THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'An error occurred';
+    END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER `event_duplicate_insert` BEFORE INSERT ON `evenement`
+    FOR EACH ROW BEGIN
+    IF EXISTS (SELECT ref_etudiant,date, heure, ADDTIME(heure,duree) FROM evenement
+    WHERE ref_etudiant=NEW.ref_etudiant AND date = NEW.date AND heure <= NEW.heure AND ADDTIME(heure,duree) > ADDTIME(NEW.heure,NEW.duree)) THEN
+ SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = 'An error occurred';
+END IF;
+END $$
+DELIMITER ;

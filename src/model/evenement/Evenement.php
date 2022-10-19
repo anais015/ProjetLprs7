@@ -10,7 +10,7 @@ class Evenement
     private $duree;
     private $valide;
     private $refSalle;
-    private $refEntreprise;
+    private $ref_entreprise;
     private $ref_etudiant;
     private $refAdmin;
 
@@ -100,12 +100,12 @@ class Evenement
         $this->refSalle = $refSalle;
     }
 
-    public function getRefEntreprise() {
-        return $this->refEntreprise;
+    public function getRef_entreprise() {
+        return $this->ref_entreprise;
     }
 
-    public function setRefEntreprise($refEntreprise): void {
-        $this->refEntreprise = $refEntreprise;
+    public function setRef_entreprise($ref_entreprise): void {
+        $this->ref_entreprise = $ref_entreprise;
     }
 
     public function getRef_etudiant() {
@@ -148,6 +148,32 @@ class Evenement
         else return false;
     }
 
+    public function entrepriseCreerEvenement($bdd){
+        $sql ='SELECT * FROM evenement WHERE date=:date AND heure=:heure AND ref_entreprise=:ref_entreprise';
+        $req = $bdd->prepare($sql);
+        $req->execute(array(
+            'date'=> $this->date,
+            'heure'=> $this->heure,
+            'ref_entreprise'=>$this->ref_entreprise));
+        $res = $req->fetch();
+        if (is_array($res)) return false;
+
+        else{
+            $sql='INSERT INTO evenement (nom, description, date, heure, duree, ref_entreprise) VALUES (:nom, :description, :date, :heure, :duree, :ref_entreprise)';
+            $request = $bdd->prepare($sql);
+            $execute=$request->execute(array(
+                'nom'=> $this->nom,
+                'description'=> $this->description,
+                'date'=> $this->date,
+                'heure'=> $this->heure,
+                'duree'=> $this->duree,
+                'ref_entreprise'=>$this->ref_entreprise
+            ));
+            if($execute) return true;
+            else return false;
+        }
+    }
+
     public function etudiantOrganiseEvenement ($bdd){
         $sql ='SELECT * FROM evenement WHERE date=:date AND heure=:heure AND ref_etudiant=:ref_etudiant';
         $request = $bdd->prepare($sql);
@@ -175,7 +201,11 @@ class Evenement
     }
 
     public function etudiantParticipeEvenement($bdd){
-        $sql ='SELECT * FROM participe WHERE ref_evenement=: ref_evenement AND ref_etudiant=:ref_etudiant';
+//        $sql ='SELECT date, heure, ADDTIME(heure,duree) FROM evenement WHERE'
+        $sql ='SELECT * FROM participe AS p
+        INNER JOIN evenement AS e
+        ON p.ref_etudiant=e.ref_etudiant
+        WHERE e.date=:date, e.heure p.ref_evenement=: ref_evenement AND p.ref_etudiant=:ref_etudiant';
         $request = $bdd->prepare($sql);
         $execute = $request->execute(array(
             'ref_evenement'=> $this->id,
@@ -185,10 +215,10 @@ class Evenement
             if (is_array($result)) return false;
         }
         else {
-            $sql='INSERT INTO participe (ref_evenement, ref_etudiant) VALUES (:ref_evenement, :ref_etudiant)';
+            $sql='INSERT INTO participe (ref_evenement, ref_etudiant) VALUES (:id, :ref_etudiant)';
             $request = $bdd->prepare($sql);
             $execute=$request->execute(array(
-                'ref_evenement'=> $this->id,
+                'id'=> $this->id,
                 'ref_etudiant'=> $this->ref_etudiant
             ));
             if($execute) return true;
@@ -205,10 +235,22 @@ class Evenement
     }
 
     public function listEventOrganise($bdd){
-        $sql='SELECT e.id_evenement, e.nom , e.date, e.heure, e.duree, e.valide, s.nom FROM evenement AS e
+        $sql='SELECT e.id_evenement, e.nom, e.date, e.heure, e.duree, e.valide, s.nom FROM evenement AS e
     LEFT JOIN salle AS s
               ON e.ref_salle = s.id_salle 
               WHERE e.date>NOW() AND e.ref_etudiant=:ref_etudiant
+              ORDER BY e.date';
+        $request= $bdd->prepare($sql);
+        $request->execute(array('ref_etudiant'=> $this->ref_etudiant));
+        $result = $request->fetchAll();
+        if(is_array($result)) return $result;
+        else return false;
+    }
+    public function listRechercheEvent($bdd){
+        $sql='SELECT e.id_evenement, e.nom, e.description, e.date, e.heure, e.duree, s.nom FROM evenement AS e
+    LEFT JOIN salle AS s
+              ON e.ref_salle = s.id_salle 
+              WHERE valide=1 AND e.date>NOW() AND (`ref_etudiant` IS NULL OR `ref_etudiant`<>:ref_etudiant)
               ORDER BY e.date';
         $request= $bdd->prepare($sql);
         $request->execute(array('ref_etudiant'=> $this->ref_etudiant));

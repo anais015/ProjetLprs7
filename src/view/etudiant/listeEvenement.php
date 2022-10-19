@@ -8,11 +8,11 @@ require_once "../../model/evenement/Evenement.php";
 
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();
-$erreur = false;
 $tbHistorique='';
 $tbOrganiser='';
 $tbParticiper='';
-$etat=''; $salle='';
+$etat='';
+$salle='';
 $event=new Evenement(array('ref_etudiant'=>$_SESSION['etudiant']['id_etudiant']));
 $historique=$event->historique($bdd);
 foreach ($historique as $value){
@@ -20,13 +20,30 @@ foreach ($historique as $value){
                         <td>".$value['nom']."</td>
                         <td>".$value['date']."</td>
                         <td>".$value['heure']."</td>
-                        <td><form action='' method='post'>
+                        <td><form action='../../traitement/evenement/traitementSuppression.php' method='post'>
                             <button name='supprimer' value='".$value['id_evenement']."'>Supprimer</button>
                             </form>
                         </td>
                     </tr>";
 
 }
+//$listParticiper= $event->listEventParticiper($bdd);
+//foreach ($listParticiper as $value){
+//    $tbParticiper .="<tr>
+//                        <td>".$value[1]."</td>
+//                        <td>".$value['description']."</td>
+//                        <td>".$value['date']."</td>
+//                        <td>".$value['heure']."</td>
+//                        <td>".$value['duree']."</td>
+//                        <td>".$value['salle']."</td>
+//                        <td>
+//                            <form action='../../traitement/evenement/traitementSuppression.php' method='post'>
+//                                <button name='annuler' value='".$value['id_evenement']."'>Annuler</button>
+//                            </form>
+//                        </td>
+//                    </tr>";
+//}
+
 $listOrganise= $event->listEventOrganise($bdd);
 foreach ($listOrganise as $value){
     if ($value['valide']==0) $etat = 'En attente';
@@ -44,22 +61,11 @@ foreach ($listOrganise as $value){
                             <form action='modifierEvenement.php' method='post'>
                                 <button name='modifier' value='".$value['id_evenement']."'>Modifier</button>
                             </form>
-                            <form action='' method='post'>
+                            <form action='../../traitement/evenement/traitementSuppression.php' method='post'>
                                 <button name='annuler' value='".$value['id_evenement']."'>Annuler</button>
                             </form>
                         </td>
                     </tr>";
-
-    if (isset($_POST['annuler'])){
-        $event=new Evenement(array('id'=>$_POST['annuler']));
-        $annuler=$event->supprimerEvenement($bdd);
-        if (!$annuler) $erreur=true;
-    }
-    if (isset($_POST['supprimer'])){
-        $event=new Evenement(array('id'=>$_POST['supprimer']));
-        $supprimer=$event->supprimerEvenement($bdd);
-        if (!$supprimer) $erreur=true;
-    }
 }
 ?>
 <!DOCTYPE html>
@@ -86,29 +92,11 @@ foreach ($listOrganise as $value){
 </nav>
 <h2>Événement</h2>
 
-<div class="container">
-    <div class="container" id="alert"
-    <?php
-    if (!$erreur) echo 'style="display:none;"';
-    else echo 'style="display:block; background-color:#f8bdc1; text-align: center"';
-    ?>
-    <input type="hidden"> &#9888; Erreur.
-</div>
-<div class="container" id="alert"
-    <?php
-    if (!$organiser) echo 'style="display:none;"';
-    else echo 'style="display:block; background-color:#D3DEA5; text-align: center"';
-    ?>>
-    <input type="hidden"> &#10003; Reussite
-
-</div>
-
 <div class="tab">
     <button class="tablinks" onclick="openTab(event, 'À organiser')">À organiser</button>
     <button class="tablinks" onclick="openTab(event, 'À participer')">À participer</button>
     <button class="tablinks" onclick="openTab(event, 'Historique')">Historique</button>
 </div>
-
 
 <div id="À organiser" class="tabcontent">
     <h3>Événement à organiser</h3>
@@ -131,7 +119,7 @@ foreach ($listOrganise as $value){
     <table>
         <tr>
             <th>Titre du événement</th>
-            <th>Entreprise</th>
+            <th>Description</th>
             <th>Date</th>
             <th>Heure</th>
             <th>Durée</th>
