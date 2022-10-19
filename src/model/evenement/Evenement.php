@@ -10,7 +10,7 @@ class Evenement
     private $duree;
     private $valide;
     private $refSalle;
-    private $refEntreprise;
+    private $ref_entreprise;
     private $ref_etudiant;
     private $refAdmin;
 
@@ -100,12 +100,12 @@ class Evenement
         $this->refSalle = $refSalle;
     }
 
-    public function getRefEntreprise() {
-        return $this->refEntreprise;
+    public function getRef_entreprise() {
+        return $this->ref_entreprise;
     }
 
-    public function setRefEntreprise($refEntreprise): void {
-        $this->refEntreprise = $refEntreprise;
+    public function setRef_entreprise($ref_entreprise): void {
+        $this->ref_entreprise = $ref_entreprise;
     }
 
     public function getRef_etudiant() {
@@ -146,6 +146,32 @@ class Evenement
         $execute=$request->execute(array('id'=>$this->id));
         if($execute) return true;
         else return false;
+    }
+
+    public function entrepriseCreerEvenement($bdd){
+        $sql ='SELECT * FROM evenement WHERE date=:date AND heure=:heure AND ref_entreprise=:ref_entreprise';
+        $req = $bdd->prepare($sql);
+        $req->execute(array(
+            'date'=> $this->date,
+            'heure'=> $this->heure,
+            'ref_entreprise'=>$this->ref_entreprise));
+        $res = $req->fetch();
+        if (is_array($res)) return false;
+
+        else{
+            $sql='INSERT INTO evenement (nom, description, date, heure, duree, ref_entreprise) VALUES (:nom, :description, :date, :heure, :duree, :ref_entreprise)';
+            $request = $bdd->prepare($sql);
+            $execute=$request->execute(array(
+                'nom'=> $this->nom,
+                'description'=> $this->description,
+                'date'=> $this->date,
+                'heure'=> $this->heure,
+                'duree'=> $this->duree,
+                'ref_entreprise'=>$this->ref_entreprise
+            ));
+            if($execute) return true;
+            else return false;
+        }
     }
 
     public function etudiantOrganiseEvenement ($bdd){

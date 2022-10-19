@@ -71,14 +71,14 @@ class  Connexion
     }
 
     public function ajoutConnexionEntreprise($bdd){
-        $req=$bdd->getBdd()->prepare('INSERT INTO connexion(date, heure, ref_entreprise) VALUES (CURDATE(),CURTIME(),:refentreprise)');
+        $req=$bdd->prepare('INSERT INTO connexion(date, heure, ref_entreprise) VALUES (CURDATE(),CURTIME(),:refentreprise)');
         $req->execute(array(
             "refentreprise"=>$this->getRefentreprise()
         ));
     }
 
     public function ajoutConnexionAdministrateur($bdd){
-        $req=$bdd->getBdd()->prepare('INSERT INTO connexion(date, heure, ref_administrateur) VALUES (CURDATE(),CURTIME(),:refadministrateur)');
+        $req=$bdd->prepare('INSERT INTO connexion(date, heure, ref_administrateur) VALUES (CURDATE(),CURTIME(),:refadministrateur)');
         $req->execute(array(
             "refadministrateur"=>$this->getRefadministrateur()
         ));
