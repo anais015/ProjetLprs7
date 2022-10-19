@@ -20,13 +20,30 @@ foreach ($historique as $value){
                         <td>".$value['nom']."</td>
                         <td>".$value['date']."</td>
                         <td>".$value['heure']."</td>
-                        <td><form action='' method='post'>
-                            <button value='".$value['id_evenement']."'>Supprimer</button>
+                        <td><form action='../../traitement/evenement/traitementSuppression.php' method='post'>
+                            <button name='supprimer' value='".$value['id_evenement']."'>Supprimer</button>
                             </form>
                         </td>
                     </tr>";
 
 }
+//$listParticiper= $event->listEventParticiper($bdd);
+//foreach ($listParticiper as $value){
+//    $tbParticiper .="<tr>
+//                        <td>".$value[1]."</td>
+//                        <td>".$value['description']."</td>
+//                        <td>".$value['date']."</td>
+//                        <td>".$value['heure']."</td>
+//                        <td>".$value['duree']."</td>
+//                        <td>".$value['salle']."</td>
+//                        <td>
+//                            <form action='../../traitement/evenement/traitementSuppression.php' method='post'>
+//                                <button name='annuler' value='".$value['id_evenement']."'>Annuler</button>
+//                            </form>
+//                        </td>
+//                    </tr>";
+//}
+
 $listOrganise= $event->listEventOrganise($bdd);
 foreach ($listOrganise as $value){
     if ($value['valide']==0) $etat = 'En attente';
@@ -44,9 +61,10 @@ foreach ($listOrganise as $value){
                             <form action='modifierEvenement.php' method='post'>
                                 <button name='modifier' value='".$value['id_evenement']."'>Modifier</button>
                             </form>
-                            <button name='annuler' id='".$value['id_evenement']."'>Annuler</button>
+                            <form action='../../traitement/evenement/traitementSuppression.php' method='post'>
+                                <button name='annuler' value='".$value['id_evenement']."'>Annuler</button>
+                            </form>
                         </td>
-                           
                     </tr>";
 }
 ?>
@@ -101,7 +119,7 @@ foreach ($listOrganise as $value){
     <table>
         <tr>
             <th>Titre du événement</th>
-            <th>Entreprise</th>
+            <th>Description</th>
             <th>Date</th>
             <th>Heure</th>
             <th>Durée</th>
