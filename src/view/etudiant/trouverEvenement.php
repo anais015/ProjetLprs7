@@ -71,8 +71,8 @@ if(isset($_POST['participer'])){
             <th>Titre du événement</th>
             <th>Description</th>
             <th>Date</th>
-            <th>Heure</th>
-            <th>Durée</th>
+            <th>Heure de début</th>
+            <th>Heure de fin</th>
             <th>Salle</th>
             <th>Action</th>
         </tr>

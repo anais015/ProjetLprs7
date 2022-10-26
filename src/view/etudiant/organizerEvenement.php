@@ -16,15 +16,14 @@ if (isset($_POST['enregistrer'])){
     $event = new Evenement(array(
         'nom'=> $_POST['nom'],
         'description'=> $_POST['description'],
-        'date'=> $_POST['date'],
-        'heure'=> $_POST['debut'],
-        'duree'=> $_POST['duree'],
+        'debut'=> $_POST['debut'],
+        'fin'=> $_POST['fin'],
         'ref_etudiant'=>$_SESSION['etudiant']['id_etudiant']
     ));
-    //var_dump($event);
+//    var_dump($event);
     $organiser=$event->etudiantOrganiseEvenement($bdd);
     if (!$organiser) $erreur=true;
-    //var_dump($organiser);
+//    var_dump($organiser);
 }
 ?>
 <html>
@@ -58,14 +57,14 @@ if (isset($_POST['enregistrer'])){
         if (!$erreur) echo 'style="display:none;"';
         else echo 'style="display:block; background-color:#f8bdc1; text-align: center"';
     ?>
-    <input type="hidden"> &#9888; Erreur : Vous avez déjà créé un événement à ces heures. Veuillez créer un autre.
+    <input type="hidden"> &#9888; Erreur.
 </div>
 <div class="container" id="alert"
     <?php
         if (!$organiser) echo 'style="display:none;"';
         else echo 'style="display:block; background-color:#D3DEA5; text-align: center"';
     ?>>
-    <input type="hidden"> &#10003; Reussite
+    <input type="hidden"> &#10003; Reussite.
 
 </div>
 <div  <?php if ($organiser) echo 'style="display:none;"';?>>
@@ -76,14 +75,11 @@ if (isset($_POST['enregistrer'])){
         <label for='description'><b>Description</b></label>
         <input type="text" name='description' placeholder="Description" required>
 
-        <label for='date'><b>Date</b></label>
-        <input type='date' placeholder='Date' name='date' required>
+        <label for='debut'><b>Début</b></label>
+        <input type='datetime-local' placeholder='Heure de début' name='debut' required>
 
-        <label for='debut'><b>Heure de début</b></label>
-        <input type='time' placeholder='Heure de début' name='debut' required>
-
-        <label for='duree'><b>Durée</b></label>
-        <input type='time' placeholder='Durée' name='duree' required>
+        <label for='fin'><b>Fin</b></label>
+        <input type='datetime-local' placeholder='Heure de fin' name='fin' required>
 
         <input type='submit' value="Enregistrer" name='enregistrer' id='enregistrer'>
 </div>

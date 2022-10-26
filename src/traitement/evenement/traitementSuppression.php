@@ -13,15 +13,14 @@ $supprimer=false;
 $annuler=false;
 $erreur=false;
 
-
-var_dump($_POST);
+//var_dump($_POST);
 if(isset($_POST['annuler'])){
     $h2='Annuler un événement';
     $event = new Evenement(array(
         'id'=>$_POST['annuler']
     ));
     $annuler=$event->supprimerEvenement($bdd);
-    var_dump($annuler);
+//    var_dump($annuler);
     if($annuler) $msg='Événement annulé';
     else $msg="Erreur : Votre annulation n'a pas été prise en compte.";
 
@@ -32,7 +31,7 @@ if(isset($_POST['supprimer'])){
         'id'=>$_POST['supprimer']
     ));
     $supprimer=$event->supprimerEvenement($bdd);
-    var_dump($supprimer);
+//    var_dump($supprimer);
     if($supprimer) $msg='Événement supprimé';
     else $msg="Erreur : Votre suppression n'a pas été prise en compte.";
 
