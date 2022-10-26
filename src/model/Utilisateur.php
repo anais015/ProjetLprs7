@@ -2,11 +2,11 @@
 
 abstract class Utilisateur
 {
-    protected $id;
-    protected $nom;
-    protected $prenom;
-    protected $email;
-    protected $mot_de_passe;
+    protected int $id;
+    protected ?string $nom;
+    protected ?string $prenom;
+    protected ?string $email;
+    protected ?string $mot_de_passe;
 
     protected function __construct(array $donnees)
     {
@@ -38,9 +38,16 @@ abstract class Utilisateur
         return $this->nom;
     }
 
-    protected function setNom($nom)
+    protected function setNom(string $nom)
     {
-        $this->nom = $nom;
+        $nom=trim($nom);
+        if(strlen($nom)<50 && strlen($nom)>0){
+            $this->nom = $nom;
+            return true;
+        }
+        return false;
+
+
     }
 
     protected function getPrenom()
@@ -48,9 +55,14 @@ abstract class Utilisateur
         return $this->prenom;
     }
 
-    protected function setPrenom($prenom)
+    protected function setPrenom(string $prenom)
     {
-        $this->prenom = $prenom;
+        $prenom=trim($prenom);
+        if(strlen($prenom)<50 && strlen($prenom)>0){
+            $this->prenom = $prenom;
+            return true;
+        }
+        return false;
     }
 
     protected function getEmail()
@@ -58,7 +70,7 @@ abstract class Utilisateur
         return $this->email;
     }
 
-    protected function setEmail($email)
+    protected function setEmail(string $email)
     {
         $this->email = $email;
     }
@@ -68,7 +80,7 @@ abstract class Utilisateur
         return $this->mot_de_passe;
     }
 
-    protected function setMot_de_passe($mot_de_passe)
+    protected function setMot_de_passe(string $mot_de_passe)
     {
         $this->mot_de_passe = $mot_de_passe;
     }
