@@ -610,3 +610,8 @@ DELIMITER;
 ALTER TABLE `type` ADD `ref_admin` INT NOT NULL AFTER `nom`;
 ALTER TABLE `type` ADD CONSTRAINT `fk_type_admin` FOREIGN KEY (`ref_admin`) REFERENCES `administrateur`(`id_administrateur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+DROP TABLE `projet_lprs`.`creer_offre`;
+ALTER TABLE `offre` ADD `ref_entreprise` INT NOT NULL AFTER `ref_type`;
+ALTER TABLE `offre` ADD CONSTRAINT `fk_offre_entreprise` FOREIGN KEY (`ref_entreprise`) REFERENCES `entreprise`(`id_entreprise`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `type` CHANGE `nom` `nom_type` VARCHAR(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
