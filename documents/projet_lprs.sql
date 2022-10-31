@@ -182,3 +182,164 @@ ALTER TABLE `evenement` CHANGE `ref_salle` `ref_salle` INT(11) NULL;
 ALTER TABLE `evenement` CHANGE `ref_entreprise` `ref_entreprise` INT(11) NULL;
 ALTER TABLE `evenement` CHANGE `ref_etudiant` `ref_etudiant` INT(11) NULL;
 ALTER TABLE `evenement` CHANGE `ref_administrateur` `ref_administrateur` INT(11) NULL;
+
+DROP TRIGGER gestion_evenement_my;
+DROP TRIGGER gestion_evenement_my2;
+DROP TRIGGER prob_entreprise_etudiant;
+DROP TRIGGER prob_entreprise_etudiant2;
+
+
+DELIMITER &&
+CREATE TRIGGER gestion_evenement_my
+    BEFORE INSERT
+    ON evenement FOR EACH ROW
+BEGIN
+    IF date(new.debut) <> date (new.fin) THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = '0';
+END IF;
+
+IF new.debut >= new.fin THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = '1';
+END IF;
+
+	IF TIME(new.debut)<'18:00:00' THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = '2';
+END IF;
+
+	IF TIME(new.debut)>'22:59:59' THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = '3';
+
+END IF;
+
+	IF TIME(new.fin)>='23:00:00' THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = '4';
+END IF;
+
+	IF WEEKDAY(new.fin)=5 or WEEKDAY(new.fin)=6 THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = '5';
+END IF;
+
+	IF  EXISTS (SELECT debut, fin FROM evenement WHERE debut <= NEW.debut AND fin >= NEW.fin AND ref_etudiant=NEW.ref_etudiant) THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = 'An error occurred';
+END IF;
+
+
+
+
+END&&
+
+DELIMITER ;
+
+
+
+DELIMITER &&
+CREATE TRIGGER gestion_evenement_my2
+    BEFORE UPDATE
+    ON evenement FOR EACH ROW
+BEGIN
+
+    IF old.valide THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = '6';
+    ELSE
+		IF date(new.debut) <> date (new.fin) THEN
+			SIGNAL SQLSTATE '45000'
+				SET MESSAGE_TEXT = '0';
+END IF;
+
+IF new.debut >= new.fin THEN
+			SIGNAL SQLSTATE '45000'
+				SET MESSAGE_TEXT = '1';
+END IF;
+
+		IF TIME(new.debut)<'18:00:00' THEN
+			SIGNAL SQLSTATE '45000'
+				SET MESSAGE_TEXT = '2';
+END IF;
+
+		IF TIME(new.debut)>'22:59:59' THEN
+			SIGNAL SQLSTATE '45000'
+				SET MESSAGE_TEXT = '3';
+
+END IF;
+
+		IF TIME(new.fin)>='23:00:00' THEN
+			SIGNAL SQLSTATE '45000'
+				SET MESSAGE_TEXT = '4';
+END IF;
+
+		IF WEEKDAY(new.fin)=5 or WEEKDAY(new.fin)=6 THEN
+			SIGNAL SQLSTATE '45000'
+				SET MESSAGE_TEXT = '5';
+END IF;
+
+			IF  EXISTS (SELECT debut, fin FROM evenement WHERE debut <= NEW.debut AND fin >= NEW.fin AND ref_etudiant=NEW.ref_etudiant) THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = 'An error occurred';
+END IF;
+
+END IF;
+END&&
+
+DELIMITER ;
+
+
+DELIMITER &&
+CREATE TRIGGER prob_entreprise_etudiant
+    BEFORE UPDATE
+    ON evenement FOR EACH ROW
+BEGIN
+    IF old.ref_etudiant<>new.ref_etudiant then
+		SIGNAL SQLSTATE '45000'
+				SET MESSAGE_TEXT = '7';
+END IF;
+IF old.ref_entreprise<>new.ref_entreprise then
+		SIGNAL SQLSTATE '45000'
+				SET MESSAGE_TEXT = '8';
+END IF;
+
+	IF new.ref_etudiant is not null and new.ref_entreprise is not null then
+		SIGNAL SQLSTATE '45000'
+				SET MESSAGE_TEXT = '9';
+END IF;
+
+
+	IF new.ref_etudiant is  null and new.ref_entreprise is  null then
+		SIGNAL SQLSTATE '45000'
+				SET MESSAGE_TEXT = '10';
+END IF;
+
+END&&
+
+DELIMITER ;
+
+
+
+
+DELIMITER &&
+CREATE TRIGGER prob_entreprise_etudiant2
+    BEFORE INSERT
+    ON evenement FOR EACH ROW
+BEGIN
+    IF new.ref_etudiant is not null and new.ref_entreprise is not null then
+		SIGNAL SQLSTATE '45000'
+				SET MESSAGE_TEXT = '9';
+END IF;
+
+
+IF new.ref_etudiant is  null and new.ref_entreprise is  null then
+		SIGNAL SQLSTATE '45000'
+					SET MESSAGE_TEXT = '10';
+END IF;
+
+END&&
+
+DELIMITER ;
+
