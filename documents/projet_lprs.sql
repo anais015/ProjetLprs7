@@ -410,11 +410,11 @@ ALTER TABLE `evenement` CHANGE `heure` `fin` DATETIME NOT NULL;
 ALTER TABLE `evenement` CHANGE `nom` `nom_event` VARCHAR(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
 ALTER TABLE `evenement` DROP COLUMN duree;
 
-DROP TRIGGER gestion_evenement_my;
-DROP TRIGGER gestion_evenement_my2;
-DROP TRIGGER prob_entreprise_etudiant;
-DROP TRIGGER prob_entreprise_etudiant2;
-DROP TRIGGER prob_participer_etudiant;
+DROP TRIGGER IF EXISTS gestion_evenement_my;
+DROP TRIGGER IF EXISTS gestion_evenement_my2;
+DROP TRIGGER IF EXISTS prob_entreprise_etudiant;
+DROP TRIGGER IF EXISTS prob_entreprise_etudiant2;
+DROP TRIGGER IF EXISTS prob_participer_etudiant;
 
 
 DELIMITER
