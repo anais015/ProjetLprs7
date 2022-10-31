@@ -9,10 +9,11 @@ require_once "../../model/offre/Offre.php";
 
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();
+$erreur= false;
+$postule= false;
 
 $tblisteOffres = '';
-$etat = '';
-$salle = '';
+
 $offre = new Offre(array('ref_etudiant' => $_SESSION['etudiant']['id_etudiant']));
 //var_dump($_SESSION['etudiant']['id_etudiant']);
 $liste_offres=$offre->listeOffreEtudiant($bdd);
@@ -39,8 +40,10 @@ if(isset($_POST['postuler'])){
         'id'=> $_POST['postuler'],
         'ref_etudiant'=> $_SESSION['etudiant']['id_etudiant']
     ));
-
-    var_dump($offre);
+//    var_dump($offre);
+    $postule = $offre->etudiantPostule($bdd);
+    if (!$postule) $erreur=true;
+//    var_dump($postule);
 }
 
 ?>
@@ -67,6 +70,24 @@ if(isset($_POST['postuler'])){
         </div>
     </nav>
     <h2>Liste d'offre</h2>
+
+    <div class="container">
+        <div class="container" id="alert"
+        <?php
+        if (!$erreur) echo 'style="display:none;"';
+        else echo 'style="display:block; background-color:#f8bdc1; text-align: center"';
+        ?>
+        <input type="hidden"> &#9888; Vous avez déja postulé à cette offre.
+    </div>
+    <div class="container">
+    <div class="container" id="alert"
+        <?php
+        if (!$postule) echo 'style="display:none;"';
+        else echo 'style="display:block; background-color:#D3DEA5; text-align: center"';
+        ?>
+        <input type="hidden"> &#10003; Postulé.
+
+    </div>
     <table>
         <tr>
             <th>Titre</th>

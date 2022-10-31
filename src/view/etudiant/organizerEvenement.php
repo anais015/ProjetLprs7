@@ -51,21 +51,21 @@ if (isset($_POST['enregistrer'])){
     </div>
 </nav>
 
-<div class="container">
-    <div class="container" id="alert"
+<div class="container" id="alert"
     <?php
         if (!$erreur) echo 'style="display:none;"';
         else echo 'style="display:block; background-color:#f8bdc1; text-align: center"';
     ?>
     <input type="hidden"> &#9888; Erreur.
 </div>
+
+
 <div class="container" id="alert"
     <?php
         if (!$organiser) echo 'style="display:none;"';
         else echo 'style="display:block; background-color:#D3DEA5; text-align: center"';
-    ?>>
+    ?>
     <input type="hidden"> &#10003; Reussite.
-
 </div>
 <div  <?php if ($organiser) echo 'style="display:none;"';?>>
     <form action='' method='POST'>
