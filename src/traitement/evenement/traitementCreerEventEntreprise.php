@@ -11,11 +11,10 @@ $bdd = $connexion->getBdd();
 if(isset($_POST['creerEvenement'])) {
 
     $event = new Evenement(array(
-        'nom'=> $_POST['nom'],
+        'nom_event'=> $_POST['nom_event'],
         'description'=> $_POST['description'],
-        'date'=> $_POST['date'],
-        'heure'=> $_POST['heure'],
-        'duree'=> $_POST['duree'],
+        'debut'=> $_POST['debut'],
+        'fin'=> $_POST['fin'],
         'ref_entreprise'=>$_POST['ref_entreprise']
     ));
 
