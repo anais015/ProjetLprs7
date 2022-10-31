@@ -177,4 +177,16 @@ class Offre
         if (is_array($result)) return $result;
         else return false;
     }
+
+    public function etudiantPostule (PDO $bdd){
+        $sql='INSERT INTO postule (ref_offre, ref_etudiant) VALUES (:id, :ref_etudiant)';
+        $request=$bdd->prepare($sql);
+        $execute= $request->execute(array(
+            'id'=>$this->id,
+            'ref_etudiant'=>$this->ref_etudiant
+        ));
+        if ($execute) return true;
+        else return false;
+    }
+
 }
