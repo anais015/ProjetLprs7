@@ -608,4 +608,5 @@ END
 DELIMITER;
 
 ALTER TABLE `type` ADD `ref_admin` INT NOT NULL AFTER `nom`;
+ALTER TABLE `type` ADD CONSTRAINT `fk_type_admin` FOREIGN KEY (`ref_admin`) REFERENCES `administrateur`(`id_administrateur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
