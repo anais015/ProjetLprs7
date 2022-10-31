@@ -71,7 +71,7 @@ foreach ($listOrganise as $value){
                             <form action='modifierEvenement.php' method='GET'>
                                 <button name='modifier' value='".$value['id_evenement']."' ".$hidden.">Modifier</button>
                             </form>
-                            <form action='../../traitement/evenement/traitementSuppression.php' method='post'>
+                            <form action='../../traitement/evenement/traitementSuppression.php' method='POST'>
                                 <button name='annuler' value='".$value['id_evenement']."' ".$hidden.">Annuler</button>
                             </form>
                         </td>

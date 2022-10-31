@@ -10,7 +10,7 @@ class Evenement
     private $valide;
     private $refSalle;
     private $ref_entreprise;
-    private $ref_etudiant;
+    private ?int $ref_etudiant;
     private $refAdmin;
 
     public function __construct(array $donnees)
@@ -59,7 +59,8 @@ class Evenement
         $this->description = $description;
     }
 
-    public function getDebut() {
+    public function getDebut()
+    {
         return $this->debut;
     }
 
@@ -121,7 +122,7 @@ class Evenement
         $this->refAdmin = $refAdmin;
     }
 
-    public function modifierEvenement ($bdd){
+    public function modifierEvenement (PDO $bdd){
         $sql='UPDATE evenement SET nom_event=:nom, description=:description, debut=:debut, fin=:fin
               WHERE id_evenement=:id';
         $request=$bdd->prepare($sql);
@@ -136,34 +137,33 @@ class Evenement
         else return false;
     }
 
-    public function supprimerEvenement ($bdd){
-        $sql='DELETE FROM evenement WHERE id_evenement=:id_evenement';
+    public function supprimerEvenement (PDO $bdd){
+        $sql='DELETE FROM evenement WHERE id_evenement=:id';
         $request=$bdd->prepare($sql);
-        $execute=$request->execute(array('id_evenement'=>$this->id));
+        $execute=$request->execute(array('id'=>$this->id));
         if($execute) return true;
         else return false;
     }
 
     public function entrepriseCreerEvenement($bdd){
-        $sql ='SELECT * FROM evenement WHERE debut=:debut, fin=:fin, AND ref_entreprise=:ref_entreprise';
+        $sql ='SELECT * FROM evenement WHERE date=:date AND heure=:heure AND ref_entreprise=:ref_entreprise';
         $req = $bdd->prepare($sql);
         $req->execute(array(
-            'debut' => $this->debut,
-            'fin'=> $this->fin,
-            'ref_entreprise'=>$this->ref_entreprise
-        ));
-
+            'date'=> $this->date,
+            'heure'=> $this->heure,
+            'ref_entreprise'=>$this->ref_entreprise));
         $res = $req->fetch();
         if (is_array($res)) return false;
 
         else{
-            $sql='INSERT INTO evenement (nom, description, date, heure, duree, ref_entreprise) VALUES (:nom, :description, :date, :heure, :duree, :ref_entreprise)';
+            $sql='INSERT INTO evenement (nom_event, description, date, heure, duree, ref_entreprise) VALUES (:nom, :description, :date, :heure, :duree, :ref_entreprise)';
             $request = $bdd->prepare($sql);
             $execute=$request->execute(array(
                 'nom'=> $this->nom,
                 'description'=> $this->description,
-                'debut' => $this->debut,
-                'fin'=> $this->fin,
+                'date'=> $this->date,
+                'heure'=> $this->heure,
+                'duree'=> $this->duree,
                 'ref_entreprise'=>$this->ref_entreprise
             ));
             if($execute) return true;
@@ -171,45 +171,33 @@ class Evenement
         }
     }
 
-    public function etudiantOrganiseEvenement ($bdd){
-        $sql='INSERT INTO evenement (nom_event, description, debut, fin, ref_etudiant) VALUES (:nom, :description, :debut, :fin, :ref_etudiant)';
+    public function etudiantOrganiseEvenement (PDO $bdd){
+            $sql='INSERT INTO evenement (nom_event, description, debut, fin, ref_etudiant) VALUES (:nom, :description, :debut, :fin, :ref_etudiant)';
+            $request = $bdd->prepare($sql);
+            $execute=$request->execute(array(
+                'nom'=> $this->nom,
+                'description'=> $this->description,
+                'debut'=> $this->debut,
+                'fin'=> $this->fin,
+                'ref_etudiant'=>$this->ref_etudiant
+            ));
+            if($execute) return true;
+            else return false;
+    }
+
+    public function etudiantParticipeEvenement($bdd){
+        $sql='INSERT INTO participe (ref_evenement, ref_etudiant, debut, fin) VALUES (:id, :ref_etudiant, :debut, :fin)';
         $request = $bdd->prepare($sql);
         $execute=$request->execute(array(
-            'nom'=> $this->nom,
-            'description'=> $this->description,
-            'debut'=> $this->debut,
-            'fin'=> $this->fin,
-            'ref_etudiant'=>$this->ref_etudiant
+            'id'=> $this->id,
+            'ref_etudiant'=> $this->ref_etudiant,
+            'debut'=>$this->debut,
+            'fin'=>$this->fin
         ));
         if($execute) return true;
         else return false;
     }
 
-    public function etudiantParticipeEvenement($bdd){
-//        $sql ='SELECT date, heure, ADDTIME(heure,duree) FROM evenement WHERE'
-        $sql ='SELECT * FROM participe AS p
-        INNER JOIN evenement AS e
-        ON p.ref_etudiant=e.ref_etudiant
-        WHERE e.date=:date, e.heure p.ref_evenement=: ref_evenement AND p.ref_etudiant=:ref_etudiant';
-        $request = $bdd->prepare($sql);
-        $execute = $request->execute(array(
-            'ref_evenement'=> $this->id,
-            'ref_etudiant'=> $this->ref_etudiant));
-        if($execute) {
-            $result = $request->fetch();
-            if (is_array($result)) return false;
-        }
-        else {
-            $sql='INSERT INTO participe (ref_evenement, ref_etudiant) VALUES (:id, :ref_etudiant)';
-            $request = $bdd->prepare($sql);
-            $execute=$request->execute(array(
-                'id'=> $this->id,
-                'ref_etudiant'=> $this->ref_etudiant
-            ));
-            if($execute) return true;
-            else return false;
-        }
-    }
     public function selectParId($bdd){
         $sql='SELECT * FROM evenement WHERE id_evenement=:id';
         $request=$bdd->prepare($sql);
@@ -232,7 +220,7 @@ class Evenement
         else return false;
     }
 
-    public function listEventOrganise($bdd){
+    public function listEventOrganise(PDO $bdd){
         $sql='SELECT e.id_evenement, e.nom_event, e.debut, e.fin, e.valide, s.nom FROM evenement AS e
     LEFT JOIN salle AS s
               ON e.ref_salle = s.id_salle 
@@ -245,12 +233,12 @@ class Evenement
         else return false;
     }
 
-    public function listRechercheEvent($bdd){
+    public function listRechercheEvent(PDO $bdd){
         $sql='SELECT e.id_evenement, e.nom_event, e.description, e.debut, e.fin, s.nom FROM evenement AS e
     LEFT JOIN salle AS s
               ON e.ref_salle = s.id_salle 
-              WHERE valide=1 AND e.date>NOW() AND (`ref_etudiant` IS NULL OR `ref_etudiant`<>:ref_etudiant)
-              ORDER BY e.date';
+              WHERE valide=1 AND e.debut>NOW() AND (`ref_etudiant` IS NULL OR `ref_etudiant`<>:ref_etudiant)
+              ORDER BY e.debut';
         $request= $bdd->prepare($sql);
         $request->execute(array('ref_etudiant'=> $this->ref_etudiant));
         $result = $request->fetchAll();
@@ -258,7 +246,7 @@ class Evenement
         else return false;
     }
 
-    public function historique($bdd){
+    public function historique(PDO $bdd){
         $sql='SELECT * FROM evenement WHERE date<NOW() AND valide=1 AND ref_etudiant=:ref_etudiant ORDER BY date DESC';
         $request= $bdd->prepare($sql);
         $request->execute(array('ref_etudiant'=> $this->ref_etudiant));

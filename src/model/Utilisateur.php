@@ -82,7 +82,17 @@ abstract class Utilisateur
 
     protected function setMot_de_passe(string $mot_de_passe)
     {
-        $this->mot_de_passe = $mot_de_passe;
+        $length = strlen($mot_de_passe);
+        $uppercase = preg_match('/[A-Z]/', $mot_de_passe);
+        $lowercase = preg_match('/[a-z]/', $mot_de_passe);
+        $number    = preg_match('/[0-9]/', $mot_de_passe);
+        $specialChars = preg_match('/[^\w]/', $mot_de_passe);
+
+        if($length>8 && $uppercase && $lowercase && $number && $specialChars){
+            $this->mot_de_passe = $mot_de_passe;
+            return true;
+        }
+        return false;
     }
 
 }
