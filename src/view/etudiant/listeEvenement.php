@@ -88,8 +88,8 @@ foreach ($listOrganise as $value){
 <nav>
     <div class="bottom-row">
         <a href="accueil.php">Accueil</a>
-        <a href="trouverJob.php">Trouver un job</a>
-        <a href="trouverEvenement.php">Trouver un événement</a>
+        <a href="trouverJob.php">Chercher un job</a>
+        <a href="trouverEvenement.php">Chercher un événement</a>
         <a href="organizerEvenement.php">Organizer un événement</a>
         <a href="#">Contact</a>
 
