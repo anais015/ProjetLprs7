@@ -636,3 +636,6 @@ ALTER TABLE `offre` ADD CONSTRAINT `fk_offre_entreprise` FOREIGN KEY (`ref_entre
 ALTER TABLE `type` CHANGE `nom` `nom_type` VARCHAR(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
 ALTER TABLE `rdv` CHANGE `date` `horaire` DATETIME NOT NULL;
 ALTER TABLE `rdv` DROP COLUMN `heure`;
+
+ALTER TABLE `rdv` DROP FOREIGN KEY `fk_rdv_offre`; ALTER TABLE `rdv` ADD CONSTRAINT `fk_rdv_postule` FOREIGN KEY (`ref_offre`) REFERENCES `postule`(`ref_offre`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `postule` ADD `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `ref_etudiant`;
