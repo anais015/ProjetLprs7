@@ -11,6 +11,7 @@
                 <li><a href="page_accueil.php">Accueil</a></li>
                 <li><a href="profil.php">Profil</a></li>
                 <li><a href="creerEventEntreprise.php">Créer un événement</a></li>
+                <li><a href="creerOffre.php">Créer une offre</a></li>
                 <li><a href="../contact.php">Contact</a></li>
                 <li><a href="deconnexion.php">Déconnexion</a></li>
             </ul>
