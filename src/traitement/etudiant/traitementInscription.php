@@ -9,14 +9,11 @@ $cnx = new Bdd();
 $bdd = $cnx->getBdd();
 
 if(isset($_POST['inscription'])) {
-    $password = $_POST['password'];
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
     $etudiant = new Etudiant(array(
         'nom' => $_POST['nom'],
         'prenom' => $_POST['prenom'],
         'email' => $_POST['email'],
-        'mot_de_passe' => $hashed_password,
+        'mot_de_passe' => $_POST['password'],
         'domaine_etude' => $_POST['domaine']
     ));
 //    var_dump($etudiant);
@@ -50,7 +47,7 @@ if(isset($_POST['inscription'])) {
             if (!$erreur) echo 'style="display:none;"';
             else echo 'style="display:block; background-color:#f8bdc1; text-align: center"';
         ?>
-        <input type="hidden"> &#9888; Erreur : L'email entré a été dejà pris. Veuillez entrer un autre.
+        <input type="hidden"> &#9888; Erreur!
         <a href="../../view/inscription.php">Revenir à la page d'inscription</a>
     </div>
     <div class="container" id="alert"

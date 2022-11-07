@@ -6,41 +6,33 @@ require_once "../../model/Utilisateur.php";
 require_once "../../model/etudiant/Etudiant.php";
 require_once "../../model/Connexion.php";
 require_once "../../model/offre/Offre.php";
+require_once "../../model/rdv/Rdv.php";
 
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();
-$erreur= false;
-$postule= false;
-$button= 'Postuler';
-$btn_style='';
+$statut='';
 
-$tblisteOffres = '';
+$tblisteCandidatures = '';
 
-$offre = new Offre(array('ref_etudiant' => $_SESSION['etudiant']['id_etudiant']));
-$etudiant = new Etudiant(array('id' => $_SESSION['etudiant']['id_etudiant']));
+$etudiant= new Etudiant(array('id' => $_SESSION['etudiant']['id_etudiant']));
 //var_dump($_SESSION['etudiant']['id_etudiant']);
-$liste_offres=$offre->listeOffreEtudiant($bdd);
-//var_dump($liste_offres);
+//var_dump($etudiant);
+$liste_candidatures=$etudiant->listeCandidature($bdd);
+//var_dump($liste_candidatures);
 
-foreach ($liste_offres as $value){
-$check_postule=$etudiant->checkPostule($bdd,$value['id_offre']);
-//var_dump($check_postule);
-if (is_array($check_postule)) {
-    $button = 'Postulé le '.date_format(date_create($check_postule['date']),"d/m/Y H:i");
-    $btn_style='disabled="disabled"';
-}
-    $tblisteOffres .="<tr>
+foreach ($liste_candidatures as $value){
+    if (is_null($value['id_rdv'])) $statut="Candidature envoyée";
+    else $statut = "Entretien accordé";
+
+    $tblisteCandidatures .="<tr>
                         <td>".$value['titre']."</td>
                         <td>".$value['description']."</td>
+                        <td>".date_format(date_create($value['date']),"d/m/Y H:i")  ."</td>
                         <td>".$value['nom_entreprise']."</td>
                         <td>".$value['domaine']."</td>
                         <td>".$value['nom_type']."</td>
                         <td>".$value['rue_entreprise'].", ". $value['ville_entreprise'].", ". $value['cp_entreprise']."</td>
-                        <td>
-                            <form action='' method='POST'>
-                                <button name='postuler'".$btn_style." value='".$value['id_offre']."'>".$button."</button>
-                            </form>
-                        </td>
+                        <td>$statut</td>
                     </tr>";
 }
 
@@ -78,36 +70,19 @@ if(isset($_POST['postuler'])){
             <a href="deconnexion.php">Se déconnecter</a>
         </div>
     </nav>
-    <h2>Liste d'offre</h2>
-
-    <div class="container">
-        <div class="container" id="alert"
-        <?php
-        if (!$erreur) echo 'style="display:none;"';
-        else echo 'style="display:block; background-color:#f8bdc1; text-align: center"';
-        ?>
-        <input type="hidden"> &#9888; Vous avez déja postulé à cette offre.
-    </div>
-    <div class="container">
-    <div class="container" id="alert"
-        <?php
-        if (!$postule) echo 'style="display:none;"';
-        else echo 'style="display:block; background-color:#D3DEA5; text-align: center"';
-        ?>
-        <input type="hidden"> &#10003; Postulé.
-
-    </div>
+    <h2>Mes candidatures</h2>
     <table>
         <tr>
             <th>Titre</th>
             <th>Description</th>
+            <th>Date de postule</th>
             <th>Entreprise</th>
             <th>Domaine</th>
             <th>Type de contrat</th>
             <th>Adresse</th>
-            <th>Action</th>
+            <th>Statut</th>
         </tr>
-        <?= $tblisteOffres ?>
+        <?= $tblisteCandidatures ?>
     </table>
     </body>
 

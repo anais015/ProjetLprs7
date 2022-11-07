@@ -62,8 +62,8 @@ if (isset($_POST['modifierPw'])){
 <nav>
     <div class="bottom-row">
         <a href="../../view/etudiant/accueil.php">Accueil</a>
-        <a href="../../view/etudiant/trouverJob.php">Trouver un job</a>
-        <a href="../../view/etudiant/trouverEvenement.php">Trouver un événement</a>
+        <a href="../../view/etudiant/trouverJob.php">Chercher un job</a>
+        <a href="../../view/etudiant/trouverEvenement.php">Chercher un événement</a>
         <a href="../../view/etudiant/organizerEvenement.php">Organizer un événement</a>
         <a href="#">Contact</a>
 

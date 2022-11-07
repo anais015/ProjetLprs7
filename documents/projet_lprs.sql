@@ -415,6 +415,7 @@ DROP TRIGGER IF EXISTS gestion_evenement_my2;
 DROP TRIGGER IF EXISTS prob_entreprise_etudiant;
 DROP TRIGGER IF EXISTS prob_entreprise_etudiant2;
 DROP TRIGGER IF EXISTS prob_participer_etudiant;
+DROP TRIGGER IF EXISTS prob_postule_etudiant;
 
 
 DELIMITER
@@ -607,6 +608,24 @@ END
 
 DELIMITER;
 
+
+DELIMITER
+&&
+CREATE TRIGGER prob_postule_etudiant
+    BEFORE INSERT
+    ON postule
+    FOR EACH ROW
+BEGIN
+    IF  EXISTS (SELECT ref_offre, ref_etudiant FROM postule WHERE ref_offre = NEW.ref_offre AND ref_etudiant = NEW.ref_etudiant) THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = 'Dejà postulé';
+END IF;
+END
+&&
+
+DELIMITER;
+
+
 ALTER TABLE `type` ADD `ref_admin` INT NOT NULL AFTER `nom`;
 ALTER TABLE `type` ADD CONSTRAINT `fk_type_admin` FOREIGN KEY (`ref_admin`) REFERENCES `administrateur`(`id_administrateur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -615,3 +634,8 @@ ALTER TABLE `offre` ADD `ref_entreprise` INT NOT NULL AFTER `ref_type`;
 ALTER TABLE `offre` ADD CONSTRAINT `fk_offre_entreprise` FOREIGN KEY (`ref_entreprise`) REFERENCES `entreprise`(`id_entreprise`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `type` CHANGE `nom` `nom_type` VARCHAR(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
+ALTER TABLE `rdv` CHANGE `date` `horaire` DATETIME NOT NULL;
+ALTER TABLE `rdv` DROP COLUMN `heure`;
+
+ALTER TABLE `rdv` DROP FOREIGN KEY `fk_rdv_offre`; ALTER TABLE `rdv` ADD CONSTRAINT `fk_rdv_postule` FOREIGN KEY (`ref_offre`) REFERENCES `postule`(`ref_offre`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `postule` ADD `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `ref_etudiant`;
