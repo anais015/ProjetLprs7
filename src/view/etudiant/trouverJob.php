@@ -11,15 +11,24 @@ $cnx = new Bdd();
 $bdd = $cnx->getBdd();
 $erreur= false;
 $postule= false;
+$button= 'Postuler';
+$btn_style='';
 
 $tblisteOffres = '';
 
 $offre = new Offre(array('ref_etudiant' => $_SESSION['etudiant']['id_etudiant']));
+$etudiant = new Etudiant(array('id' => $_SESSION['etudiant']['id_etudiant']));
 //var_dump($_SESSION['etudiant']['id_etudiant']);
 $liste_offres=$offre->listeOffreEtudiant($bdd);
 //var_dump($liste_offres);
 
 foreach ($liste_offres as $value){
+$check_postule=$etudiant->checkPostule($bdd,$value['id_offre']);
+//var_dump($check_postule);
+if (is_array($check_postule)) {
+    $button = 'Postulé le '.date_format(date_create($check_postule['date']),"d/m/Y H:i");
+    $btn_style='disabled="disabled"';
+}
     $tblisteOffres .="<tr>
                         <td>".$value['titre']."</td>
                         <td>".$value['description']."</td>
@@ -29,7 +38,7 @@ foreach ($liste_offres as $value){
                         <td>".$value['rue_entreprise'].", ". $value['ville_entreprise'].", ". $value['cp_entreprise']."</td>
                         <td>
                             <form action='' method='POST'>
-                                <button name='postuler' value='".$value['id_offre']."'>Postuler</button>
+                                <button name='postuler'".$btn_style." value='".$value['id_offre']."'>".$button."</button>
                             </form>
                         </td>
                     </tr>";
@@ -57,8 +66,8 @@ if(isset($_POST['postuler'])){
     <nav>
         <div class="bottom-row">
             <a href="accueil.php">Accueil</a>
-            <a href="trouverJob.php">Trouver un job</a>
-            <a href="trouverEvenement.php">Trouver un événement</a>
+            <a href="trouverJob.php">Chercher un job</a>
+            <a href="trouverEvenement.php">Chercher un événement</a>
             <a href="organizerEvenement.php">Organizer un événement</a>
             <a href="#">Contact</a>
 
