@@ -1,12 +1,12 @@
 <?php
 
-
 class Etudiant extends Utilisateur
 {
     private $domaine_etude;
     private $valide;
     private Evenement $evenement;
     private Connexion $connexion;
+    private Rdv $rdv;
 
     public function __construct(array $donnees){
         parent::__construct($donnees);
@@ -44,6 +44,7 @@ class Etudiant extends Utilisateur
 
         if(is_array($result)) return false;
         else {
+            if (!$this->isValideWithoutId()) return false;
             $sql='INSERT INTO etudiant (nom, prenom, email, mot_de_passe, domaine_etude) VALUES (:nom, :prenom, :email, :mot_de_passe, :domaine_etude)';
             $request = $bdd->prepare($sql);
             $execute=$request->execute(array(
@@ -152,5 +153,45 @@ class Etudiant extends Utilisateur
     public function getPendingAccount(Bdd $bdd){
         $req = $bdd->getBdd()->query('SELECT * FROM etudiant WHERE valide=0');
         return $req->fetchAll();
+    }
+
+    public function listeCandidature(PDO $bdd){
+        $sql='SELECT e.nom_entreprise, e.rue_entreprise, e.ville_entreprise, e.cp_entreprise, 
+              o.titre, o.description, o.domaine, t.nom_type, r.id_rdv, p.ref_etudiant, p.date
+              FROM entreprise AS e
+              JOIN offre AS o
+              ON e.id_entreprise = o.ref_entreprise
+              JOIN type AS t
+              ON o.ref_type = t.id_type
+              JOIN postule AS p
+              ON o.id_offre = p.ref_offre
+              LEFT JOIN rdv AS r
+              ON p.ref_offre = r.ref_offre
+              WHERE p.ref_etudiant=:id';
+        $request = $bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'id'=>$this->id
+        ));
+        if ($execute){
+            $result = $request->fetchAll(PDO::FETCH_ASSOC);
+            if(is_array($result)) return $result;
+            else return false;
+        }
+        else return false;
+    }
+
+    public function checkPostule (PDO $bdd, $offre_id){
+        $sql = 'SELECT * FROM postule WHERE ref_offre=:ref_offre AND ref_etudiant=:ref_etudiant ';
+        $request= $bdd->prepare($sql);
+        $execute= $request->execute(array(
+            'ref_offre'=>$offre_id,
+            'ref_etudiant'=>$this->id
+        ));
+        if ($execute) {
+            $result=$request->fetch(PDO::FETCH_ASSOC);
+            if(is_array($result)) return $result;
+            else return false;
+        }
+        else return false;
     }
 }

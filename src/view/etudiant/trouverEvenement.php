@@ -18,15 +18,20 @@ $event = new Evenement(array('ref_etudiant' => $_SESSION['etudiant']['id_etudian
 $listeRechercheEvent= $event->listRechercheEvent($bdd);
 //var_dump($listeRechercheEvent);
 foreach ($listeRechercheEvent as $value){
+    $debut=explode(" ",$value['debut']);
+    $date=$debut[0];
+    $heurre_debut=$debut[1];
+    $fin=explode(" ",$value['fin']);
+    $heurre_fin=$fin[1];
     $tbRechercheEvent .="<tr>
-                        <td>".$value[1]."</td>
+                        <td>".$value['nom_event']."</td>
                         <td>".$value['description']."</td>
-                        <td>".$value['date']."</td>
-                        <td>".$value['heure']."</td>
-                        <td>".$value['duree']."</td>
-                        <td>".$value[6]."</td>
+                        <td>".$date."</td>
+                        <td>".$heurre_debut."</td>
+                        <td>".$heurre_fin."</td>
+                        <td>".$value['nom']."</td>
                         <td>
-                            <form action='' method='post'>
+                            <form action='' method='POST'>
                                 <button name='participer' value='".$value['id_evenement']."'>Participer</button>
                             </form>
                         </td>
@@ -53,8 +58,8 @@ if(isset($_POST['participer'])){
 <nav>
     <div class="bottom-row">
         <a href="accueil.php">Accueil</a>
-        <a href="trouverJob.php">Trouver un job</a>
-        <a href="trouverEvenement.php">Trouver un événement</a>
+        <a href="trouverJob.php">Chercher un job</a>
+        <a href="trouverEvenement.php">Chercher un événement</a>
         <a href="organizerEvenement.php">Organizer un événement</a>
         <a href="#">Contact</a>
 
@@ -65,7 +70,7 @@ if(isset($_POST['participer'])){
         <a href="deconnexion.php">Se déconnecter</a>
     </div>
 </nav>
-<h2>Chercher un Événement</h2>
+<h2>Liste d'événement</h2>
     <table>
         <tr>
             <th>Titre du événement</th>
@@ -79,13 +84,5 @@ if(isset($_POST['participer'])){
         <?= $tbRechercheEvent ?>
     </table>
 </body>
-<!--SELECT `nom`, `date`,`heure`, ADDTIME(`heure`,`duree`) AS fin FROM evenement;-->
-<!--CREATE TRIGGER `event_duplicate_insert` BEFORE INSERT ON `evenement`-->
-<!--FOR EACH ROW-->
-<!--BEGIN-->
-<!--IF EXISTS (SELECT `heure`, ADDTIME(`heure`,`duree`) FROM evenement WHERE `heure` <= NEW.`heure` AND ADDTIME(`heure`,`duree`) > ADDTIME(NEW.`heure`,NEW.`duree`)) THEN-->
-<!--SIGNAL SQLSTATE '45000'-->
-<!--SET MESSAGE_TEXT = 'An error occurred';-->
-<!--END IF;-->
 
 </html>

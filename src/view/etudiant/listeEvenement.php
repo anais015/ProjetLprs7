@@ -71,7 +71,7 @@ foreach ($listOrganise as $value){
                             <form action='modifierEvenement.php' method='GET'>
                                 <button name='modifier' value='".$value['id_evenement']."' ".$hidden.">Modifier</button>
                             </form>
-                            <form action='../../traitement/evenement/traitementSuppression.php' method='post'>
+                            <form action='../../traitement/evenement/traitementSuppression.php' method='POST'>
                                 <button name='annuler' value='".$value['id_evenement']."' ".$hidden.">Annuler</button>
                             </form>
                         </td>
@@ -88,8 +88,8 @@ foreach ($listOrganise as $value){
 <nav>
     <div class="bottom-row">
         <a href="accueil.php">Accueil</a>
-        <a href="trouverJob.php">Trouver un job</a>
-        <a href="trouverEvenement.php">Trouver un événement</a>
+        <a href="trouverJob.php">Chercher un job</a>
+        <a href="trouverEvenement.php">Chercher un événement</a>
         <a href="organizerEvenement.php">Organizer un événement</a>
         <a href="#">Contact</a>
 

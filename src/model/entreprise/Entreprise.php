@@ -145,7 +145,8 @@ class Entreprise extends Utilisateur
         $res = $req->fetch();
 
         if (is_array($res)) {
-            return false;
+            //return false;
+            return "L'email est déjà utilisé !";
         }
         else {
             $sql = 'INSERT INTO entreprise (nom, prenom ,nom_entreprise, 

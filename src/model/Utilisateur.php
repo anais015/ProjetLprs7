@@ -2,11 +2,12 @@
 
 abstract class Utilisateur
 {
-    protected int $id;
-    protected ?string $nom;
-    protected ?string $prenom;
-    protected ?string $email;
-    protected ?string $mot_de_passe;
+    protected ?int $id=null;
+    protected ?string $nom=null;
+    protected ?string $prenom=null;
+    protected ?string $email=null;
+    protected ?string $mot_de_passe=null;
+
 
     protected function __construct(array $donnees)
     {
@@ -46,9 +47,7 @@ abstract class Utilisateur
             return true;
         }
         return false;
-
-
-    }
+     }
 
     protected function getPrenom()
     {
@@ -82,7 +81,18 @@ abstract class Utilisateur
 
     protected function setMot_de_passe(string $mot_de_passe)
     {
-        $this->mot_de_passe = $mot_de_passe;
+        $length = strlen($mot_de_passe);
+        $uppercase = preg_match('/[A-Z]/', $mot_de_passe);
+        $lowercase = preg_match('/[a-z]/', $mot_de_passe);
+        $number    = preg_match('/[0-9]/', $mot_de_passe);
+        $specialChars = preg_match('/[^\w]/', $mot_de_passe);
+
+        if($length>=8 && $uppercase && $lowercase && $number && $specialChars){
+            $hashed_password = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+            $this->mot_de_passe = $hashed_password;
+            return true;
+        }
+        return false;
     }
 
 }

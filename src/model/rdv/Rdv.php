@@ -2,14 +2,13 @@
 
 class Rdv
 {
-    private $id;
-    private $date;
-    private $heure;
-    private $lieux;
-    private $accepte;
-    private $refOffre;
-    private $refEntreprise;
-    private $refEtudiant;
+    private ?int $id=null;
+    private $horaire;
+    private ?string $lieux='';
+    private ?bool $accepte=false;
+    private ?int$refOffre=null;
+    private ?int$refEntreprise=null;
+    private ?int$refEtudiant=null;
 
     public function __construct(array $donnees)
     {
@@ -52,21 +51,16 @@ class Rdv
         $this->id = $id;
     }
 
-    public function getDate() {
-        return $this->date;
+    public function getHoraire()
+    {
+        return $this->horaire;
     }
 
-    public function setDate($date): void {
-        $this->date = $date;
+    public function setHoraire($horaire): void
+    {
+        $this->horaire = $horaire;
     }
 
-    public function getHeure() {
-        return $this->heure;
-    }
-
-    public function setHeure($heure): void {
-        $this->heure = $heure;
-    }
 
     public function getLieux() {
         return $this->lieux;
@@ -107,5 +101,74 @@ class Rdv
     public function setRefEtudiant($refEtudiant): void {
         $this->refEtudiant = $refEtudiant;
     }
+
+    public function listeRdv (PDO $bdd){
+        $sql='SELECT e.nom_entreprise, o.titre, o.description, o.domaine,
+              t.nom_type, r.id_rdv, r.horaire, r.lieux, r.accepte
+              FROM entreprise AS e
+              JOIN offre AS o
+              ON e.id_entreprise = o.ref_entreprise
+              JOIN type AS t
+              ON o.ref_type = t.id_type
+              LEFT JOIN rdv AS r
+              ON o.id_offre = r.ref_offre
+              WHERE r.ref_etudiant=:refEtudiant AND r.horaire >= NOW() AND r.accepte IS NOT FALSE
+              ORDER BY r.horaire ';
+        $request = $bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'refEtudiant'=>$this->refEtudiant
+        ));
+        if ($execute){
+            $result = $request->fetchAll(PDO::FETCH_ASSOC);
+            if(is_array($result)) return $result;
+            else return false;
+        }
+        else return false;
+    }
+    public function historiqueRdv (PDO $bdd){
+        $sql='SELECT e.nom_entreprise, o.titre, o.description, o.domaine,
+              t.nom_type, r.id_rdv, r.horaire, r.lieux, r.accepte
+              FROM entreprise AS e
+              JOIN offre AS o
+              ON e.id_entreprise = o.ref_entreprise
+              JOIN type AS t
+              ON o.ref_type = t.id_type
+              LEFT JOIN rdv AS r
+              ON o.id_offre = r.ref_offre
+              WHERE r.ref_etudiant=:refEtudiant AND r.horaire < NOW()';
+        $request = $bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'refEtudiant'=>$this->refEtudiant
+        ));
+        if ($execute){
+            $result = $request->fetchAll(PDO::FETCH_ASSOC);
+            if(is_array($result)) return $result;
+            else return false;
+        }
+        else return false;
+    }
+
+    public function accepterRdv (PDO $bdd){
+        $sql = 'UPDATE rdv SET accepte = 1 WHERE id_rdv =:id AND ref_etudiant=:refEtudiant';
+        $request=$bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'id'=>$this->id,
+            'refEtudiant'=>$this->refEtudiant
+        ));
+        if ($execute) return true;
+        else return false;
+    }
+
+    public function declinerRdv (PDO $bdd){
+        $sql = 'UPDATE rdv SET accepte = 0 WHERE id_rdv =:id AND ref_etudiant=:refEtudiant';
+        $request=$bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'id'=>$this->id,
+            'refEtudiant'=>$this->refEtudiant
+        ));
+        if ($execute) return true;
+        else return false;
+    }
+
 
 }

@@ -2,12 +2,13 @@
 
 class Offre
 {
-    private $id;
-    private $titre;
-    private $description;
-    private $domaine;
-    private $accepte;
-    private $refType;
+    private ?int $id;
+    private ?string $titre;
+    private ?string $description;
+    private ?string $domaine;
+    private ?bool $accepte;
+    private ?int $refType;
+    private ?int $ref_etudiant;
 
     /**
      * @param $id
@@ -146,6 +147,46 @@ class Offre
     public function setRefType($refType): void
     {
         $this->refType = $refType;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getRef_etudiant(): ?int
+    {
+        return $this->ref_etudiant;
+    }
+
+    /**
+     * @param int|null $ref_etudiant
+     */
+    public function setRef_etudiant(?int $ref_etudiant): void
+    {
+        $this->ref_etudiant = $ref_etudiant;
+    }
+
+    public function listeOffreEtudiant (PDO $bdd){
+        $sql='SELECT * FROM type AS t 
+              JOIN offre AS o 
+              ON t.id_type = o.ref_type 
+              JOIN entreprise AS e 
+              ON o.ref_entreprise = e.id_entreprise 
+              WHERE o.accepte = 1;';
+        $request=$bdd->query($sql);
+        $result=$request->fetchAll(PDO::FETCH_ASSOC);
+        if (is_array($result)) return $result;
+        else return false;
+    }
+
+    public function etudiantPostule (PDO $bdd){
+        $sql='INSERT INTO postule (ref_offre, ref_etudiant) VALUES (:id, :ref_etudiant)';
+        $request=$bdd->prepare($sql);
+        $execute= $request->execute(array(
+            'id'=>$this->id,
+            'ref_etudiant'=>$this->ref_etudiant
+        ));
+        if ($execute) return true;
+        else return false;
     }
 
 }
