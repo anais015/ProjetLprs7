@@ -13,9 +13,10 @@ $bdd = $connexion->getBdd();
 if(isset($_POST['creerOffre'])) {
 
 $offre = new Offre(array(
-    'nom'=> $_POST['nom'],
+    'titre'=> $_POST['titre'],
     'description'=> $_POST['description'],
     'domaine'=>$_POST['domaine'],
+
     'ref_entreprise'=>$_SESSION['id_entreprise']
 ));
 
