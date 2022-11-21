@@ -14,10 +14,18 @@ $tbRechercheEvent = '';
 $etat = '';
 $salle = '';
 $event = new Evenement(array('ref_etudiant' => $_SESSION['etudiant']['id_etudiant']));
-
 $listeRechercheEvent= $event->listRechercheEvent($bdd);
-//var_dump($listeRechercheEvent);
+$etudiant=new Etudiant(array('id'=>$_SESSION['etudiant']['id_etudiant']));
+
 foreach ($listeRechercheEvent as $value){
+    $check_inscription_evenement=$etudiant->checkInscrireEvenement($bdd,$value['id_evenement']);
+    if (is_array($check_inscription_evenement)) {
+        $button = 'Inscrit le '.date_format(date_create($check_inscription_evenement['date_inscription']),"d/m/Y H:i");
+        $btn_style='disabled="disabled"';
+    } else {
+        $button= 'Participer';
+        $btn_style='';
+    }
     $debut=explode(" ",$value['debut']);
     $date=$debut[0];
     $heurre_debut=$debut[1];
@@ -32,19 +40,17 @@ foreach ($listeRechercheEvent as $value){
                         <td>".$value['nom']."</td>
                         <td>
                             <form action='' method='POST'>
-                                <button name='participer' value='".$value['id_evenement']."'>Participer</button>
+                                <button name='participer' ".$btn_style." value='".$value['id_evenement']."'>".$button."</button>
                             </form>
                         </td>
                     </tr>";
 }
 
 if(isset($_POST['participer'])){
-    $event=new Evenement(array(
-        'id'=> $_POST['participer'],
-        'ref_etudiant'=> $_SESSION['etudiant']['id_etudiant']
-    ));
+    $participe=$etudiant->participeEvenement($bdd, $_POST['participer']);
+    if($participe) header("location:trouverEvenement.php");
+    else echo '<script>alert("Vous vous êtes déjà inscrivé à un événement dans cette tranche d\'horaires ")</script>';
 
-    var_dump($event);
 }
 
 ?>

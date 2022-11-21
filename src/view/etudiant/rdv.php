@@ -93,13 +93,6 @@ else {
                         <td>".$value['domaine']."</td>
                         <td>".$value['nom_type']."</td>
                         <td>".$value['lieux']."</td>
-                        <td>$statut</td>
-                        <td>
-                             <form action='' method='POST'>
-                                <button name='accepter' value='".$value['id_rdv']."'>Accepter</button>
-                                <button name='decliner' value='".$value['id_rdv']."'>Décliner</button>
-                            </form>
-                        </td>
                     </tr>";
     }
 }
@@ -167,8 +160,6 @@ else {
                 <th>Domaine</th>
                 <th>Type de contrat</th>
                 <th>Adresse</th>
-                <th>Statut</th>
-                <th>Action</th>
             </tr>
             <?=$tblisteHistoriques;?>
         </table>

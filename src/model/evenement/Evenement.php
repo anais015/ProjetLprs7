@@ -185,19 +185,6 @@ class Evenement
             else return false;
     }
 
-    public function etudiantParticipeEvenement($bdd){
-        $sql='INSERT INTO participe (ref_evenement, ref_etudiant, debut, fin) VALUES (:id, :ref_etudiant, :debut, :fin)';
-        $request = $bdd->prepare($sql);
-        $execute=$request->execute(array(
-            'id'=> $this->id,
-            'ref_etudiant'=> $this->ref_etudiant,
-            'debut'=>$this->debut,
-            'fin'=>$this->fin
-        ));
-        if($execute) return true;
-        else return false;
-    }
-
     public function selectParId($bdd){
         $sql='SELECT * FROM evenement WHERE id_evenement=:id';
         $request=$bdd->prepare($sql);
@@ -220,16 +207,34 @@ class Evenement
         else return false;
     }
 
-    public function listEventOrganise(PDO $bdd){
-        $sql='SELECT e.id_evenement, e.nom_event, e.debut, e.fin, e.valide, s.nom FROM evenement AS e
-    LEFT JOIN salle AS s
-              ON e.ref_salle = s.id_salle 
-              WHERE e.debut>NOW() AND e.ref_etudiant=:ref_etudiant
-              ORDER BY e.debut';
+    public function listeEventParticipe(PDO $bdd){
+        $sql='
+                SELECT p.ref_evenement, e.nom_event, e.description, e.debut, e.fin, s.nom 
+                FROM participe AS p 
+                JOIN evenement AS e ON p.ref_evenement = e.id_evenement 
+                JOIN salle AS s ON e.ref_salle = s.id_salle 
+                WHERE e.debut>=NOW() AND p.ref_etudiant=:ref_etudiant
+                ORDER BY e.debut
+                ';
         $request= $bdd->prepare($sql);
         $request->execute(array('ref_etudiant'=> $this->ref_etudiant));
-        $result = $request->fetchAll();
-        if(is_array($result)) return $result;
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        if(is_array($result)&&count($result)>0) return $result;
+        else return false;
+    }
+
+    public function listEventOrganise(PDO $bdd){
+        $sql="
+                SELECT e.id_evenement, e.nom_event, e.debut, e.fin, e.valide, s.nom 
+                FROM evenement AS e
+                LEFT JOIN salle AS s ON e.ref_salle = s.id_salle 
+                WHERE e.debut>NOW() AND e.ref_etudiant=:ref_etudiant
+                ORDER BY e.debut
+                ";
+        $request= $bdd->prepare($sql);
+        $request->execute(array('ref_etudiant'=> $this->ref_etudiant));
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        if(is_array($result)&&count($result)>0) return $result;
         else return false;
     }
 
@@ -238,7 +243,7 @@ class Evenement
     LEFT JOIN salle AS s
               ON e.ref_salle = s.id_salle 
               WHERE valide=1 AND e.debut>NOW() AND (`ref_etudiant` IS NULL OR `ref_etudiant`<>:ref_etudiant)
-              ORDER BY e.debut';
+              ORDER BY e.debut desc ';
         $request= $bdd->prepare($sql);
         $request->execute(array('ref_etudiant'=> $this->ref_etudiant));
         $result = $request->fetchAll();

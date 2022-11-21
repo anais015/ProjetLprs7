@@ -6,7 +6,6 @@ class Etudiant extends Utilisateur
     private $valide;
     private Evenement $evenement;
     private Connexion $connexion;
-    private Rdv $rdv;
 
     public function __construct(array $donnees){
         parent::__construct($donnees);
@@ -194,4 +193,82 @@ class Etudiant extends Utilisateur
         }
         else return false;
     }
+
+    public function checkInscrireEvenement (PDO $bdd, $evenement_id){
+        $sql = 'SELECT * FROM participe WHERE ref_evenement=:ref_evenement AND ref_etudiant=:ref_etudiant ';
+        $request= $bdd->prepare($sql);
+        $execute= $request->execute(array(
+            'ref_evenement'=>$evenement_id,
+            'ref_etudiant'=>$this->id
+        ));
+        if ($execute) {
+            $result=$request->fetch(PDO::FETCH_ASSOC);
+            if(is_array($result)) return $result;
+            else return false;
+        }
+        else return false;
+    }
+
+    public function checkVacancy(PDO $bdd, int $id_evenement){
+        $sql="
+            SELECT COUNT(*) 
+            FROM participe AS p
+            JOIN evenement AS e ON e.id_evenement = p.ref_evenement
+            WHERE p.ref_etudiant =:id
+            AND e.id_evenement <>:id_evenement
+        ";
+    }
+
+    public function chevaucheEvenement(PDO $bdd, int $id_evenement){//return true or false
+        $sql="
+            SELECT COUNT(*) 
+            FROM participe AS p
+            JOIN evenement AS e ON e.id_evenement = p.ref_evenement
+            WHERE p.ref_etudiant =:id
+            AND e.id_evenement <>:id_evenement
+            AND 
+            (
+                e.debut between (select debut from evenement where id_evenement=:id_evenement) and (select fin from evenement where id_evenement=:id_evenement)
+                OR e.fin between (select debut from evenement where id_evenement=:id_evenement) and (select fin from evenement where id_evenement=:id_evenement)
+                OR (select debut from evenement where id_evenement=:id_evenement) between e.debut and e.fin
+                OR (select fin from evenement where id_evenement=:id_evenement) between e.debut and e.fin           
+            
+            )
+            ";
+        $request=$bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'id'=>$this->id,
+            'id_evenement'=>$id_evenement
+        ));
+        if ($request->fetchColumn()>0) return true;
+        else return false;
+    }
+
+    public function participeEvenement(PDO $bdd, int $id_evenement){
+        $chevauche=$this->chevaucheEvenement($bdd, $id_evenement);
+        if (!$chevauche){
+            $sql= 'INSERT INTO participe (ref_evenement, ref_etudiant) VALUES (:ref_evenement, :id)';
+            $request=$bdd->prepare($sql);
+            $execute=$request->execute(array(
+                'ref_evenement'=>$id_evenement,
+                'id'=>$this->id
+            ));
+            if($execute) return true;
+            else return false;
+        } else return false;
+    }
+
+    public function desinscrire(PDO $bdd, Evenement $event){
+        $sql='
+            DELETE FROM participe 
+            WHERE ref_etudiant=:id AND ref_evenement=:ref_evenement';
+        $request=$bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'id'=>$this->id,
+            'ref_evenement'=>$event->getId()
+        ));
+        if($execute) return true;
+        else return false;
+    }
+
 }

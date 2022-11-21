@@ -29,25 +29,30 @@ foreach ($historique as $value){
                     </tr>";
 
 }
-//$listParticiper= $event->listEventParticiper($bdd);
-//foreach ($listParticiper as $value){
-//    $tbParticiper .="<tr>
-//                        <td>".$value[1]."</td>
-//                        <td>".$value['description']."</td>
-//                        <td>".$value['date']."</td>
-//                        <td>".$value['heure']."</td>
-//                        <td>".$value['duree']."</td>
-//                        <td>".$value['salle']."</td>
-//                        <td>
-//                            <form action='../../traitement/evenement/traitementSuppression.php' method='post'>
-//                                <button name='annuler' value='".$value['id_evenement']."'>Annuler</button>
-//                            </form>
-//                        </td>
-//                    </tr>";
-//}
+$listParticiper= $event->listeEventParticipe($bdd);
+if (!$listParticiper) $tbParticiper= "<tr><td colspan='7'>Vous n'avez aucun evenement à participer</td></td>";
+else {
+    foreach ($listParticiper as $value){
+        $debut=explode(" ",$value['debut']);
+        $fin=explode(" ",$value['fin']);
+        $tbParticiper .="<tr>
+                        <td>".$value['nom_event']."</td>
+                        <td>".$value['description']."</td>
+                        <td>".$debut[0]."</td>
+                        <td>".$debut[1]."</td>
+                        <td>".$fin[1]."</td>
+                        <td>".$value['nom']."</td>
+                        <td>
+                            <form action='' method='post'>
+                                <button name='desinscrire' value='".$value['ref_evenement']."'>Se désinscrire</button>
+                            </form>
+                        </td>
+                    </tr>";
+    }
+}
+
 
 $listOrganise= $event->listEventOrganise($bdd);
-//var_dump($listOrganise);
 foreach ($listOrganise as $value){
     if ($value['valide']==0) {
         $hidden='';
@@ -76,6 +81,16 @@ foreach ($listOrganise as $value){
                             </form>
                         </td>
                     </tr>";
+}
+
+if(isset($_POST['desinscrire'])){
+    $event = new Evenement(array('id'=> $_POST['desinscrire']));
+    $etudiant = new Etudiant(array('id'=>$_SESSION['etudiant']['id_etudiant']));
+    $desincription=$etudiant->desinscrire($bdd,$event);
+    if ($desincription) {
+        echo '<script>alert("Vous vous êtes désinscrit au évenement")</script>';
+        header("location:listeEvenement.php");
+    } else echo '<script>alert("Erreur")</script>';
 }
 ?>
 <!DOCTYPE html>
@@ -136,15 +151,7 @@ foreach ($listOrganise as $value){
             <th>Salle</th>
             <th>Action</th>
         </tr>
-        <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>ENGIE</td>
-            <td>20-10-2022</td>
-            <td>10:00</td>
-            <td>2:00</td>
-            <td>Germany</td>
-            <td><button>Annuler</button></td>
-        </tr>
+        <?=$tbParticiper?>
     </table>
 </div>
 
