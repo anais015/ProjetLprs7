@@ -104,8 +104,98 @@
         <!--<h2> Page d'accueil </h2>
         <h4> ... même si elle est moche ! &#128521;</h4>-->
 
+        <aside id="fh5co-hero">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li style="background-image: url(../../../src/style/image-entreprise/vecteezy_hand-shaking-which-print-screen-on-wooden-cube-block-in_6969586_600.jpg);">
+                        <div class="overlay-gradient"></div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2 text-center slider-text">
+                                    <div class="slider-text-inner">
+                                        <h1>Bla bla ...</h1>
+                                        <h2>Bla bla ...<a href="creerOffre.php" target="_blank">Créer des offres d'emplois</a></h2>
+                                        <p><a class="btn btn-primary btn-lg" href="creerOffre.php">Créer des offres d'emplois</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="background-image: url(../../../src/style/image-entreprise/salon.webp);">
+                        <div class="overlay-gradient"></div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2 text-center slider-text">
+                                    <div class="slider-text-inner">
+                                        <h1>Bla bla ...</h1>
+                                        <h2>Bla bla ...<a href="creerEventEntreprise.php" target="_blank">Créer un evenement</a></h2>
+                                        <p><a class="btn btn-primary btn-lg btn-learn" href="creerEventEntreprise.php">Création d'événement</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="background-image: url(../../../src/style/image-entreprise/rdv.webp);">
+                        <div class="overlay-gradient"></div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2 text-center slider-text">
+                                    <div class="slider-text-inner">
+                                        <h1>Bla bla ...</h1>
+                                        <h2>Bla bla ... <a href="organiserRdv.php" target="_blank">RDV entreprise-étudiant</a></h2>
+                                        <p><a class="btn btn-primary btn-lg btn-learn" href="organiserRdv.php">Création RDV</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
 
 <!-- Partie du bas -->
+
+        <footer id="fh5co-footer" role="contentinfo" style="background-image: url(../../../src/style/images/img_bg_4.jpg);">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row row-pb-md">
+                    <div class="col-md-4 fh5co-widget">
+                        <h3>LYCÉE PRIVÉ ET UFA ROBERT SCHUMAN</h3>
+                        <p>Enseignement catholique sous contrat d'association avec l'Etat
+                            Etablissement habilité à percevoir la taxe d'apprentissage</p>
+                        <p> 5 avenue du Général de Gaulle - 93440 Dugny</p>
+                        <p>administration@lyceerobertschuman.com</p>
+                    </div>
+
+                    <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
+                        <h3>LIENS RAPIDES</h3>
+                        <ul class="fh5co-footer-links">
+                            <li><a href="../contact.php">Contact</a></li>
+                            <li><a href="#">Accès</a></li>
+                            <li><a href="https://0931573e.index-education.net/pronote/">Espace Pronote</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=5fQu2KygRL0&ab_channel=RobertSchuman">Vidéo Etablissement</a></li>
+                            <li><a href="https://www.facebook.com/robertschumandugny">Facebook</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
+                        <h3>ACCÈS</h3>
+                        <p>RER B (Le Bourget) et Bus 133 (Albert Chardavoine)<br/> RER B (La Courneuve) et Bus 249 (Albert Chardavoine) Tramway T11 : arrêt Dugny-La Courneuve</p>
+                    </div>
+                </div>
+
+                <div class="row copyright">
+                    <div class="col-md-12 text-center">
+                        <p>
+                            <small class="block">&copy; 2016 - Micromagic - Tous droits réservés.</small>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+
         <div class="gototop js-top">
             <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
         </div>
