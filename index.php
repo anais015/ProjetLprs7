@@ -117,7 +117,7 @@
                                 <a href="#">Relations Entreprises</a>
                                 <ul class="dropdown">
                                     <li><a href="#">Stage</a></li>
-                                    <li><a href="#">Offres d'emploies</a></li>
+                                    <li><a href="#">Offres d'emplois</a></li>
                                     <li><a href="#">Partenariat entreprises</a></li>
                                 </ul>
                             </li>
@@ -210,7 +210,7 @@
 
                 <div class="col-md-4 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
                     <h3>ACCÈS</h3>
-                    <p>RER B (Le Bourget) et Bus 133 (Albert Chardavoine) RER B (La Courneuve) et Bus 249 (Albert Chardavoine) Tramway T11: arrêt Dugny-La Courneuve</p>
+                    <p>RER B (Le Bourget) et Bus 133 (Albert Chardavoine)<br/> RER B (La Courneuve) et Bus 249 (Albert Chardavoine) Tramway T11: arrêt Dugny-La Courneuve</p>
                 </div>
             </div>
 

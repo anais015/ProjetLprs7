@@ -1,35 +1,31 @@
-h1, h4, h2{
+h1, h4, h2 {
     text-align: center;
 }
 
 label {
     display: block;
     margin-bottom: 10px;
-    font: 1rem 'Fira Sans', sans-serif;
 }
 
 textarea {
     padding: 10px;
-    max-width: 100%;
+    max-width: 100%;    /* augmentation de la zone écriture */
     line-height: 1.5;
     border-radius: 5px;
     border: 1px solid #ccc;
     box-shadow: 1px 1px 1px #999;
 }
 
-small{
+small {
     color: red;
 }
 
-input{
+input {
     padding: 10px;
     line-height: 1.5;
     border-radius: 5px;
     border: 1px solid #ccc;
     box-shadow: 1px 1px 1px #999;
-}
-nav{
-    background-color: #008aff;
 }
 
 input,
@@ -37,6 +33,7 @@ label,
 textarea {
     margin: .4rem 0;
     letter-spacing: 1px;
+    font : 1em "monospace";
 }
 
 ul {
@@ -49,37 +46,13 @@ li {
     display: inline;
 }
 
-/*button {
-    background-image: linear-gradient(135deg, #008aff, #9672d4);
-    border-radius: 6px;
-    box-sizing: border-box;
-    color: #ffffff;
-    display: block;
-    height: 50px;
-    font-size: 1.4em;
-    font-weight: 600;
-    padding: 4px;
-    position: relative;
-    text-decoration: none;
-    width: 7em;
-    z-index: 2;
-}
+/* Partie Nav barre */
 
-button:hover {
-    color: #fff;
-}
+.navbar { background-color: #6dcbfd; }
+.navbar .navbar-nav .nav-link { color: #fff; }
+.navbar .navbar-nav .nav-link:hover { color: #fbc531; }
+.navbar .navbar-nav .active > .nav-link { color: #fbc531; }
 
-button, .bn39span {
-    align-items: center;
-    background: #0e0e10;
-    border-radius: 6px;
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    transition: background 0.5s ease;
-    width: 100%;
-}
-
-button:hover, .bn39span {
-    background: transparent;
-}*/
+footer a.text-light:hover { color: #fed136!important; text-decoration: none; }
+footer .cizgi { border-right: 1px solid #535e67; }
+@media (max-width: 992px) { footer .cizgi { border-right: none; } }

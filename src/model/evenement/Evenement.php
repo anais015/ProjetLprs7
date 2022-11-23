@@ -146,24 +146,24 @@ class Evenement
     }
 
     public function entrepriseCreerEvenement($bdd){
-        $sql ='SELECT * FROM evenement WHERE date=:date AND heure=:heure AND ref_entreprise=:ref_entreprise';
+        $sql ='SELECT * FROM evenement WHERE debut=:debut, fin=:fin AND ref_entreprise=:ref_entreprise';
         $req = $bdd->prepare($sql);
         $req->execute(array(
-            'date'=> $this->date,
-            'heure'=> $this->heure,
-            'ref_entreprise'=>$this->ref_entreprise));
+            'debut'=> $this->debut,
+            'fin'=> $this->fin,
+            'ref_entreprise'=>$this->ref_entreprise
+        ));
         $res = $req->fetch();
         if (is_array($res)) return false;
 
         else{
-            $sql='INSERT INTO evenement (nom_event, description, date, heure, duree, ref_entreprise) VALUES (:nom, :description, :date, :heure, :duree, :ref_entreprise)';
+            $sql='INSERT INTO evenement (nom_event, description, debut, fin, ref_entreprise) VALUES (:nom, :description, :debut, :fin, :ref_entreprise)';
             $request = $bdd->prepare($sql);
             $execute=$request->execute(array(
                 'nom'=> $this->nom,
                 'description'=> $this->description,
-                'date'=> $this->date,
-                'heure'=> $this->heure,
-                'duree'=> $this->duree,
+                'debut'=> $this->debut,
+                'fin'=> $this->fin,
                 'ref_entreprise'=>$this->ref_entreprise
             ));
             if($execute) return true;
