@@ -720,6 +720,7 @@
         month: d.getMonth() + 1,
         day: d.getDate()
     });
+    });
 
     //jQuery example
     $('#simply-countdown-losange').simplyCountdown({

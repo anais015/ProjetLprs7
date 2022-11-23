@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Education &mdash; Free Website Template, Free HTML5 Template by freehtml5.co</title>
+    <title>Accueil &mdash; LPRS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
     <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -193,8 +193,8 @@
                     <h3>LYCÉE PRIVÉ ET UFA ROBERT SCHUMAN</h3>
                     <p>Enseignement catholique sous contrat d'association avec l'Etat
                         Etablissement habilité à percevoir la taxe d'apprentissage</p>
-                    <p> 5 avenue du Général de Gaulle - 93440 Dugny</p>
-                    <p>administration@lyceerobertschuman.com</p>
+                    <p>Adresse : 5 Avenue du Général de Gaulle - 93440 Dugny</p>
+                    <p>Email : administration@lyceerobertschuman.com</p>
                 </div>
 
                 <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
@@ -275,15 +275,4 @@
 </html>
 
 
-<body>
-<nav>
-    <div class="bottom-row">
-        <a href="">Accueil</a>
-        <a href="src/view/connexion.php">Se Connecter</a>
-        <a href="src/view/inscription.php">S'inscrire</a>
-        <a href="#">Contact</a>
-    </div>
-</nav>
-
-</body>
 
