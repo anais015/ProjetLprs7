@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `evenement`
 (
     `id_evenement` int (11)NOT NULL AUTO_INCREMENT,
     `nom_event` varchar(50)NOT NULL,
-    `description` varchar(300)NOT NULL,
+    `description` varchar(2000)NOT NULL,
     `debut` DATETIME NOT NULL,
     `fin` DATETIME NOT NULL,
     `valide` BOOLEAN NOT NULL DEFAULT FALSE,
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `offre`
 (
     `id_offre` int(11)NOT NULL AUTO_INCREMENT,
     `titre` varchar(50)NOT NULL,
-    `description` varchar(300)NOT NULL,
+    `description` varchar(2000)NOT NULL,
     `domaine` varchar(255)NOT NULL,
     `accepte` BOOLEAN NOT NULL,
     `ref_type` int(11)NOT NULL,
