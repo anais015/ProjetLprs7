@@ -229,7 +229,7 @@ class Evenement
                 FROM evenement AS e
                 LEFT JOIN salle AS s ON e.ref_salle = s.id_salle 
                 WHERE e.debut>NOW() AND e.ref_etudiant=:ref_etudiant
-                ORDER BY e.debut
+                ORDER BY e.debut desc
                 ";
         $request= $bdd->prepare($sql);
         $request->execute(array('ref_etudiant'=> $this->ref_etudiant));
@@ -252,7 +252,10 @@ class Evenement
     }
 
     public function historique(PDO $bdd){
-        $sql='SELECT * FROM evenement WHERE date<NOW() AND valide=1 AND ref_etudiant=:ref_etudiant ORDER BY date DESC';
+        $sql='
+            SELECT * FROM participe AS p
+            JOIN evenement AS e ON p.ref_evenement=e.id_evenement 
+            WHERE e.debut<NOW() AND valide=1 AND e.ref_etudiant=:ref_etudiant ORDER BY e.debut DESC';
         $request= $bdd->prepare($sql);
         $request->execute(array('ref_etudiant'=> $this->ref_etudiant));
         $result = $request->fetchAll();
