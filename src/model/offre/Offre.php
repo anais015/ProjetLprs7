@@ -11,14 +11,6 @@ class Offre
     private ?int $ref_entreprise;
     private ?int $ref_etudiant;
 
-    /**
-     * @param $id
-     * @param $titre
-     * @param $description
-     * @param $domaine
-     * @param $accepte
-     */
-
     public function __construct(array $donnees)
     {
         $this->hydrate($donnees);
@@ -55,131 +47,81 @@ class Offre
         ));
     }
 
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
     public function setId($id)
     {
         $this->id = $id;
     }
 
-    /**
-     * @return mixed
-     */
     public function getTitre()
     {
         return $this->titre;
     }
 
-    /**
-     * @param mixed $titre
-     */
     public function setTitre($titre)
     {
         $this->titre = $titre;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDescription()
     {
         return $this->description;
     }
 
-    /**
-     * @param mixed $description
-     */
     public function setDescription($description)
     {
         $this->description = $description;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDomaine()
     {
         return $this->domaine;
     }
 
-    /**
-     * @param mixed $domaine
-     */
     public function setDomaine($domaine)
     {
         $this->domaine = $domaine;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAccepte()
     {
         return $this->accepte;
     }
 
-    /**
-     * @param mixed $accepte
-     */
     public function setAccepte($accepte)
     {
         $this->accepte = $accepte;
     }
 
-    /**
-     * @return mixed
-     */
     public function getRefType()
     {
         return $this->refType;
     }
 
-    /**
-     * @param mixed $refType
-     */
     public function setRefType($refType): void
     {
         $this->refType = $refType;
     }
 
-    /**
-     * @return mixed
-     */
     public function getRefEntreprise(): ?int
     {
         return $this->ref_entreprise;
     }
 
-    /**
-     * @param mixed $ref_entreprise
-     */
     public function setRefEntreprise($ref_entreprise): void
     {
         $this->ref_entreprise = $ref_entreprise;
     }
 
-
-
-    /**
-     * @return int|null
-     */
     public function getRef_etudiant(): ?int
     {
         return $this->ref_etudiant;
     }
 
-    /**
-     * @param int|null $ref_etudiant
-     */
     public function setRef_etudiant(?int $ref_etudiant): void
     {
         $this->ref_etudiant = $ref_etudiant;
@@ -207,6 +149,30 @@ class Offre
         ));
         if ($execute) return true;
         else return false;
+    }
+    public function exist (PDO $bdd,int $id){
+        $sql='SELECT * FROM offre WHERE id_offre=:id';
+        $request=$bdd->prepare($sql);
+        $execute= $request->execute(array('id'=>$id));
+        if (is_array($request->fetch())) return true;
+        return false;
+    }
+
+    public function detailOffre (PDO $bdd){
+        $sql='
+            SELECT t.nom_type, o.description, o.titre, o.domaine,  e.nom_entreprise, e.rue_entreprise, e.ville_entreprise, e.cp_entreprise
+            FROM type AS t 
+            JOIN offre AS o 
+            ON t.id_type = o.ref_type 
+            JOIN entreprise AS e 
+            ON o.ref_entreprise = e.id_entreprise 
+            WHERE o.id_offre =:id';
+        $request=$bdd->prepare($sql);
+        $execute= $request->execute(array(
+            'id'=>$this->id
+        ));
+        if ($execute) return $request->fetch(PDO::FETCH_ASSOC);
+        return false;
     }
 
 }
