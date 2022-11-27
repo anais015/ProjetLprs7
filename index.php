@@ -185,7 +185,7 @@
         </div>
     </aside>
 
-    <footer id="fh5co-footer" role="contentinfo" style="background-image: url(src/style/images/img_bg_4.jpg);">
+    <footer id="fh5co-footer" role="contentinfo">
         <div class="overlay"></div>
         <div class="container">
             <div class="row row-pb-md">

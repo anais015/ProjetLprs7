@@ -39,11 +39,10 @@ class Etudiant extends Utilisateur
         $sql ='SELECT * FROM etudiant WHERE email = :email ';
         $request = $bdd->prepare($sql);
         $request->execute(array('email'=> $this->email));
-        $result = $request->fetch();
+        $result = $request->fetch(PDO::FETCH_ASSOC);
 
         if(is_array($result)) return false;
         else {
-            if (!$this->isValideWithoutId()) return false;
             $sql='INSERT INTO etudiant (nom, prenom, email, mot_de_passe, domaine_etude) VALUES (:nom, :prenom, :email, :mot_de_passe, :domaine_etude)';
             $request = $bdd->prepare($sql);
             $execute=$request->execute(array(
@@ -65,7 +64,7 @@ class Etudiant extends Utilisateur
             'email'=>$this->email
         ));
         if ($execute){
-            $result=$request->fetch();
+            $result=$request->fetch(PDO::FETCH_ASSOC);
             if(is_array($result)) {
                 $this->setId($result['id_etudiant']);
                 if (password_verify($passwordSaisi, $result['mot_de_passe'])) {
@@ -84,7 +83,7 @@ class Etudiant extends Utilisateur
             'id'=>$this->id
         ));
         if ($execute){
-            $result=$request->fetch();
+            $result=$request->fetch(PDO::FETCH_ASSOC);
             if(is_array($result)) return $result;
             else return false;
         } else return false;
@@ -107,13 +106,13 @@ class Etudiant extends Utilisateur
         $sql ='SELECT * FROM etudiant WHERE email = :email ';
         $request = $bdd->prepare($sql);
         $request->execute(array('email'=> $this->email));
-        $result = $request->fetch();
+        $result = $request->fetch(PDO::FETCH_ASSOC);
         if(is_array($result)) return false;
         else {
             $sql ='SELECT * FROM etudiant WHERE id_etudiant = :id ';
             $request=$bdd->prepare($sql);
             $request->execute(array('id'=> $this->id));
-            $result=$request->fetch();
+            $result=$request->fetch(PDO::FETCH_ASSOC);
             if(is_array($result)){
                 if (password_verify($passwordSaisi, $result['mot_de_passe'])){
                     //echo "password dung";
@@ -134,7 +133,7 @@ class Etudiant extends Utilisateur
         $sql ='SELECT * FROM etudiant WHERE id_etudiant = :id ';
         $request=$bdd->prepare($sql);
         $request->execute(array('id'=> $this->id));
-        $result=$request->fetch();
+        $result=$request->fetch(PDO::FETCH_ASSOC);
         if(is_array($result)) {
             if (password_verify($passwordSaisi, $result['mot_de_passe'])) {
                 $sql = 'UPDATE etudiant SET mot_de_passe =:mot_de_passe WHERE id_etudiant =:id';
@@ -151,21 +150,16 @@ class Etudiant extends Utilisateur
 
     public function getPendingAccount(Bdd $bdd){
         $req = $bdd->getBdd()->query('SELECT * FROM etudiant WHERE valide=0');
-        return $req->fetchAll();
+        return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function listeCandidature(PDO $bdd){
-        $sql='SELECT e.nom_entreprise, e.rue_entreprise, e.ville_entreprise, e.cp_entreprise, 
-              o.titre, o.description, o.domaine, t.nom_type, r.id_rdv, p.ref_etudiant, p.date
+        $sql='SELECT p.ref_offre, e.nom_entreprise, o.titre, t.nom_type, r.id_rdv, p.ref_etudiant, p.date
               FROM entreprise AS e
-              JOIN offre AS o
-              ON e.id_entreprise = o.ref_entreprise
-              JOIN type AS t
-              ON o.ref_type = t.id_type
-              JOIN postule AS p
-              ON o.id_offre = p.ref_offre
-              LEFT JOIN rdv AS r
-              ON p.ref_offre = r.ref_offre
+              JOIN offre AS o ON e.id_entreprise = o.ref_entreprise
+              JOIN type AS t ON o.ref_type = t.id_type
+              JOIN postule AS p ON o.id_offre = p.ref_offre
+              LEFT JOIN rdv AS r ON p.ref_offre = r.ref_offre
               WHERE p.ref_etudiant=:id';
         $request = $bdd->prepare($sql);
         $execute=$request->execute(array(
@@ -213,7 +207,7 @@ class Etudiant extends Utilisateur
         $sql="
             SELECT COUNT(*) 
             FROM participe AS p
-            JOIN evenement AS e ON e.id_evenement = p.ref_evenement
+            JOIN description AS e ON e.id_evenement = p.ref_evenement
             WHERE p.ref_etudiant =:id
             AND e.id_evenement <>:id_evenement
         ";
@@ -223,15 +217,15 @@ class Etudiant extends Utilisateur
         $sql="
             SELECT COUNT(*) 
             FROM participe AS p
-            JOIN evenement AS e ON e.id_evenement = p.ref_evenement
+            JOIN description AS e ON e.id_evenement = p.ref_evenement
             WHERE p.ref_etudiant =:id
             AND e.id_evenement <>:id_evenement
             AND 
             (
-                e.debut between (select debut from evenement where id_evenement=:id_evenement) and (select fin from evenement where id_evenement=:id_evenement)
-                OR e.fin between (select debut from evenement where id_evenement=:id_evenement) and (select fin from evenement where id_evenement=:id_evenement)
-                OR (select debut from evenement where id_evenement=:id_evenement) between e.debut and e.fin
-                OR (select fin from evenement where id_evenement=:id_evenement) between e.debut and e.fin           
+                e.debut between (select debut from description where id_evenement=:id_evenement) and (select fin from description where id_evenement=:id_evenement)
+                OR e.fin between (select debut from description where id_evenement=:id_evenement) and (select fin from description where id_evenement=:id_evenement)
+                OR (select debut from description where id_evenement=:id_evenement) between e.debut and e.fin
+                OR (select fin from description where id_evenement=:id_evenement) between e.debut and e.fin           
             
             )
             ";

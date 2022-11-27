@@ -8,20 +8,21 @@ if(isset($_POST['selectIdentity'])) {
                 <div class='row form-group'>
 				<form action='../traitement/administration/inscriptionadmin.php' method='POST'>
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Nom' name='nom'  required>
+					<input type='text' class='form-control' placeholder='Nom' name='nom'  required='required'>
 				</div>
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required>
+					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required='required'>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='email' class='form-control' placeholder='Email' name='email' required>
+					<input type='email' class='form-control' placeholder='Email' name='email' required='required'>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='password' class='form-control' placeholder='Password' name='password' required>
+					<input type='password' class='form-control' placeholder='Password' name='password' required='required'>
+                    <small>Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial</small>
 				</div>
 			</div>
 
@@ -37,43 +38,44 @@ if(isset($_POST['selectIdentity'])) {
         <div class='row form-group'>
 				<form action='../traitement/entreprise/traitementInscriptionEntreprise.php' method='POST'>  
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Nom' name='nom' required>
+					<input type='text' class='form-control' placeholder='Nom' name='nom' required='required'>
 				</div>
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required>
+					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required='required'>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='text' class='form-control' placeholder='Rôle de la société' name='role_societe' required>
+					<input type='text' class='form-control' placeholder='Rôle de la société' name='role_societe' required='required'>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-                <input type='text' class='form-control' placeholder='Nom de l Entreprise' name='nom_entreprise' required>
+                <input type='text' class='form-control' placeholder='Nom de l Entreprise' name='nom_entreprise' required='required'>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='text' class='form-control' placeholder='Rue' name='rue_entreprise' required>
+					<input type='text' class='form-control' placeholder='Rue' name='rue_entreprise' required='required'>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-6'>
-					<input type='text' class='form-control'placeholder='Ville' name='ville_entreprise' required>
+					<input type='text' class='form-control'placeholder='Ville' name='ville_entreprise' required='required'>
 				</div>
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Code Postal' name='cp_entreprise' required>
+					<input type='text' class='form-control' placeholder='Code Postal' name='cp_entreprise' required='required'>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='email' class='form-control' placeholder='Email' name='email' required>
+					<input type='email' class='form-control' placeholder='Email' name='email' required='required'>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='password' class='form-control' placeholder='Password' name='password' required>
+					<input type='password' class='form-control' placeholder='Password' name='password' required='required'>
+					<small>Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial</small>
 				</div>
 			</div>
 			<div class='form-group text-center'>
@@ -89,25 +91,26 @@ if(isset($_POST['selectIdentity'])) {
                 <div class='row form-group'>
 				<form action='../traitement/etudiant/traitementInscription.php' method='POST'>   
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Nom' name='nom' required>
+					<input type='text' class='form-control' placeholder='Nom' name='nom' required='required'>
 				</div>
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required>
+					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required='required'>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='text' class='form-control' placeholder=\"Domaine d'étude\" name='domaine' required>
+					<input type='text' class='form-control' placeholder=\"Domaine d'étude\" name='domaine' required='required'>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='email' class='form-control' placeholder='Email' name='email' required>
+					<input type='email' class='form-control' placeholder='Email' name='email' required='required'>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='password' class='form-control' placeholder='Password' name='password' required>
+					<input type='password' class='form-control' placeholder='Password' name='password' required='required'>
+                    <small>Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial</small>
 				</div>
 			</div>
 			<div class='form-group text-center'>
@@ -119,25 +122,6 @@ if(isset($_POST['selectIdentity'])) {
 }
 ?>
 
-<!--<div>
-    <div class="modal-content">
-        <div class="container">
-            <form action="" method="post">
-                <label for="selectIdentity"><b>Vous êtes :</b></label>
-                <select name="selectIdentity" id="selectIdentity" required onchange="this.form.submit()">-->
-                   <!-- <option selected hidden disabled><?/*=$placeHolder;*/?></option>
-                    <option value="administrateur">Administrateur</option>
-                    <option value="entreprise">Entreprise</option>
-                    <option value="etudiant">Etudiant</option>
-                </select>
-            </form>
-            <?/*//=$table;*/?>
-
-        </div>
-    </div>
--->
-
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -148,20 +132,6 @@ if(isset($_POST['selectIdentity'])) {
     <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
     <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
     <meta name="author" content="freehtml5.co" />
-
-    <!--
-    //////////////////////////////////////////////////////
-
-    FREE HTML5 TEMPLATE
-    DESIGNED & DEVELOPED by FreeHTML5.co
-
-    Website: 		http://freehtml5.co/
-    Email: 			info@freehtml5.co
-    Twitter: 		http://twitter.com/fh5co
-    Facebook: 		https://www.facebook.com/fh5co
-
-    //////////////////////////////////////////////////////
-     -->
 
     <!-- Facebook and Twitter integration -->
     <meta property="og:title" content=""/>
@@ -391,23 +361,6 @@ if(isset($_POST['selectIdentity'])) {
 <script src="../style/js/simplyCountdown.js"></script>
 <!-- Main -->
 <script src="../style/js/main.js"></script>
-<script>
-    var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
 
-    // default example
-    simplyCountdown('.simply-countdown-one', {
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate()
-    });
-
-    //jQuery example
-    $('#simply-countdown-losange').simplyCountdown({
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate(),
-        enableUtc: false
-    });
-</script>
 </body>
 </html>
