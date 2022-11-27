@@ -31,7 +31,8 @@ abstract class Utilisateur
 
     protected function setId($id)
     {
-        $this->id = $id;
+        if(is_integer($id)||is_integer(intval($id))) $this->id = $id;
+        return false;
     }
 
     protected function getNom()
@@ -42,7 +43,7 @@ abstract class Utilisateur
     protected function setNom(string $nom)
     {
         $nom=trim($nom);
-        if(strlen($nom)<50 && strlen($nom)>0){
+        if(strlen($nom)<=50 && strlen($nom)>0){
             $this->nom = $nom;
             return true;
         }
@@ -57,7 +58,7 @@ abstract class Utilisateur
     protected function setPrenom(string $prenom)
     {
         $prenom=trim($prenom);
-        if(strlen($prenom)<50 && strlen($prenom)>0){
+        if(strlen($prenom)<=50 && strlen($prenom)>0){
             $this->prenom = $prenom;
             return true;
         }
@@ -71,7 +72,12 @@ abstract class Utilisateur
 
     protected function setEmail(string $email)
     {
-        $this->email = $email;
+        $email=trim($email);
+        if(strlen($email)<=80 && strlen($email)>0){
+            $this->email = $email;
+            return true;
+        }
+        return false;
     }
 
     protected function getMot_de_passe()
