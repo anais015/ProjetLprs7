@@ -24,11 +24,11 @@ if (isset($_POST['modifierInfo'])){
     ));
     $modifierInfo=$etudiant->modifierInfo($bdd);
     if ($modifierInfo) {
-        echo '
-            <script>
-                window.location.href = "../../view/etudiant/monCompte.php"; 
-                alert("Modification enregistrée");
-            </script>';
+            echo '
+                <script>
+                    window.location.href = "../../view/etudiant/monCompte.php"; 
+                    alert("Modification enregistrée");
+                </script>';
     }
     else echo '<script>alert("Erreur")</script>';
 }

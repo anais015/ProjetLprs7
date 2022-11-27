@@ -26,7 +26,7 @@ if(isset($_POST['inscription'])) {
 
     $ins = $entreprise->inscription($bdd);
     echo "Inscription effectuée !";
-    header('Location: ../../index.php');
+    header('Location: ../../../index.php');
 
 } else {
     echo "la valeur n'existe pas ! ";
