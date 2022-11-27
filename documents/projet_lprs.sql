@@ -303,7 +303,7 @@ DELIMITER ;
 
 DELIMITER
 &&
-CREATE TRIGGER prob_entreprise_etudiant2BEFORE INSERTON evenementFOR EACH ROW
+CREATE TRIGGER prob_entreprise_etudiant2 BEFORE INSERTON evenement FOR EACH ROW
 BEGIN
 	IF new.ref_etudiant is not null and new.ref_entreprise is not null
 	THEN SIGNAL SQLSTATE '45000'
@@ -321,7 +321,7 @@ DELIMITER ;
 
 DELIMITER
 &&
-CREATE TRIGGER prob_participer_etudiantBEFORE INSERTON participeFOR EACH ROW
+CREATE TRIGGER prob_participer_etudiant BEFORE INSERTON participe FOR EACH ROW
 BEGIN
 	IF EXISTS (SELECT debut, fin FROM participe WHERE debut <= NEW.debut AND fin >= NEW.fin AND ref_etudiant=NEW.ref_etudiant)
 	THEN SIGNAL SQLSTATE '45000'
@@ -334,7 +334,7 @@ DELIMITER;
 
 DELIMITER
 &&
-CREATE TRIGGER prob_postule_etudiantBEFORE INSERTON postuleFOR EACH ROW
+CREATE TRIGGER prob_postule_etudiant BEFORE INSERTON postule FOR EACH ROW
 BEGIN
 	IF EXISTS (SELECT ref_offre, ref_etudiant FROM postule WHERE ref_offre = NEW.ref_offre AND ref_etudiant = NEW.ref_etudiant)
 	THEN SIGNAL SQLSTATE '45000'
