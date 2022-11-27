@@ -1,11 +1,12 @@
 <?php
-
 session_start();
 require_once "../../model/bdd/Bdd.php";
 require_once "../../model/Utilisateur.php";
 require_once "../../model/etudiant/Etudiant.php";
 require_once "../../model/Connexion.php";
 require_once "../../model/evenement/Evenement.php";
+
+if (!isset($_SESSION['etudiant'])) header('Location:../pageIntrouvable.php');
 
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();
@@ -16,7 +17,7 @@ $salle = '';
 $event = new Evenement(array('ref_etudiant' => $_SESSION['etudiant']['id_etudiant']));
 $listeRechercheEvent= $event->listRechercheEvent($bdd);
 $etudiant=new Etudiant(array('id'=>$_SESSION['etudiant']['id_etudiant']));
-
+var_dump($listeRechercheEvent);
 foreach ($listeRechercheEvent as $value){
     $check_inscription_evenement=$etudiant->checkInscrireEvenement($bdd,$value['id_evenement']);
     if (is_array($check_inscription_evenement)) {
@@ -60,7 +61,7 @@ foreach ($listeRechercheEvent as $value){
                         <button class="pricing__feature btn-link">En savoir plus</button>
                     </ul>
                     <form action="" method="POST">
-                        <button type"submit" class="pricing__action" name="participer"'.$btn_style.' value="'.$value['id_evenement'].'">'.$button.'</button>
+                        <button type="submit" class="pricing__action" name="participer"'.$btn_style.' value="'.$value['id_evenement'].'">'.$button.'</button>
                     </form>
                 </div>
             </div>

@@ -8,24 +8,24 @@ require_once "../../model/Connexion.php";
 require_once "../../model/offre/Offre.php";
 require_once "../../model/rdv/Rdv.php";
 
+if (!isset($_SESSION['etudiant'])) header('Location:../pageIntrouvable.php');
+
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();
 $statut='';
-
 $tblisteCandidatures = '';
 
 $etudiant= new Etudiant(array('id' => $_SESSION['etudiant']['id_etudiant']));
-//var_dump($_SESSION['etudiant']['id_etudiant']);
-//var_dump($etudiant);
 $liste_candidatures=$etudiant->listeCandidature($bdd);
-//var_dump($liste_candidatures);
 
 foreach ($liste_candidatures as $value){
     if (is_null($value['id_rdv'])) $statut="Candidature envoyée";
     else $statut = "Entretien accordé";
 
     $tblisteCandidatures .="<tr>
-                        <th scope='row'>".$value['titre']."</th>
+                        <form  action='fiche_job.php' method='get'>
+                            <td><button type='submit' class='btn-link' name='ref_offre' value='".$value['ref_offre']."'>".$value['titre']."</button></td>                            
+                        </form>
                         <td>".$value['nom_entreprise']."</td>
                         <td>".date_format(date_create($value['date']),"d/m/Y H:i")  ."</td>
                         <td>".$value['nom_type']."</td>
@@ -38,10 +38,8 @@ if(isset($_POST['postuler'])){
         'id'=> $_POST['postuler'],
         'ref_etudiant'=> $_SESSION['etudiant']['id_etudiant']
     ));
-//    var_dump($offre);
     $postule = $offre->etudiantPostule($bdd);
     if (!$postule) $erreur=true;
-//    var_dump($postule);
 }
 ?>
 
@@ -98,24 +96,6 @@ if(isset($_POST['postuler'])){
     <script src="../../style/js/simplyCountdown.js"></script>
     <!-- Main -->
     <script src="../../style/js/main.js"></script>
-    <script>
-        var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
-
-        // default example
-        simplyCountdown('.simply-countdown-one', {
-            year: d.getFullYear(),
-            month: d.getMonth() + 1,
-            day: d.getDate()
-        });
-
-        //jQuery example
-        $('#simply-countdown-losange').simplyCountdown({
-            year: d.getFullYear(),
-            month: d.getMonth() + 1,
-            day: d.getDate(),
-            enableUtc: false
-        });
-    </script>
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <script>

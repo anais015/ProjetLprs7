@@ -6,57 +6,17 @@ require_once "../../model/etudiant/Etudiant.php";
 require_once "../../model/Connexion.php";
 require_once "../../model/evenement/Evenement.php";
 
+if (!isset($_SESSION['etudiant'])) header('Location:../pageIntrouvable.php');
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();
 
 $etudiant = new Etudiant(array('id'=>$_SESSION['etudiant']['id_etudiant']));
 $selectedEtudiant=$etudiant->selectParId($bdd);
+/*var_dump($_SESSION['etudiant']['id_etudiant']);
+var_dump($etudiant);
+var_dump($selectedEtudiant);*/
 
 ?>
-<!--
-
-<form action='../../traitement/etudiant/traitementModification.php' method='POST'>
-    <fieldset>
-        <legend>Information Personnelle</legend>
-        <div>
-            <label for='nom'><b>Nom</b></label>
-            <input type='text' placeholder='Nom' name='nom' value="<?/*=$selectedEtudiant['nom'];*/?>" >
-        </div>
-        <div>
-            <label for='prenom'><b>Prénom</b></label>
-            <input type='text' placeholder='Prénom' name='prenom' value="<?/*=$selectedEtudiant['prenom'];*/?>" >
-        </div>
-        <div>
-            <label for='domaine'><b>Domaine</b></label>
-            <input type='text' placeholder="Domaine d'étude" name='domaine' value="<?/*=$selectedEtudiant['domaine_etude'];*/?>" >
-        </div>
-            <input type='submit' name='modifierInfo' id='modifierInfo' value="Modifier">
-    </fieldset>
-    <fieldset>
-        <legend>Email</legend>
-        <div>
-            <label for='email'><b>Email</b></label>
-            <input type='email' placeholder='Email' name='email' >
-        </div>
-        <div>
-            <label for='pw'><b>Mot de passe</b></label>
-            <input type='password' placeholder='Saisissez votre mot de passe pour changer votre adresse email' name='pw' >
-        </div>
-            <input type='submit' name='modifierEmail' id='modifierEmail' value="Modifier Email">
-    </fieldset>
-    <fieldset>
-        <legend>Mot de passe</legend>
-        <div>
-            <label for='old'><b>Ancien mot de passe</b></label>
-            <input type='password' placeholder='Ancien mot de passe' name='old' >
-        </div>
-        <div>
-            <label for='new'><b>Nouveau mot de passe</b></label>
-            <input type='password' placeholder='Nouveau mot de passe' name='new' >
-        </div>
-            <input type='submit' name='modifierPw' id='modifierPw' value="Modifier Mot de passe">
-    </fieldset>
--->
 
 <!DOCTYPE HTML>
 <html>
@@ -69,21 +29,6 @@ $selectedEtudiant=$etudiant->selectParId($bdd);
     <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
     <meta name="author" content="freehtml5.co" />
 
-    <!--
-    //////////////////////////////////////////////////////
-
-    FREE HTML5 TEMPLATE
-    DESIGNED & DEVELOPED by FreeHTML5.co
-
-    Website: 		http://freehtml5.co/
-    Email: 			info@freehtml5.co
-    Twitter: 		http://twitter.com/fh5co
-    Facebook: 		https://www.facebook.com/fh5co
-
-    //////////////////////////////////////////////////////
-     -->
-
-    <!-- Facebook and Twitter integration -->
     <meta property="og:title" content=""/>
     <meta property="og:image" content=""/>
     <meta property="og:url" content=""/>
@@ -341,23 +286,5 @@ $selectedEtudiant=$etudiant->selectParId($bdd);
 <script src="../../style/js/simplyCountdown.js"></script>
 <!-- Main -->
 <script src="../../style/js/main.js"></script>
-<script>
-    var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
-
-    // default example
-    simplyCountdown('.simply-countdown-one', {
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate()
-    });
-
-    //jQuery example
-    $('#simply-countdown-losange').simplyCountdown({
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate(),
-        enableUtc: false
-    });
-</script>
 </body>
 </html>

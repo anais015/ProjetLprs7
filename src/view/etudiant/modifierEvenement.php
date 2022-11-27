@@ -6,6 +6,8 @@ require_once "../../model/etudiant/Etudiant.php";
 require_once "../../model/Connexion.php";
 require_once "../../model/evenement/Evenement.php";
 
+if (!isset($_SESSION['etudiant'])) header('Location:../pageIntrouvable.php');
+
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();
 $nom = '';
@@ -44,7 +46,6 @@ if (isset($_POST['enregistrer'])) {
     $debut = $selectedEvent->getDebut();
     $fin = $selectedEvent->getFin();
 }
-
 ?>
 
 <!DOCTYPE HTML>

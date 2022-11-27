@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `administrateur`
     `id_administrateur` int (11) NOT NULL AUTO_INCREMENT,
     `nom` varchar(50) NOT NULL,
     `prenom` varchar (50) NOT NULL,
-    `email` varchar(50) NOT NULL,
+    `email` varchar(80) NOT NULL,
     `mot_de_passe` varchar(255) NOT NULL,
     PRIMARY KEY(`id_administrateur`)
     )ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -179,11 +179,13 @@ DROP TRIGGER IF EXISTS prob_entreprise_etudiant;
 DROP TRIGGER IF EXISTS prob_entreprise_etudiant2;
 DROP TRIGGER IF EXISTS prob_participer_etudiant;
 DROP TRIGGER IF EXISTS prob_postule_etudiant;
-
+DROP TRIGGER IF EXISTS empeche_duplique_rdv;
+DROP TRIGGER IF EXISTS empeche_duplique_rdv1;
 
 DELIMITER
 &&
-CREATE TRIGGER gestion_evenement_myBEFORE INSERTON evenementFOR EACH ROW
+CREATE TRIGGER gestion_evenement_my
+BEFORE INSERT ON evenement FOR EACH ROW
 BEGIN
 	IF date(new.debut) <> date (new.fin)
 	THEN SIGNAL SQLSTATE '45000'
@@ -221,12 +223,11 @@ END IF;
 END IF;
 END
 &&
-DELIMITER ;
-
 
 DELIMITER
 &&
-CREATE TRIGGER gestion_evenement_my2BEFORE UPDATEON evenementFOR EACH ROW
+CREATE TRIGGER gestion_evenement_my2
+BEFORE UPDATE ON evenement FOR EACH ROW
 BEGIN
 	IF old.valide
 	THEN SIGNAL SQLSTATE '45000'
@@ -267,12 +268,11 @@ END IF;
 END IF;
 END
 &&
-DELIMITER ;
-
 
 DELIMITER
 &&
-CREATE TRIGGER prob_entreprise_etudiantBEFORE UPDATEON evenementFOR EACH ROW
+CREATE TRIGGER prob_entreprise_etudiant
+BEFORE UPDATE ON evenement FOR EACH ROW
 BEGIN
 	IF old.ref_etudiant<>new.ref_etudiant
 	THEN SIGNAL SQLSTATE '45000'
@@ -296,14 +296,10 @@ END IF;
 END
 &&
 
-DELIMITER ;
-
-
-
-
 DELIMITER
 &&
-CREATE TRIGGER prob_entreprise_etudiant2BEFORE INSERTON evenementFOR EACH ROW
+CREATE TRIGGER prob_entreprise_etudiant2
+BEFORE INSERT ON evenement FOR EACH ROW
 BEGIN
 	IF new.ref_etudiant is not null and new.ref_entreprise is not null
 	THEN SIGNAL SQLSTATE '45000'
@@ -316,12 +312,11 @@ END IF;
 END IF;
 END
 &&
-DELIMITER ;
-
 
 DELIMITER
 &&
-CREATE TRIGGER prob_participer_etudiantBEFORE INSERTON participeFOR EACH ROW
+CREATE TRIGGER prob_participer_etudiant
+BEFORE INSERT ON participe FOR EACH ROW
 BEGIN
 	IF EXISTS (SELECT debut, fin FROM participe WHERE debut <= NEW.debut AND fin >= NEW.fin AND ref_etudiant=NEW.ref_etudiant)
 	THEN SIGNAL SQLSTATE '45000'
@@ -329,12 +324,11 @@ BEGIN
 END IF;
 END
 &&
-DELIMITER;
-
 
 DELIMITER
 &&
-CREATE TRIGGER prob_postule_etudiantBEFORE INSERTON postuleFOR EACH ROW
+CREATE TRIGGER prob_postule_etudiant
+BEFORE INSERT ON postule FOR EACH ROW
 BEGIN
 	IF EXISTS (SELECT ref_offre, ref_etudiant FROM postule WHERE ref_offre = NEW.ref_offre AND ref_etudiant = NEW.ref_etudiant)
 	THEN SIGNAL SQLSTATE '45000'
@@ -342,4 +336,27 @@ BEGIN
 END IF;
 END
 &&
-DELIMITER;
+
+DELIMITER
+&&
+CREATE TRIGGER empeche_duplique_rdv
+BEFORE INSERT ON rdv FOR EACH ROW
+BEGIN
+    IF EXISTS (SELECT ref_offre, ref_etudiant FROM rdv WHERE ref_offre = NEW.ref_offre AND ref_etudiant = NEW.ref_etudiant)
+	THEN SIGNAL SQLSTATE '45000'
+	SET MESSAGE_TEXT = 'rdv duplique';
+END IF;
+END
+&&
+
+DELIMITER
+&&
+CREATE TRIGGER empeche_duplique_rdv1
+    BEFORE UPDATE ON rdv FOR EACH ROW
+BEGIN
+    IF EXISTS (SELECT ref_offre, ref_etudiant FROM rdv WHERE ref_offre = NEW.ref_offre AND ref_etudiant = NEW.ref_etudiant)
+	THEN SIGNAL SQLSTATE '45000'
+	SET MESSAGE_TEXT = 'rdv duplique';
+END IF;
+END
+&&

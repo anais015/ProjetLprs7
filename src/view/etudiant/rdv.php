@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 require_once "../../model/bdd/Bdd.php";
 require_once "../../model/Utilisateur.php";
@@ -7,6 +6,8 @@ require_once "../../model/etudiant/Etudiant.php";
 require_once "../../model/Connexion.php";
 require_once "../../model/offre/Offre.php";
 require_once "../../model/rdv/Rdv.php";
+
+if (!isset($_SESSION['etudiant'])) header('Location:../pageIntrouvable.php');
 
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();

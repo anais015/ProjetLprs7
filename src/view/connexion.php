@@ -20,25 +20,6 @@ if(isset($_POST['selectIdentity'])) {
 }
 ?>
 
-        <!--<div class="container">
-            <form action="" method="post">
-                <label for="selectIdentity"><b>Vous êtes :</b></label>
-                <select name="selectIdentity" id="selectIdentity" required onchange="this.form.submit()">
-                    <option selected hidden disabled><?/*=$placeHolder;*/?></option>
-                    <option value="administrateur">Administrateur</option>
-                    <option value="entreprise">Entreprise</option>
-                    <option value="etudiant">Etudiant</option>
-                </select>
-            </form>
-            <form action='<?/*=$cible*/?>' method='POST'>
-                <label for='email'><b>Email</b></label>
-                <input type='email' placeholder='Email' name='email' required>
-
-                <label for='password'><b>Mot de passe</b></label>
-                <input type='password' placeholder='Password' name='password' required>
-
-                <input type='submit' name='connexion' id='connexion'>
-            </form>-->
 
 <!DOCTYPE HTML>
 <html>
@@ -50,20 +31,6 @@ if(isset($_POST['selectIdentity'])) {
     <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
     <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
     <meta name="author" content="freehtml5.co" />
-
-    <!--
-    //////////////////////////////////////////////////////
-
-    FREE HTML5 TEMPLATE
-    DESIGNED & DEVELOPED by FreeHTML5.co
-
-    Website: 		http://freehtml5.co/
-    Email: 			info@freehtml5.co
-    Twitter: 		http://twitter.com/fh5co
-    Facebook: 		https://www.facebook.com/fh5co
-
-    //////////////////////////////////////////////////////
-     -->
 
     <!-- Facebook and Twitter integration -->
     <meta property="og:title" content=""/>
@@ -201,7 +168,7 @@ if(isset($_POST['selectIdentity'])) {
                     <div class="row form-group">
                         <div class="col-md-12">
                             <form action="" method="post">
-                                <select name="selectIdentity" id="selectIdentity" class="form-control" required onchange="this.form.submit()">
+                                <select name="selectIdentity" id="selectIdentity" class="form-control" onchange="this.form.submit()" required="required">
                                     <option selected hidden disabled><?=$placeHolder;?></option>
                                     <option value="administrateur">Administrateur</option>
                                     <option value="entreprise">Entreprise</option>
@@ -216,13 +183,13 @@ if(isset($_POST['selectIdentity'])) {
                             <!-- <label for="subject">Subject</label> -->
                             <form action='<?=$cible?>' method='POST'>
 <!--                                    <label for='email'><b>Email</b></label>-->
-                                <input type='email' class="form-control" placeholder='Email' name='email' required>
+                                <input type='email' class="form-control" placeholder='Email' name='email' required='required'>
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-12">
 <!--                                    <label for='password'><b>Mot de passe</b></label>-->
-                                <input type='password' class="form-control" placeholder='Password' name='password' required>
+                                <input type='password' class="form-control" placeholder='Password' name='password' required='required'>
 
                         </div>
                     </div>

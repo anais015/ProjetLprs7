@@ -6,6 +6,8 @@ require_once "../../model/etudiant/Etudiant.php";
 require_once "../../model/Connexion.php";
 require_once "../../model/evenement/Evenement.php";
 
+if (!isset($_SESSION['etudiant'])) header('Location:../pageIntrouvable.php');
+
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();
 if (isset($_POST['enregistrer'])){
@@ -21,37 +23,6 @@ if (isset($_POST['enregistrer'])){
     else echo '<script>alert("Erreur")</script>';
 }
 ?>
-<!--
-<div class="container" id="alert"
-    <?php
-/*        if (!$erreur) echo 'style="display:none;"';
-        else echo 'style="display:block; background-color:#f8bdc1; text-align: center"';
-    */?>
-    <input type="hidden"> &#9888; Erreur.
-</div>
-<div class="container" id="alert"
-    <?php
-/*        if (!$organiser) echo 'style="display:none;"';
-        else echo 'style="display:block; background-color:#D3DEA5; text-align: center"';
-    */?>
-    <input type="hidden"> &#10003; Reussite.
-</div>
-<div  <?php /*if ($organiser) echo 'style="display:none;"';*/?>>
-    <form action='' method='POST'>
-        <label for='nom'><b>Nom de l'événement </b></label>
-        <input type='text' placeholder="Nom de l'événement" name='nom'  required>
-
-        <label for='description'><b>Description</b></label>
-        <input type="text" name='description' placeholder="Description" required>
-
-        <label for='debut'><b>Début</b></label>
-        <input type='datetime-local' placeholder='Heure de début' name='debut' required>
-
-        <label for='fin'><b>Fin</b></label>
-        <input type='datetime-local' placeholder='Heure de fin' name='fin' required>
-
-        <input type='submit' value="Enregistrer" name='enregistrer' id='enregistrer'>
-</div>-->
 
 <!DOCTYPE HTML>
 <html>
@@ -63,20 +34,6 @@ if (isset($_POST['enregistrer'])){
     <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
     <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
     <meta name="author" content="freehtml5.co" />
-
-    <!--
-    //////////////////////////////////////////////////////
-
-    FREE HTML5 TEMPLATE
-    DESIGNED & DEVELOPED by FreeHTML5.co
-
-    Website: 		http://freehtml5.co/
-    Email: 			info@freehtml5.co
-    Twitter: 		http://twitter.com/fh5co
-    Facebook: 		https://www.facebook.com/fh5co
-
-    //////////////////////////////////////////////////////
-     -->
 
     <!-- Facebook and Twitter integration -->
     <meta property="og:title" content=""/>
@@ -311,24 +268,7 @@ if (isset($_POST['enregistrer'])){
 <script src="../../style/js/simplyCountdown.js"></script>
 <!-- Main -->
 <script src="../../style/js/main.js"></script>
-<script>
-    var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
 
-    // default example
-    simplyCountdown('.simply-countdown-one', {
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate()
-    });
-
-    //jQuery example
-    $('#simply-countdown-losange').simplyCountdown({
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate(),
-        enableUtc: false
-    });
-</script>
 </body>
 </html>
 

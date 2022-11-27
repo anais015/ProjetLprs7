@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 require_once "../../model/bdd/Bdd.php";
 require_once "../../model/Utilisateur.php";
@@ -7,13 +6,14 @@ require_once "../../model/etudiant/Etudiant.php";
 require_once "../../model/Connexion.php";
 require_once "../../model/offre/Offre.php";
 
+if (!isset($_SESSION['etudiant'])) header('Location:../pageIntrouvable.php');
+
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();
 $erreur= false;
 $postule= false;
 $button= 'Postuler';
 $btn_style='';
-
 $tblisteOffres = '';
 
 $offre = new Offre(array('ref_etudiant' => $_SESSION['etudiant']['id_etudiant']));
@@ -29,19 +29,6 @@ if (is_array($check_postule)) {
     $button= 'Postuler';
     $btn_style='';
     }
-    /*$tblisteOffres .="<tr>
-                        <td>".$value['titre']."</td>
-                        <td>".$value['description']."</td>
-                        <td>".$value['nom_entreprise']."</td>
-                        <td>".$value['domaine']."</td>
-                        <td>".$value['nom_type']."</td>
-                        <td>".$value['rue_entreprise'].", ". $value['ville_entreprise'].", ". $value['cp_entreprise']."</td>
-                        <td>
-                            <form action='' method='POST'>
-                                <button name='postuler'".$btn_style." value='".$value['id_offre']."'>".$button."</button>
-                            </form>
-                        </td>
-                    </tr>";*/
     $tblisteOffres .='
         <div class="col-md-4">
             <div class="pricing__item">
@@ -59,7 +46,7 @@ if (is_array($check_postule)) {
                         <button class="pricing__feature btn-link">En savoir plus</button>
                     </ul>
                     <form action="" method="POST">
-                        <button type"submit" class="pricing__action" name="postuler"'.$btn_style.' value="'.$value['id_offre'].'">'.$button.'</button>
+                        <button type="submit" class="pricing__action" name="postuler"'.$btn_style.' value="'.$value['id_offre'].'">'.$button.'</button>
                     </form>
                 </div>
             </div>
@@ -292,23 +279,7 @@ if(isset($_POST['postuler'])){
 <script src="../../style/js/simplyCountdown.js"></script>
 <!-- Main -->
 <script src="../../style/js/main.js"></script>
-<script>
-    var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
 
-    // default example
-    simplyCountdown('.simply-countdown-one', {
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate()
-    });
-
-    //jQuery example
-    $('#simply-countdown-losange').simplyCountdown({
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate(),
-        enableUtc: false
-    });
 </script>
 </body>
 </html>

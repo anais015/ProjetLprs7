@@ -1,10 +1,13 @@
 <?php
 session_start();
+
 require_once "../../model/bdd/Bdd.php";
 require_once "../../model/Utilisateur.php";
 require_once "../../model/etudiant/Etudiant.php";
 require_once "../../model/Connexion.php";
 require_once "../../model/evenement/Evenement.php";
+
+if (!isset($_SESSION['etudiant'])) header('Location:../pageIntrouvable.php');
 
 $cnx = new Bdd();
 $bdd = $cnx->getBdd();
@@ -30,7 +33,7 @@ foreach ($historique as $value){
                         <td>".$heuredebut."</td>
                         <td>".$heurefin."</td>
                         <td>
-                        <form action='../../traitement/evenement/traitementSuppression.php' method='post'>
+                        <form action='../../traitement/description/traitementSuppression.php' method='post'>
                             <button class='btn btn-link' name='details' value='".$value['id_evenement']."'>Détail</button>
                         </form>
                         </td>
@@ -38,7 +41,7 @@ foreach ($historique as $value){
 
 }
 $listParticiper= $event->listeEventParticipe($bdd);
-if (!$listParticiper) $tbParticiper= "<tr><td colspan='7'>Vous n'avez aucun evenement à participer</td></td>";
+if (!$listParticiper) $tbParticiper= "<tr><td colspan='7'>Vous n'avez aucun description à participer</td></td>";
 else {
     foreach ($listParticiper as $value){
         $date=explode(" ",$value['debut'])[0];
@@ -48,20 +51,19 @@ else {
         $heuredebut=date_format(date_create($heuredebut),"H:i");
         $heurefin=date_format(date_create($heurefin),"H:i");
         $tbParticiper .="<tr>
-                            <td>".$value['nom_event']."</td>
+                            <form  action='fiche_evenement.php' method='get'>
+                                <td><button class='btn btn-link' name='ref_event' value='".$value['ref_evenement']."'>".$value['nom_event']."</button></td>                            
+                            </form>
                             <td>".$date."</td>
                             <td>".$heuredebut."</td>
                             <td>".$heurefin."</td>
                             <td>".$value['nom']."</td>
-                            <td>
-                                <form action='' method='post'>
-                                    <button class='btn btn-outline-secondary' name='desinscrire' value='".$value['ref_evenement']."'>Se désinscrire</button>
-                                </form>
-                            </td>
+                            <form action='' method='post'>
+                                <td><button class='btn btn-outline-secondary' name='desinscrire' value='".$value['ref_evenement']."'>Se désinscrire</button></td>
+                            </form>
                     </tr>";
     }
 }
-
 
 $listOrganise= $event->listEventOrganise($bdd);
 foreach ($listOrganise as $value){
@@ -81,7 +83,9 @@ foreach ($listOrganise as $value){
     $heuredebut=date_format(date_create($heuredebut),"H:i");
     $heurefin=date_format(date_create($heurefin),"H:i");
     $tbOrganiser .="<tr>
-                        <td>".$value['nom_event']."</td>
+                        <form  action='fiche_evenement.php' method='get'>
+                            <td><button class='btn btn-link' name='ref_event' value='".$value['id_evenement']."'>".$value['nom_event']."</button></td>                            
+                        </form>
                         <td>".$date."</td>
                         <td>".$heuredebut."</td>
                         <td>".$heurefin."</td>
@@ -91,7 +95,7 @@ foreach ($listOrganise as $value){
                             <form action='modifierEvenement.php' method='GET'>
                                 <button class='btn btn-outline-secondary' name='modifier' value='".$value['id_evenement']."' ".$hidden.">Modifier</button>
                             </form>
-                            <form action='../../traitement/evenement/traitementSuppression.php' method='POST'>
+                            <form action='../../traitement/description/traitementSuppression.php' method='POST'>
                                 <button class='btn btn-outline-secondary' name='annuler' value='".$value['id_evenement']."' ".$hidden.">Annuler</button>
                             </form>
                         </td>
