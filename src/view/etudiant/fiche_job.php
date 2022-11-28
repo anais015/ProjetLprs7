@@ -19,7 +19,7 @@ if (isset($_GET['ref_offre'])){
     $offre = new Offre(array(
         'id'=> $_GET['ref_offre']
     ));
-    var_dump($offre->exist($bdd,$offre->getId()));
+//    var_dump($offre->exist($bdd,$offre->getId()));
     if ($offre->exist($bdd,$offre->getId())) {
         $detail=$offre->detailOffre($bdd);
         //var_dump($detail);

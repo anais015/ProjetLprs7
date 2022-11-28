@@ -43,7 +43,9 @@ if (is_array($check_postule)) {
                         <li class="pricing__feature">Adresse : '.$value['rue_entreprise'].', '. $value['ville_entreprise'].', '. $value['cp_entreprise'].'</li>
                         <li class="pricing__feature">Domaine : '.$value['domaine'].'</li>
                         <li class="pricing__feature">Contrat : '.$value['nom_type'].'</li>
-                        <button class="pricing__feature btn-link">En savoir plus</button>
+                        <form  action="fiche_job.php" method="get">
+                            <td><button class="pricing__feature btn-link" name="ref_offre" value="'.$value['id_offre'].'">En savoir plus</button></td>                            
+                        </form>
                     </ul>
                     <form action="" method="POST">
                         <button type="submit" class="pricing__action" name="postuler"'.$btn_style.' value="'.$value['id_offre'].'">'.$button.'</button>

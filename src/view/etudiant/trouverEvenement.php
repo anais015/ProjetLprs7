@@ -17,7 +17,6 @@ $salle = '';
 $event = new Evenement(array('ref_etudiant' => $_SESSION['etudiant']['id_etudiant']));
 $listeRechercheEvent= $event->listRechercheEvent($bdd);
 $etudiant=new Etudiant(array('id'=>$_SESSION['etudiant']['id_etudiant']));
-var_dump($listeRechercheEvent);
 foreach ($listeRechercheEvent as $value){
     $check_inscription_evenement=$etudiant->checkInscrireEvenement($bdd,$value['id_evenement']);
     if (is_array($check_inscription_evenement)) {
@@ -58,7 +57,9 @@ foreach ($listeRechercheEvent as $value){
                         <li class="pricing__feature">Date: '.$date.'</li>
                         <li class="pricing__feature">De '.$heurre_debut.' à '. $heurre_fin.'</li>
                         <li class="pricing__feature">Lieux : '.$value['nom'].'</li>
-                        <button class="pricing__feature btn-link">En savoir plus</button>
+                        <form  action="fiche_evenement.php" method="get">
+                            <td><button class="pricing__feature btn-link" name="ref_event" value="'.$value['id_evenement'].'">En savoir plus</button></td>                            
+                        </form>
                     </ul>
                     <form action="" method="POST">
                         <button type="submit" class="pricing__action" name="participer"'.$btn_style.' value="'.$value['id_evenement'].'">'.$button.'</button>
