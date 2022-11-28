@@ -47,7 +47,7 @@ class Administrateur extends Utilisateur
                 $conn = new Connexion(array('refadministrateur'=>$res['id_administrateur']));
                 $conn->ajoutConnexionAdministrateur($bdd);
                 return $res;
-            }else return false;
-        }else return false;
+            }else return $res;
+        }else return $res;
     }
 }

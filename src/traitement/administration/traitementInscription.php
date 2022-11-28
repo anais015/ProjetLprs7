@@ -8,22 +8,20 @@ $erreur=false;
 $bdd = new Bdd();
 
 if(isset($_POST['inscription'])) {
-    $passpasword = $_POST['password'];
-    $hashed_password = password_hash($passpasword, PASSWORD_DEFAULT);
 
     $administrateur = new Administrateur(array(
         'nom' => $_POST['nom'],
         'prenom' => $_POST['prenom'],
         'email' => $_POST['email'],
-        'mot_de_passe' => $hashed_password
+        'mot_de_passe' => $_POST['password']
     ));
 
     $ins = $administrateur->inscription($bdd);
     echo "Inscription effectuée !";
-    //header('Location: ../../../index.php');
+    header('Location: ../../../index.php');
 
 } else {
     echo "la valeur n'existe pas ! ";
-    //header('Location: ../../view/inscription.php');
+    header('Location: ../../view/inscription.php');
 }
 ?>

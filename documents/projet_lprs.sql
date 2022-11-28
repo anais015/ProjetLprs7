@@ -360,3 +360,5 @@ BEGIN
 END IF;
 END
 &&
+
+ALTER TABLE `offre` CHANGE `accepte` `accepte` TINYINT(1) NOT NULL DEFAULT '0';

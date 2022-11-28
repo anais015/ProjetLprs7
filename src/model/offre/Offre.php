@@ -8,7 +8,7 @@ class Offre
     private ?string $domaine;
     private ?bool $accepte;
     private ?int $refType;
-    private ?int $ref_entreprise;
+    private $ref_entreprise;
     private ?int $ref_etudiant;
 
     public function __construct(array $donnees)
@@ -34,16 +34,16 @@ class Offre
         return $req->fetchall();
     }
 
-    public function entrepriseCreerOffre($bdd){
-        $sql='INSERT INTO offre (titre, description, domaine, /*refType,*/ ref_entreprise) 
-        VALUES :titre, :description, :domaine, /*:ref_type,*/ :ref_entreprise';
+    public function entrepriseCreerOffre(PDO $bdd){
+        $sql='INSERT INTO offre (titre, description, domaine, ref_type, ref_entreprise) 
+        VALUES (:titre, :description, :domaine, :refType, :ref_entreprise)';
         $req = $bdd->prepare($sql);
         $execute=$req->execute(array(
             'titre' => $this->titre,
             'description' => $this->description,
+            'refType'=>$this->refType,
             'domaine' =>$this->domaine,
-            //'refType' => $this->refType,
-            'ref_entreprise'=> $this->ref_entreprise
+            'ref_entreprise'=>$this->ref_entreprise
         ));
     }
 
@@ -107,12 +107,12 @@ class Offre
         $this->refType = $refType;
     }
 
-    public function getRefEntreprise(): ?int
+    public function getRef_entreprise(): ?int
     {
         return $this->ref_entreprise;
     }
 
-    public function setRefEntreprise($ref_entreprise): void
+    public function setRef_entreprise($ref_entreprise): void
     {
         $this->ref_entreprise = $ref_entreprise;
     }

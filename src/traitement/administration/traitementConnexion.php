@@ -21,8 +21,7 @@ if(isset($_POST['connexion'])) {
 
     if ($connexion) {
         $_SESSION['administrateur']=$connexion;
-        //header("location:../../view/etudiant/accueil.php");
+        header("location:../../view/administration/vueadmin.php");
     } else $erreur=true;
 }
-
 ?>
