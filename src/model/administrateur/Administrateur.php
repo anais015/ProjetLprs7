@@ -43,11 +43,11 @@ class Administrateur extends Utilisateur
         $res=$req->fetch();
 
         if (is_array($res)){
-            if ($mdpsaisi == $res['mot_de_passe']){
+            if (password_verify($mdpsaisi, $res['mot_de_passe'])){
                 $conn = new Connexion(array('refadministrateur'=>$res['id_administrateur']));
                 $conn->ajoutConnexionAdministrateur($bdd);
                 return $res;
-            }else return false;
-        }else return false;
+            }else return $res;
+        }else return $res;
     }
 }

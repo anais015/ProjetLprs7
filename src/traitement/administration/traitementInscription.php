@@ -1,25 +1,27 @@
 <?php
-require_once "../../model/bdd/Bdd.php";
 require_once "../../model/Utilisateur.php";
+require_once "../../model/bdd/Bdd.php";
 require_once "../../model/administrateur/Administrateur.php";
 
 $erreur=false;
 
-$cnx = new Bdd();
-$bdd = $cnx->getBdd();
+$bdd = new Bdd();
 
 if(isset($_POST['inscription'])) {
-    $admin = new Administrateur(array(
+
+    $administrateur = new Administrateur(array(
         'nom' => $_POST['nom'],
         'prenom' => $_POST['prenom'],
         'email' => $_POST['email'],
-        'mot_de_passe' => $_POST['password'],
-        'domaine_etude' => $_POST['domaine']
+        'mot_de_passe' => $_POST['password']
     ));
-  var_dump($admin);
-    $inscription=$admin->inscription($bdd);
-    var_dump($inscription);
-    if (!$inscription) $erreur=true;
-    var_dump($erreur);
+
+    $ins = $administrateur->inscription($bdd);
+    echo "Inscription effectuée !";
+    header('Location: ../../../index.php');
+
+} else {
+    echo "la valeur n'existe pas ! ";
+    header('Location: ../../view/inscription.php');
 }
 ?>
