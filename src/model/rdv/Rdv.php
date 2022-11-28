@@ -34,11 +34,10 @@ class Rdv
     }
 
     public function creation($bdd){
-        $sql='INSERT INTO rdv (date, heure, lieux) VALUES :date, :heure,:lieux';
+        $sql='INSERT INTO rdv (horaire, lieux) VALUES :horaire,:lieux';
         $req = $bdd->prepare($sql);
         $execute=$req->execute(array(
-            'date' => $this->date,
-            'heure' => $this->heure,
+            'horaire' => $this->horaire,
             'lieux' =>$this->lieux
         ));
     }
@@ -106,14 +105,11 @@ class Rdv
         $sql='SELECT e.nom_entreprise, o.titre, o.description, o.domaine,
               t.nom_type, r.id_rdv, r.horaire, r.lieux, r.accepte
               FROM entreprise AS e
-              JOIN offre AS o
-              ON e.id_entreprise = o.ref_entreprise
-              JOIN type AS t
-              ON o.ref_type = t.id_type
-              LEFT JOIN rdv AS r
-              ON o.id_offre = r.ref_offre
-              WHERE r.ref_etudiant=:refEtudiant AND r.horaire >= NOW() AND r.accepte IS NOT FALSE
-              ORDER BY r.horaire ';
+              JOIN offre AS o ON e.id_entreprise = o.ref_entreprise
+              JOIN type AS t ON o.ref_type = t.id_type
+              LEFT JOIN rdv AS r ON o.id_offre = r.ref_offre
+              WHERE r.ref_etudiant=:refEtudiant AND r.horaire >= NOW()
+              ORDER BY r.horaire desc ';
         $request = $bdd->prepare($sql);
         $execute=$request->execute(array(
             'refEtudiant'=>$this->refEtudiant
@@ -129,13 +125,10 @@ class Rdv
         $sql='SELECT e.nom_entreprise, o.titre, o.description, o.domaine,
               t.nom_type, r.id_rdv, r.horaire, r.lieux, r.accepte
               FROM entreprise AS e
-              JOIN offre AS o
-              ON e.id_entreprise = o.ref_entreprise
-              JOIN type AS t
-              ON o.ref_type = t.id_type
-              LEFT JOIN rdv AS r
-              ON o.id_offre = r.ref_offre
-              WHERE r.ref_etudiant=:refEtudiant AND r.horaire < NOW()';
+              JOIN offre AS o ON e.id_entreprise = o.ref_entreprise
+              JOIN type AS t ON o.ref_type = t.id_type
+              LEFT JOIN rdv AS r ON o.id_offre = r.ref_offre
+              WHERE r.ref_etudiant=:refEtudiant AND r.accepte = 1 AND r.horaire < NOW()';
         $request = $bdd->prepare($sql);
         $execute=$request->execute(array(
             'refEtudiant'=>$this->refEtudiant
@@ -143,9 +136,8 @@ class Rdv
         if ($execute){
             $result = $request->fetchAll(PDO::FETCH_ASSOC);
             if(is_array($result)) return $result;
-            else return false;
         }
-        else return false;
+        return false;
     }
 
     public function accepterRdv (PDO $bdd){
