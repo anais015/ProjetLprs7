@@ -101,8 +101,54 @@ session_start();
         </div>
     </nav>
 
-<h2> Page des événements </h2>
-<h4> ... même si elle est moche ! &#128521;</h4>
+    <aside id="fh5co-hero">
+        <div class="flexslider">
+            <ul class="slides">
+                <li style="background-image: url(../../../src/style/image-entreprise/vecteezy_hand-shaking-which-print-screen-on-wooden-cube-block-in_6969586_600.jpg);">
+                    <div class="overlay-gradient"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center slider-text">
+                                <div class="slider-text-inner">
+                                    <h1>Bla bla ...</h1>
+                                   <!-- <h2>Bla bla ...<a href="../offre/creerOffre.php" target="_blank">Créer des offres d'emplois</a></h2>-->
+                                    <p><a class="btn btn-primary btn-lg" href="../offre/creerOffre.php">Créer des offres d'emplois</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li style="background-image: url(../../../src/style/image-entreprise/salon.webp);">
+                    <div class="overlay-gradient"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center slider-text">
+                                <div class="slider-text-inner">
+                                    <h1>Bla bla ...</h1>
+                                    <h2>Bla bla ...<a href="../evenement/creerEventEntreprise.php" target="_blank">Créer un evenement</a></h2>
+                                    <p><a class="btn btn-primary btn-lg btn-learn" href="../evenement/creerEventEntreprise.php">Création d'événement</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li style="background-image: url(../../../src/style/image-entreprise/rdv.webp);">
+                    <div class="overlay-gradient"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center slider-text">
+                                <div class="slider-text-inner">
+                                    <h1>Bla bla ...</h1>
+                                    <h2>Bla bla ... <a href="organiserRdv.php" target="_blank">RDV entreprise-étudiant</a></h2>
+                                    <p><a class="btn btn-primary btn-lg btn-learn" href="organiserRdv.php">Création RDV</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
 
     <!-- Partie du bas -->
 
