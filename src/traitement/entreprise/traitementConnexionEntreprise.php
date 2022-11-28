@@ -16,7 +16,6 @@ if(isset($_POST['connexion'])) {
     ));
 
     $co = $entreprise->connexion($bdd, $_POST['password']);
-
     if ($co) {
 
         $_SESSION['entreprise'] = $co;
@@ -25,7 +24,7 @@ if(isset($_POST['connexion'])) {
 
     } else {
         echo "Email ou Mot de passe incorrecte, réessayer !";
-        header('Location: ../../view/connexion.php');
+        //header('Location: ../../view/connexion.php');
     }
 }
 

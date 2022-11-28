@@ -11,19 +11,25 @@ $connexion = new Bdd();
 $bdd = $connexion->getBdd();
 
 if(isset($_POST['creerEvenement'])) {
-
     $event = new Evenement(array(
-        'nom_event'=> $_POST['nom_event'],
+        'nom'=> $_POST['nom_event'],
         'description'=> $_POST['description'],
         'debut'=> $_POST['debut'],
         'fin'=> $_POST['fin'],
-        'ref_entreprise'=>$_SESSION['id_entreprise']
+        'ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']
     ));
-
     $eve = $event->entrepriseCreerEvenement($bdd);
-
-} else {
-    echo "la valeur n'existe pas ! ";
+    if($eve){
+        echo "<script>
+        window.location.href = \"../../view/entreprise/creerEventEntreprise.php\";
+        alert(\"Evénement enregistré\")
+        </script>";
+    }
+    else{
+        echo "<script>
+        window.location.href = \"../../view/entreprise/creerEventEntreprise.php\";
+        alert(\"Erreur\")
+        </script>";
+    }
 }
-
 ?>

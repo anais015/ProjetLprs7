@@ -22,7 +22,7 @@ if(isset($_POST['connexion'])) {
 
     if ($connexion){
         $_SESSION['etudiant']=$connexion;
-        sleep(2     );
+        sleep(2);
         echo '
                 <script>
                     window.location.href = "../../view/etudiant/accueil.php"; 
