@@ -6,7 +6,7 @@ if(isset($_POST['selectIdentity'])) {
         $placeHolder = 'Administrateur';
         $table .= "
                 <div class='row form-group'>
-				<form action='../traitement/administration/inscriptionadmin.php' method='POST'>
+				<form action='../traitement/administration/traitementInscription.php' method='POST'>
 				<div class='col-md-6'>
 					<input type='text' class='form-control' placeholder='Nom' name='nom'  required='required'>
 				</div>
@@ -123,7 +123,7 @@ if(isset($_POST['selectIdentity'])) {
 ?>
 
 <!DOCTYPE HTML>
-<html>
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

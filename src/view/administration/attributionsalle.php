@@ -125,7 +125,6 @@ if (count($pendingevents)>=1){
     </nav>
     <a href="vueadmin.php">Retour</a>
     <?=$eventlist?>
-    <?=$page?>
 
     <footer id="fh5co-footer" role="contentinfo" style="background-image: url(../../../src/style/images/img_bg_4.jpg);">
         <div class="overlay"></div>

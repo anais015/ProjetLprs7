@@ -10,7 +10,7 @@ $pendingaccounts = $etudiant->getPendingAccount($bdd) + $entreprise->getPendingA
 if (count($pendingaccounts)>=1){
     $page = "<b>Liste des comptes en attentes</b>";
     foreach ($pendingaccounts as $account) {
-        $html = "<div style='background-color: lightgray'><h3>".$account['nom']."</h3><br><p>".$account['description']."</p></div>";
+        $html = "<div style='background-color: lightgray'><h3>".$account['nom']."</h3><br><p>".$account['prenom']."</p></div>";
         $page .= $html;
     }
 }else{
