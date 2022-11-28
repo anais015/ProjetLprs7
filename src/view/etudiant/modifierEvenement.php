@@ -17,15 +17,16 @@ $fin = '';
 $id = '';
 $hidden = '';
 $modifiedEvent = false;
-
 if (isset($_GET['modifier'])) {
     $event = new Evenement(array('id' => $_GET['modifier']));
     $selectedEvent = $event->selectParId($bdd);
-    $id = $selectedEvent->getId();
-    $nom = $selectedEvent->getNom();
-    $description = $selectedEvent->getDescription();
-    $debut = $selectedEvent->getDebut();
-    $fin = $selectedEvent->getFin();
+    if (is_object($selectedEvent)){
+        $id = $selectedEvent->getId();
+        $nom = $selectedEvent->getNom();
+        $description = $selectedEvent->getDescription();
+        $debut = $selectedEvent->getDebut();
+        $fin = $selectedEvent->getFin();
+    } else header('Location:../pageIntrouvable.php');
 }
 
 if (isset($_POST['enregistrer'])) {
@@ -40,11 +41,13 @@ if (isset($_POST['enregistrer'])) {
     if ($modifiedEvent) echo '<script>alert("Evénement modifié")</script>';
     else echo '<script>alert("Erreur")</script>';
     $selectedEvent = $event->selectParId($bdd);
-    $id = $selectedEvent->getId();
-    $nom = $selectedEvent->getNom();
-    $description = $selectedEvent->getDescription();
-    $debut = $selectedEvent->getDebut();
-    $fin = $selectedEvent->getFin();
+    if (is_object($selectedEvent)){
+        $id = $selectedEvent->getId();
+        $nom = $selectedEvent->getNom();
+        $description = $selectedEvent->getDescription();
+        $debut = $selectedEvent->getDebut();
+        $fin = $selectedEvent->getFin();
+    } else  header('Location:../pageIntrouvable.php');
 }
 ?>
 
@@ -58,21 +61,7 @@ if (isset($_POST['enregistrer'])) {
     <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
     <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
     <meta name="author" content="freehtml5.co" />
-
-    <!--
-    //////////////////////////////////////////////////////
-
-    FREE HTML5 TEMPLATE
-    DESIGNED & DEVELOPED by FreeHTML5.co
-
-    Website: 		http://freehtml5.co/
-    Email: 			info@freehtml5.co
-    Twitter: 		http://twitter.com/fh5co
-    Facebook: 		https://www.facebook.com/fh5co
-
-    //////////////////////////////////////////////////////
-     -->
-
+x
     <!-- Facebook and Twitter integration -->
     <meta property="og:title" content=""/>
     <meta property="og:image" content=""/>
