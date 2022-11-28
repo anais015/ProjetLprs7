@@ -8,7 +8,7 @@ $erreur=false;
 $bdd = new Bdd();
 
 if(isset($_POST['inscription'])) {
-    $passpasword = $_POST['mot_de_passe'];
+    $passpasword = $_POST['password'];
     $hashed_password = password_hash($passpasword, PASSWORD_DEFAULT);
 
     $administrateur = new Administrateur(array(
