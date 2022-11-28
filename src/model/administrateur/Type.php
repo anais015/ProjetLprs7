@@ -32,6 +32,13 @@ class Type
         ));
     }
 
+    public function deleteType(BDD $bdd){
+        $req = $bdd->getBdd()->prepare('DELETE FROM type WHERE id_type=:id');
+        $req->execute(array(
+            "id"=>$this->getIdtype()
+        ));
+    }
+
     /**
      * @return mixed
      */

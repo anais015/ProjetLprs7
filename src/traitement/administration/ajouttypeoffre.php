@@ -6,3 +6,4 @@ $typeoffre = new Type(array(
     'nom'=>$_POST['nom']
 ));
 $typeoffre->ajoutType($bdd);
+header("Location: ../../view/administration/gestiontypeoffre.php");

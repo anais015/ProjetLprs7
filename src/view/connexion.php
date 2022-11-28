@@ -4,7 +4,7 @@ $placeHolder='Vous êtes';
 if(isset($_POST['selectIdentity'])) {
     if ($_POST['selectIdentity'] == 'administrateur') {
         $placeHolder = 'Administrateur';
-        $cible .="";
+        $cible .="../traitement/administration/connexionadministrateur.php";
 
     }
     if ($_POST['selectIdentity'] == 'entreprise') {

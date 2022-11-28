@@ -78,7 +78,7 @@ class  Connexion
     }
 
     public function ajoutConnexionAdministrateur($bdd){
-        $req=$bdd->prepare('INSERT INTO connexion(date, heure, ref_administrateur) VALUES (CURDATE(),CURTIME(),:refadministrateur)');
+        $req=$bdd->getBdd()->prepare("INSERT INTO connexion(date, heure, ref_administrateur) VALUES (CURDATE(),CURTIME(),:refadministrateur)");
         $req->execute(array(
             "refadministrateur"=>$this->getRefadministrateur()
         ));

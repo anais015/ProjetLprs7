@@ -7,7 +7,15 @@ $typesoffre = $typeoffre->getAllType($bdd);
 $page = "";
 $table = "<table><thead><tr><th>ID</th><th>Nom</th></tr></thead><tbody>";
 foreach ($typesoffre as $type){
-    $table .= "<tr><td>".$type['id_type']."</td><td>".$type['nom']."</td>";
+    $table .= "<tr>
+                <td>".$type['id_type']."</td>
+                <td>".$type['nom']."</td>
+                <td>
+                <form action='../../traitement/administration/supprimertypeoffre.php' method='post'>
+                    <input hidden name='idtype' value='".$type['id_type']."'>
+                    <button type='submit'>Supprimer</button>
+                </form>
+                </td>";
 }
 $table .= "</tbody></table>";
 ?>

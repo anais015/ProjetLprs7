@@ -5,16 +5,15 @@ $bdd = new Bdd();
 $salle = new Salle(array());
 $salles = $salle->getAllSalle($bdd);
 $page = "";
-$table = "<table><thead><tr><th>ID</th><th>Nom</th><th>Capacité</th></tr></thead><tbody>";
+$table = "<table><thead><tr><th>ID</th><th>Nom</th><th>Capacité</th><th>Supprimer</th></tr></thead><tbody>";
 foreach ($salles as $salle){
-    $table .= "<tr><td>".$salle['idsalle']."</td><td>".$salle['nom']."</td><td>".$salle['nombre_place']."</td>";
+    $table .= "<tr><td>".$salle['id_salle']."</td><td>".$salle['nom']."</td><td>".$salle['nombre_place']."</td><td><form action='../../traitement/administration/supprimersalle.php' method='post'><input hidden name='idsalle' value='".$salle['id_salle']."'><button type='submit'>Supprimer</button></form></td>";
 }
 $table .= "</tbody></table>";
 ?>
 
 <html lang="fr">
 <head>
-    <title>Gestion Type Offre</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
     <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -47,6 +46,7 @@ $table .= "</tbody></table>";
     <link rel="stylesheet" href="../../../src/style/css/style.css">
 
 
+    <title>Gestion Salle</title>
 </head>
 <body>
 <div class="fh5co-loader"></div>
