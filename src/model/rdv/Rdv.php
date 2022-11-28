@@ -102,7 +102,7 @@ class Rdv
     }
 
     public function listeRdv (PDO $bdd){
-        $sql='SELECT e.nom_entreprise, o.titre, o.description, o.domaine,
+        $sql='SELECT o.id_offre, e.nom_entreprise, o.titre, o.description, o.domaine,
               t.nom_type, r.id_rdv, r.horaire, r.lieux, r.accepte
               FROM entreprise AS e
               JOIN offre AS o ON e.id_entreprise = o.ref_entreprise
@@ -122,7 +122,7 @@ class Rdv
         else return false;
     }
     public function historiqueRdv (PDO $bdd){
-        $sql='SELECT e.nom_entreprise, o.titre, o.description, o.domaine,
+        $sql='SELECT o.id_offre, e.nom_entreprise, o.titre, o.description, o.domaine,
               t.nom_type, r.id_rdv, r.horaire, r.lieux, r.accepte
               FROM entreprise AS e
               JOIN offre AS o ON e.id_entreprise = o.ref_entreprise
