@@ -87,6 +87,7 @@
                                         <li><a href="profil.php">Profil</a></li>
                                         <li><a href="creerOffre.php">Création d'offre d'emplois</a></li>
                                         <li><a href="creerEventEntreprise.php">Création d'événements</a></li>
+                                        <li><a href="listeEventEntreprise.php">Liste d'événements</a></li>
                                         <li><a href="organiserRdv.php">RDV entreprise-étudiant</a></li>
                                     </ul>
                                 </li>
@@ -130,6 +131,7 @@
                                 <div class="col-md-12">
                                     <label for='debut'><b>Date et heure de début :</b></label>
                                     <input type='datetime-local' class="form-control" placeholder='début' name='debut' required>
+                                    <small>L'événement ne peut commencer qu'à partir de 18h de Lundi à Vendredi</small>
                                 </div>
                             </div>
 
@@ -137,6 +139,7 @@
                                 <div class="col-md-12">
                                     <label for='fin'><b>Date et heure de fin : </b></label>
                                     <input type='datetime-local' class="form-control" placeholder='fin' name='fin' required>
+                                    <small>L'événement finit le plus tard à 23h</small>
                                 </div>
                             </div>
 

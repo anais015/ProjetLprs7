@@ -84,6 +84,8 @@
                                         <li><a href="profil.php">Profil</a></li>
                                         <li><a href="creerOffre.php">Création d'offre d'emplois</a></li>
                                         <li><a href="creerEventEntreprise.php">Création d'événements</a></li>
+                                        <li><a href="listeEventEntreprise.php">Liste d'événements</a></li>
+
                                         <li><a href="organiserRdv.php">RDV entreprise-étudiant</a></li>
                                     </ul>
                                 </li>
