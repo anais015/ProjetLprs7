@@ -27,8 +27,10 @@ foreach ($historique as $value){
     $heurefin=explode(" ",$value['fin'])[1];
     $heuredebut=date_format(date_create($heuredebut),"H:i");
     $heurefin=date_format(date_create($heurefin),"H:i");
-     $tbHistorique .="<tr>
-                        <td>".$value['nom']."</td>
+    $tbHistorique .="<tr>
+                        <form  action='fiche_evenement.php' method='get'>
+                            <td><button class='btn btn-link' name='ref_event' value='".$value['id_evenement']."'>".$value['nom_event']."</button></td>                            
+                        </form>
                         <td>".$date."</td>
                         <td>".$heuredebut."</td>
                         <td>".$heurefin."</td>
@@ -165,24 +167,6 @@ if(isset($_POST['desinscrire'])){
     <script src="../../style/js/simplyCountdown.js"></script>
     <!-- Main -->
     <script src="../../style/js/main.js"></script>
-    <script>
-        var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
-
-        // default example
-        simplyCountdown('.simply-countdown-one', {
-            year: d.getFullYear(),
-            month: d.getMonth() + 1,
-            day: d.getDate()
-        });
-
-        //jQuery example
-        $('#simply-countdown-losange').simplyCountdown({
-            year: d.getFullYear(),
-            month: d.getMonth() + 1,
-            day: d.getDate(),
-            enableUtc: false
-        });
-    </script>
     <script>
             $(document).ready(function () {
                 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
