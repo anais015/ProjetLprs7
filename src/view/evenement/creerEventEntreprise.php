@@ -11,33 +11,33 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400" rel="stylesheet">
 
         <!-- Animate.css -->
-        <link rel="stylesheet" href="../../../src/style/css/animate.css">
+        <link rel="stylesheet" href="../../style/css/animate.css">
         <!-- Icomoon Icon Fonts-->
-        <link rel="stylesheet" href="../../../src/style/css/icomoon.css">
+        <link rel="stylesheet" href="../../style/css/icomoon.css">
         <!-- Bootstrap  -->
-        <link rel="stylesheet" href="../../../src/style/css/bootstrap.css">
+        <link rel="stylesheet" href="../../style/css/bootstrap.css">
 
         <!-- Magnific Popup -->
-        <link rel="stylesheet" href="../../../src/style/css/magnific-popup.css">
+        <link rel="stylesheet" href="../../style/css/magnific-popup.css">
 
         <!-- Owl Carousel  -->
-        <link rel="stylesheet" href="../../../src/style/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="../../../src/style/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="../../style/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="../../style/css/owl.theme.default.min.css">
 
         <!-- Flexslider  -->
-        <link rel="stylesheet" href="../../../src/style/css/flexslider.css">
+        <link rel="stylesheet" href="../../style/css/flexslider.css">
 
         <!-- Pricing -->
-        <link rel="stylesheet" href="../../../src/style/css/pricing.css">
+        <link rel="stylesheet" href="../../style/css/pricing.css">
 
         <!-- Theme style  -->
-        <link rel="stylesheet" href="../../../src/style/css/style.css">
+        <link rel="stylesheet" href="../../style/css/style.css">
 
         <!-- Modernizr JS -->
-        <script src="../../../src/style/js/modernizr-2.6.2.min.js"></script>
+        <script src="../../style/js/modernizr-2.6.2.min.js"></script>
         <!-- FOR IE9 below -->
         <!--[if lt IE 9]>
-        <script src="../../../src/style/js/respond.min.js"></script>
+        <script src="../../style/js/respond.min.js"></script>
         <![endif]-->
     </head>
     <body>
@@ -84,10 +84,10 @@
                                 <li class="has-dropdown">
                                     <a href="#">Partie Entreprise</a>
                                     <ul class="dropdown">
-                                        <li><a href="profil.php">Profil</a></li>
-                                        <li><a href="creerOffre.php">Création d'offre d'emplois</a></li>
+                                        <li><a href="../entreprise/profil.php">Profil</a></li>
+                                        <li><a href="../offre/creerOffre.php">Création d'offre d'emplois</a></li>
                                         <li><a href="creerEventEntreprise.php">Création d'événements</a></li>
-                                        <li><a href="organiserRdv.php">RDV entreprise-étudiant</a></li>
+                                        <li><a href="../entreprise/organiserRdv.php">RDV entreprise-étudiant</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Vie de l'établissement</a></li>
@@ -95,7 +95,7 @@
                                 <li><a href="#">Erasmus+</a></li>
 
                                 <li><a href="../contact.php">Contact</a></li>
-                                <li class="btn-cta"><a href="../../../src/view/entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
+                                <li class="btn-cta"><a href="../entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                             <div class="row form-group">
                                 <div class="col-md-12">
                                     <form action='../../traitement/evenement/traitementCreerEventEntreprise.php' method='POST'>
-                                        <input type='text' class="form-control" placeholder="Nom de l'événement" name='nom_event'  required>
+                                        <input type='text' class="form-control" placeholder="Nom de l'événement" name='nom_event' id="nom_event"  required>
 
                                 </div>
                             </div>
