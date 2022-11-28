@@ -29,7 +29,7 @@ class Evenement
     }
 
     public function getPendingEvent(Bdd $bdd){
-        $req = $bdd->getBdd()->query('SELECT * FROM description WHERE valide=0');
+        $req = $bdd->getBdd()->query('SELECT * FROM evenement WHERE valide=0');
         return $req->fetchAll();
     }
 
