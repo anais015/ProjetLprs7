@@ -52,7 +52,9 @@ else {
         $heure=explode(" ",$value['horaire'])[1];
         $heure=date_format(date_create($heure),"H:i");
         $tblisteRdvs .="<tr>
-                        <td>".$value['titre']."</td>
+                        <form  action='fiche_job.php' method='get'>
+                            <td><button class='pricing__feature btn-link' name='ref_offre' value='".$value['id_offre']."'>".$value['titre']."</button></td>                            
+                        </form>
                         <td>".$value['nom_entreprise']."</td>
                         <td>$date</td>
                         <td>$heure</td>
@@ -81,8 +83,9 @@ else {
         $heure=explode(" ",$value['horaire'])[1];
         $heure=date_format(date_create($heure),"H:i");
         $tblisteHistoriques .="<tr>
-
-                        <td>".$value['titre']."</td>
+                        <form  action='fiche_job.php' method='get'>
+                            <td><button class='pricing__feature btn-link' name='ref_offre' value='".$value['id_offre']."'>".$value['titre']."</button></td>                            
+                        </form>
                         <td>".$value['nom_entreprise']."</td>
                         <td>$date</td>
                         <td>$heure</td>

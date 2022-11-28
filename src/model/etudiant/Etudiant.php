@@ -207,7 +207,7 @@ class Etudiant extends Utilisateur
         $sql="
             SELECT COUNT(*) 
             FROM participe AS p
-            JOIN description AS e ON e.id_evenement = p.ref_evenement
+            JOIN evenement AS e ON e.id_evenement = p.ref_evenement
             WHERE p.ref_etudiant =:id
             AND e.id_evenement <>:id_evenement
         ";
@@ -217,15 +217,15 @@ class Etudiant extends Utilisateur
         $sql="
             SELECT COUNT(*) 
             FROM participe AS p
-            JOIN description AS e ON e.id_evenement = p.ref_evenement
+            JOIN evenement AS e ON e.id_evenement = p.ref_evenement
             WHERE p.ref_etudiant =:id
             AND e.id_evenement <>:id_evenement
             AND 
             (
-                e.debut between (select debut from description where id_evenement=:id_evenement) and (select fin from description where id_evenement=:id_evenement)
-                OR e.fin between (select debut from description where id_evenement=:id_evenement) and (select fin from description where id_evenement=:id_evenement)
-                OR (select debut from description where id_evenement=:id_evenement) between e.debut and e.fin
-                OR (select fin from description where id_evenement=:id_evenement) between e.debut and e.fin           
+                e.debut between (select debut from evenement where id_evenement=:id_evenement) and (select fin from evenement where id_evenement=:id_evenement)
+                OR e.fin between (select debut from evenement where id_evenement=:id_evenement) and (select fin from evenement where id_evenement=:id_evenement)
+                OR (select debut from evenement where id_evenement=:id_evenement) between e.debut and e.fin
+                OR (select fin from evenement where id_evenement=:id_evenement) between e.debut and e.fin           
             
             )
             ";
