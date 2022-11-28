@@ -1,3 +1,7 @@
+<?php
+require_once "../../model/bdd/Bdd.php";
+require_once "../../model/administrateur/Type.php";
+?>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -74,26 +78,25 @@
                             <ul>
                                 <li class="active"><a href="../../../index.php">Accueil</a></li>
                                 <li class="has-dropdown">
-                                    <a href="#">Formations</a>
+                                    <a href="#">Evénement</a>
                                     <ul class="dropdown">
-                                        <li><a href="#">Lycée Professionnel</a></li>
-                                        <li><a href="#">Lycée Technologique</a></li>
-                                        <li><a href="#">Enseignement supérieur et UFA</a></li>
-                                        <li><a href="#">Organigramme</a></li>
+                                        <li><a href="#">Création d'événements</a></li>
+                                        <li><a href="#">Modification d'événement</a></li>
+                                        <li><a href="#">Suppression d'événement</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-dropdown">
-                                    <a href="#">Partie Entreprise</a>
+                                    <a href="#">Offres</a> <!-- Select -->
                                     <ul class="dropdown">
-                                        <li><a href="profil.php">Profil</a></li>
-                                        <li><a href="creerOffre.php">Création d'offre d'emplois</a></li>
-                                        <li><a href="creerEventEntreprise.php">Création d'événements</a></li>
-                                        <li><a href="organiserRdv.php">RDV entreprise-étudiant</a></li>
+                                        <li><a href="creerOffre.php">Création d'offre d'emplois</a></li> <!-- insert -->
+                                        <li><a href="">Modification des offres d'emplois</a></li> <!-- Update -->
+                                        <li><a href="" >Suppression des offres d'emplois</a></li>
                                     </ul>
                                 </li>
+                                <li><a href="creerEventEntreprise.php"></a></li>
                                 <li><a href="#">Vie de l'établissement</a></li>
-                                <li><a href="#">International</a></li>
-                                <li><a href="#">Erasmus+</a></li>
+                                <li><a href="organiserRdv.php">RDV entreprise-étudiant</a></li>
+                                <li><a href="profil.php">Profil</a></li>
 
                                 <li><a href="../contact.php">Contact</a></li>
                                 <li class="btn-cta"><a href="../../../src/view/entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
@@ -134,6 +137,26 @@
                                     <input type='text' class="form-control" placeholder='Domaine' name='domaine'  required><br>
                                 </div>
                             </div>
+
+                                <div class="row form-group">
+                                    <div class="col-md-12">
+                                        <select name="type" class="form-control">
+                                            <option value="" disabled selected> Choississez le type de l'offre </option>
+
+                                                <?php
+                                                $bdd = new Bdd();
+                                                $type = new Type(array());
+                                                $donnees = $type->getAllType($bdd);
+
+                                                foreach($donnees as $value) {
+
+                                                    echo "<option value=".$value['id_type'].">".$value['nom_type']."</option>";
+                                                }
+                                                 ?>
+
+                                        </select>
+                                    </div>
+                                </div>
 
                                 <div class="form-group text-center">
                                         <input type='submit' value="Créer une offre" name='creerOffre' id='creerOffre' class="btn btn-primary"></input>

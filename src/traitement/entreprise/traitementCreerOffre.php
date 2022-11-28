@@ -16,13 +16,16 @@ $offre = new Offre(array(
     'titre'=> $_POST['titre'],
     'description'=> $_POST['description'],
     'domaine'=>$_POST['domaine'],
-
-    'ref_entreprise'=>$_SESSION['id_entreprise']
+    'refType'=>$_POST['type'],
+    'ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']
 ));
-
+var_dump($offre);
 $uneoffre = $offre->entrepriseCreerOffre($bdd);
+echo "Création effectuée !";
+header('Location: ../../view/entreprise/creerOffre.php');
 
 } else {
-    echo "la valeur n'existe pas ! ";
+    echo "Echec de la création !";
+    header('Location: ../../view/entreprise/creerOffre.php');
 }
 ?>
