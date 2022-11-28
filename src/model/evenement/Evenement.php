@@ -29,7 +29,7 @@ class Evenement
     }
 
     public function getPendingEvent(Bdd $bdd){
-        $req = $bdd->getBdd()->query('SELECT * FROM evenement WHERE valide=0');
+        $req = $bdd->getBdd()->query('SELECT * FROM description WHERE valide=0');
         return $req->fetchAll();
     }
 
@@ -138,7 +138,7 @@ class Evenement
     }
 
     public function modifierEvenement (PDO $bdd){
-        $sql='UPDATE evenement SET nom_event=:nom, description=:description, debut=:debut, fin=:fin
+        $sql='UPDATE description SET nom_event=:nom, description=:description, debut=:debut, fin=:fin
               WHERE id_evenement=:id';
         $request=$bdd->prepare($sql);
         $execute=$request->execute(array(
@@ -153,7 +153,7 @@ class Evenement
     }
 
     public function supprimerEvenement (PDO $bdd){
-        $sql='DELETE FROM evenement WHERE id_evenement=:id';
+        $sql='DELETE FROM description WHERE id_evenement=:id';
         $request=$bdd->prepare($sql);
         $execute=$request->execute(array('id'=>$this->id));
         if($execute) return true;
@@ -161,7 +161,7 @@ class Evenement
     }
 
     public function entrepriseCreerEvenement($bdd){
-        $sql ='SELECT * FROM evenement WHERE debut=:debut, fin=:fin AND ref_entreprise=:ref_entreprise';
+        $sql ='SELECT * FROM description WHERE debut=:debut, fin=:fin AND ref_entreprise=:ref_entreprise';
         $req = $bdd->prepare($sql);
         $req->execute(array(
             'debut'=> $this->debut,
@@ -172,7 +172,9 @@ class Evenement
         if (is_array($res)) return false;
 
         else{
-            $sql='INSERT INTO evenement (nom_event, description, debut, fin, ref_entreprise) VALUES (:nom, :description, :debut, :fin, :ref_entreprise)';
+
+            $sql='INSERT INTO description (nom_event, description, debut, fin, ref_entreprise) 
+            VALUES (:nom, :description, :debut, :fin, :ref_entreprise)';
             $request = $bdd->prepare($sql);
             $execute=$request->execute(array(
                 'nom'=> $this->nom,
@@ -187,7 +189,7 @@ class Evenement
     }
 
     public function etudiantOrganiseEvenement (PDO $bdd){
-            $sql='INSERT INTO evenement (nom_event, description, debut, fin, ref_etudiant) VALUES (:nom, :description, :debut, :fin, :ref_etudiant)';
+            $sql='INSERT INTO description (nom_event, description, debut, fin, ref_etudiant) VALUES (:nom, :description, :debut, :fin, :ref_etudiant)';
             $request = $bdd->prepare($sql);
             $execute=$request->execute(array(
                 'nom'=> $this->nom,
@@ -201,7 +203,7 @@ class Evenement
     }
 
     public function selectParId($bdd){
-        $sql='SELECT * FROM evenement WHERE id_evenement=:id';
+        $sql='SELECT * FROM description WHERE id_evenement=:id';
         $request=$bdd->prepare($sql);
         $request->execute(array('id'=>$this->id));
         $result=$request->fetch();
@@ -272,36 +274,12 @@ class Evenement
         $sql='
             SELECT * FROM participe AS p
             JOIN evenement AS e ON p.ref_evenement=e.id_evenement 
-            WHERE e.debut<NOW() AND e.valide=1 AND p.ref_etudiant=:ref_etudiant ORDER BY e.debut DESC';
+            WHERE e.debut<NOW() AND valide=1 AND e.ref_etudiant=:ref_etudiant ORDER BY e.debut DESC';
         $request= $bdd->prepare($sql);
         $request->execute(array('ref_etudiant'=> $this->ref_etudiant));
         $result = $request->fetchAll();
         if(is_array($result)) return $result;
         else return false;
-    }
-
-    public function exist (PDO $bdd,int $id){
-        $sql='SELECT * FROM evenement WHERE id_evenement=:id';
-        $request=$bdd->prepare($sql);
-        $execute= $request->execute(array('id'=>$id));
-        if (is_array($request->fetch())) return true;
-        return false;
-    }
-
-    public function detailEvenement (PDO $bdd){
-        $sql='
-            SELECT ev.nom_event, ev.description, ev.debut, ev.fin, etu.nom, etu.prenom, e.nom_entreprise, s.nom as salle
-            FROM evenement AS ev
-            LEFT JOIN salle AS s ON ev.ref_salle = s.id_salle 
-            LEFT JOIN entreprise AS e ON ev.ref_entreprise = e.id_entreprise
-            LEFT JOIN etudiant AS etu ON ev.ref_etudiant = etu.id_etudiant
-            WHERE ev.id_evenement =:id';
-        $request=$bdd->prepare($sql);
-        $execute= $request->execute(array(
-            'id'=>$this->id
-        ));
-        if ($execute) return $request->fetch(PDO::FETCH_ASSOC);
-        return false;
     }
 
 }
