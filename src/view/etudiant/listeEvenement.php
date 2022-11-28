@@ -34,11 +34,6 @@ foreach ($historique as $value){
                         <td>".$date."</td>
                         <td>".$heuredebut."</td>
                         <td>".$heurefin."</td>
-                        <td>
-                        <form action='../../traitement/description/traitementSuppression.php' method='post'>
-                            <button class='btn btn-link' name='details' value='".$value['id_evenement']."'>Détail</button>
-                        </form>
-                        </td>
                     </tr>";
 
 }
@@ -350,7 +345,6 @@ if(isset($_POST['desinscrire'])){
                                         <th scope="col">Date</th>
                                         <th scope="col">Début</th>
                                         <th scope="col">Fin</th>
-                                        <th scope="col">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
