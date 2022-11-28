@@ -82,8 +82,8 @@
                                     <a href="#">Partie Entreprise</a>
                                     <ul class="dropdown">
                                         <li><a href="profil.php">Profil</a></li>
-                                        <li><a href="creerOffre.php">Création d'offre d'emplois</a></li>
-                                        <li><a href="creerEventEntreprise.php">Création d'événements</a></li>
+                                        <li><a href="../offre/creerOffre.php">Création d'offre d'emplois</a></li>
+                                        <li><a href="../evenement/creerEventEntreprise.php">Création d'événements</a></li>
                                         <li><a href="organiserRdv.php">RDV entreprise-étudiant</a></li>
                                     </ul>
                                 </li>
@@ -114,8 +114,8 @@
                                 <div class="col-md-8 col-md-offset-2 text-center slider-text">
                                     <div class="slider-text-inner">
                                         <h1>Bla bla ...</h1>
-                                        <h2>Bla bla ...<a href="creerOffre.php" target="_blank">Créer des offres d'emplois</a></h2>
-                                        <p><a class="btn btn-primary btn-lg" href="creerOffre.php">Créer des offres d'emplois</a></p>
+                                        <h2>Bla bla ...<a href="../offre/creerOffre.php" target="_blank">Créer des offres d'emplois</a></h2>
+                                        <p><a class="btn btn-primary btn-lg" href="../offre/creerOffre.php">Créer des offres d'emplois</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -128,8 +128,8 @@
                                 <div class="col-md-8 col-md-offset-2 text-center slider-text">
                                     <div class="slider-text-inner">
                                         <h1>Bla bla ...</h1>
-                                        <h2>Bla bla ...<a href="creerEventEntreprise.php" target="_blank">Créer un evenement</a></h2>
-                                        <p><a class="btn btn-primary btn-lg btn-learn" href="creerEventEntreprise.php">Création d'événement</a></p>
+                                        <h2>Bla bla ...<a href="../evenement/creerEventEntreprise.php" target="_blank">Créer un evenement</a></h2>
+                                        <p><a class="btn btn-primary btn-lg btn-learn" href="../evenement/creerEventEntreprise.php">Création d'événement</a></p>
                                     </div>
                                 </div>
                             </div>
