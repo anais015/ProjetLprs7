@@ -16,13 +16,38 @@ class Administrateur extends Utilisateur
         }
     }
 
-    public function ajoutAdmin(BDD $bdd){
-        $req=$bdd->getBdd()->prepare('INSERT INTO administrateur(nom,prenom,email,mot_de_passe) VALUES (:nom,:prenom,:mail,:password)');
-        $req->execute(array(
-            "nom"=>$this->getNom(),
-            "prenom"=>$this->getPrenom(),
-            "mail"=>$this->getEmail(),
-            "mdp"=>$this->getMot_de_passe()
-        ));
+    public function inscription(BDD $bdd){
+        $req=$bdd->getBdd()->prepare('SELECT * FROM administrateur WHERE email=:email');
+        $req->execute(array("email"=>$this->getEmail()));
+        $res=$req->fetch();
+
+        if (is_array($res)){
+            session_start();
+            $_SESSION['err_message'] = "Adresse email déjà inscrite";
+            return false;
+        }else{
+            $req=$bdd->getBdd()->prepare('INSERT INTO administrateur(nom,prenom,email,mot_de_passe) VALUES (:nom,:prenom,:mail,:password)');
+            $req->execute(array(
+                "nom"=>$this->getNom(),
+                "prenom"=>$this->getPrenom(),
+                "mail"=>$this->getEmail(),
+                "password"=>$this->getMot_de_passe()
+            ));
+            return true;
+        }
+    }
+
+    public function connexion(BDD $bdd, $mdpsaisi){
+        $req=$bdd->getBdd()->prepare('SELECT * FROM administrateur WHERE email=:email');
+        $req->execute(array("email"=>$this->getEmail()));
+        $res=$req->fetch();
+
+        if (is_array($res)){
+            if ($mdpsaisi == $res['mot_de_passe']){
+                $conn = new Connexion(array('refadministrateur'=>$res['id_administrateur']));
+                $conn->ajoutConnexionAdministrateur($bdd);
+                return $res;
+            }else return false;
+        }else return false;
     }
 }

@@ -102,7 +102,7 @@ $typeoffre = new Type(array());
             </div>
         </div>
     </nav>
-<a href="vueadmin.php">Retour</a>
+<a href="gestiontypeoffre.php">Retour</a>
 <form action="../../traitement/administration/ajouttypeoffre.php" method="post">
     <label>Nom :
         <input type="text" name="nom" placeholder="Nom">

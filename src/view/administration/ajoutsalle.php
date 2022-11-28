@@ -7,7 +7,6 @@ $salle = new Salle(array());
 
 <html lang="fr">
 <head>
-    <title>Gestion Type Offre</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
     <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -40,6 +39,7 @@ $salle = new Salle(array());
     <link rel="stylesheet" href="../../../src/style/css/style.css">
 
 
+    <title>Gestion Salle</title>
 </head>
 <body>
 <div class="fh5co-loader"></div>
@@ -102,7 +102,7 @@ $salle = new Salle(array());
             </div>
         </div>
     </nav>
-<a href="vueadmin.php">Retour</a>
+<a href="gestionsalle.php">Retour</a>
 <form action="../../traitement/administration/ajoutsalle.php" method="post">
     <label>Nom :
         <input type="text" name="nom" placeholder="Nom">

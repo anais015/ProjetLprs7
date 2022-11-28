@@ -7,3 +7,4 @@ $salle = new Salle(array(
     'nombreplace'=>$_POST['nombre_place']
 ));
 $salle->ajoutSalle($bdd);
+header("Location: ../../view/administration/gestionsalle.php");

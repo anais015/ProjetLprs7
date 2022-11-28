@@ -35,14 +35,14 @@ class Offre
     }
 
     public function entrepriseCreerOffre($bdd){
-        $sql='INSERT INTO offre (titre, description, domaine, refType, ref_entreprise) 
-        VALUES :titre, :description, :domaine, :ref_type, :ref_entreprise';
+        $sql='INSERT INTO offre (titre, description, domaine, /*refType,*/ ref_entreprise) 
+        VALUES :titre, :description, :domaine, /*:ref_type,*/ :ref_entreprise';
         $req = $bdd->prepare($sql);
         $execute=$req->execute(array(
             'titre' => $this->titre,
             'description' => $this->description,
             'domaine' =>$this->domaine,
-            'refType' => $this->refType,
+            //'refType' => $this->refType,
             'ref_entreprise'=> $this->ref_entreprise
         ));
     }

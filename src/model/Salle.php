@@ -33,6 +33,16 @@ class Salle
         ));
     }
 
+    public function deleteSalle(BDD $bdd){
+        try {
+            $req = $bdd->getBdd()->prepare('DELETE FROM salle WHERE id_salle=:id');
+            $req->execute(array(
+                "id"=>$this->getIdsalle()
+            ));
+        }catch (PDOException $exeption){
+            return $exeption;
+        }
+    }
 
     /**
      * @return mixed

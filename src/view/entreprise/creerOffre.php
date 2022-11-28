@@ -40,6 +40,9 @@
         <![endif]-->
     </head>
     <body>
+    <?php
+    session_start();
+    ?>
 
     <!--<div class="fh5co-loader"></div>-->
 
@@ -101,25 +104,45 @@
                 </div>
             </div>
         </nav>
-        <?php
-        session_start();
-        ?>
 
-        <h1>Création d'une offre</h1>
+        <div id="fh5co-contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 align-self-start"></div>
+                    <div class="col-md-6 align-self-center">
 
-        <form action='../../traitement/entreprise/traitementCreerOffre.php' method='POST'>
-            <label for='titre'><b>Titre de l'offre :</b></label>
-            <input type='text' placeholder='titre' name='titre'  required>
+                        <h3 class="text-center">Création d'une offre</h3>
 
-            <label for='description'><b>Description de l'offre :</b></label>
-            <textarea placeholder='Description' name='description' id="description" required></textarea>
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <form action='../../traitement/entreprise/traitementCreerOffre.php' method='POST'>
+                                        <!--<label for='titre'><b>Titre de l'offre :</b></label>-->
+                                        <input type='text' class="form-control" placeholder="Titre de l'offre" name='titre'  required><br/>
+                                </div>
+                            </div>
 
-            <label for='domaine'><b>Domaine :</b></label>
-            <input type='text' placeholder='domaine' name='domaine'  required>
-            <br>
-            <button type='submit' name='creerOffre' id='creerOffre'>Créer</button>
-        </form>
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <!--<label for='description'><b>Description de l'offre :</b></label>-->
+                                    <textarea class="form-control" placeholder="Description de l'offre" name='description' id="description" required></textarea><br/>
+                                </div>
+                            </div>
 
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <!--<label for='domaine'><b>Domaine :</b></label>-->
+                                    <input type='text' class="form-control" placeholder='Domaine' name='domaine'  required><br>
+                                </div>
+                            </div>
+
+                                <div class="form-group text-center">
+                                        <input type='submit' value="Créer une offre" name='creerOffre' id='creerOffre' class="btn btn-primary"></input>
+                                    </form>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Partie du bas -->
 
