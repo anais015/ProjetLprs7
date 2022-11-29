@@ -70,29 +70,31 @@
                             <ul>
                                 <li class="active"><a href="../../../index.php">Accueil</a></li>
                                 <li class="has-dropdown">
-                                    <a href="#">Formations</a>
+                                    <a href="../evenement/evenement.php">Evénement</a>
                                     <ul class="dropdown">
-                                        <li><a href="#">Lycée Professionnel</a></li>
-                                        <li><a href="#">Lycée Technologique</a></li>
-                                        <li><a href="#">Enseignement supérieur et UFA</a></li>
-                                        <li><a href="#">Organigramme</a></li>
+                                        <li><a href="../evenement/creerEventEntreprise.php">Création d'événements</a></li>
+                                        <li><a href="#">Modification d'événement</a></li>
+                                        <li><a href="#">Suppression d'événement</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-dropdown">
-                                    <a href="#">Partie Entreprise</a>
+                                    <a href="../offre/offre.php">Offres</a> <!-- Select -->
                                     <ul class="dropdown">
-                                        <li><a href="profil.php">Profil</a></li>
-                                        <li><a href="creerOffre.php">Création d'offre d'emplois</a></li>
-                                        <li><a href="creerEventEntreprise.php">Création d'événements</a></li>
-                                        <li><a href="organiserRdv.php">RDV entreprise-étudiant</a></li>
+                                        <li><a href="../offre/creerOffre.php">Création d'offre d'emplois</a></li> <!-- insert -->
+                                        <li><a href="">Modification des offres d'emplois</a></li> <!-- Update -->
+                                        <li><a href="" >Suppression des offres d'emplois</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Vie de l'établissement</a></li>
-                                <li><a href="#">International</a></li>
-                                <li><a href="#">Erasmus+</a></li>
+                                <li class="has-dropdown">
+                                    <a href="../RDV/gestionRDV.php">RDV entreprise-étudiant</a>
+                                    <ul class="dropdown">
+                                        <li><a href="../RDV/organiserRdv.php">Création de RDV</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="../entreprise/profil.php">Profil</a></li>
 
                                 <li><a href="../contact.php">Contact</a></li>
-                                <li class="btn-cta"><a href="../../../src/view/entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
+                                <li class="btn-cta"><a href="../entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -100,9 +102,6 @@
                 </div>
             </div>
         </nav>
-
-        <!--<h2> Page d'accueil </h2>
-        <h4> ... même si elle est moche ! &#128521;</h4>-->
 
         <aside id="fh5co-hero">
             <div class="flexslider">
@@ -113,9 +112,9 @@
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2 text-center slider-text">
                                     <div class="slider-text-inner">
-                                        <h1>Bla bla ...</h1>
-                                        <h2>Bla bla ...<a href="creerOffre.php" target="_blank">Créer des offres d'emplois</a></h2>
-                                        <p><a class="btn btn-primary btn-lg" href="creerOffre.php">Créer des offres d'emplois</a></p>
+                                        <h1>Accéder à la gestion de vos offres d'emploi</h1>
+                                        <h2>C'est parti, pour <a href="../offre/offre.php" target="_blank">gèrer les offres d'emplois</a></h2>
+                                        <p><a class="btn btn-primary btn-lg" href="../offre/creerOffre.php">Ou Créer des offres d'emplois</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -127,9 +126,9 @@
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2 text-center slider-text">
                                     <div class="slider-text-inner">
-                                        <h1>Bla bla ...</h1>
-                                        <h2>Bla bla ...<a href="creerEventEntreprise.php" target="_blank">Créer un evenement</a></h2>
-                                        <p><a class="btn btn-primary btn-lg btn-learn" href="creerEventEntreprise.php">Création d'événement</a></p>
+                                        <h1>Accéder à la gestion de vos événements</h1>
+                                        <h2>C'est parti, pour <a href="../evenement/evenement.php" target="_blank">gèrer les événements</a></h2>
+                                        <p><a class="btn btn-primary btn-lg btn-learn" href="../evenement/creerEventEntreprise.php">Ou bien création d'événement</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -141,9 +140,9 @@
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2 text-center slider-text">
                                     <div class="slider-text-inner">
-                                        <h1>Bla bla ...</h1>
-                                        <h2>Bla bla ... <a href="organiserRdv.php" target="_blank">RDV entreprise-étudiant</a></h2>
-                                        <p><a class="btn btn-primary btn-lg btn-learn" href="organiserRdv.php">Création RDV</a></p>
+                                        <h1>Gèrer vos rendez-vous</h1>
+                                        <h2>C'est parti, pour <a href="../RDV/gestionRDV.php" target="_blank">les RDV entreprise-étudiant</a></h2>
+                                        <p><a class="btn btn-primary btn-lg btn-learn" href="../RDV/organiserRdv.php">Ou la création de RDV</a></p>
                                     </div>
                                 </div>
                             </div>
