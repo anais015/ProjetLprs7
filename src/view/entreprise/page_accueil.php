@@ -73,16 +73,16 @@
                                     <a href="../evenement/evenement.php">Evénement</a>
                                     <ul class="dropdown">
                                         <li><a href="../evenement/creerEventEntreprise.php">Création d'événements</a></li>
-                                        <li><a href="#">Modification d'événement</a></li>
-                                        <li><a href="#">Suppression d'événement</a></li>
+                                        <li><a href="../evenement/modifierEventEntreprise.php">Modification d'événement</a></li>
+                                        <li><a href="../evenement/supprimerEventEntreprise.php">Suppression d'événement</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-dropdown">
                                     <a href="../offre/offre.php">Offres</a> <!-- Select -->
                                     <ul class="dropdown">
                                         <li><a href="../offre/creerOffre.php">Création d'offre d'emplois</a></li> <!-- insert -->
-                                        <li><a href="">Modification des offres d'emplois</a></li> <!-- Update -->
-                                        <li><a href="" >Suppression des offres d'emplois</a></li>
+                                        <li><a href="../offre/modifierOffre.php">Modification des offres d'emplois</a></li> <!-- Update -->
+                                        <li><a href="../offre/supprimerOffre.php" >Suppression des offres d'emplois</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-dropdown">
@@ -91,10 +91,10 @@
                                         <li><a href="../RDV/organiserRdv.php">Création de RDV</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="../entreprise/profil.php">Profil</a></li>
+                                <li><a href="profil.php">Profil</a></li>
 
                                 <li><a href="../contact.php">Contact</a></li>
-                                <li class="btn-cta"><a href="../entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
+                                <li class="btn-cta"><a href="deconnexion.php"><span>Se déconnecter</span></a></li>
                             </ul>
                         </div>
                     </div>

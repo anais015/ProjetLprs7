@@ -73,22 +73,22 @@ session_start();
                         <ul>
                             <li class="active"><a href="../../../index.php">Accueil</a></li>
                             <li class="has-dropdown">
-                                <a href="#">Evénement</a>
+                                <a href="evenement.php">Evénement</a>
                                 <ul class="dropdown">
                                     <li><a href="creerEventEntreprise.php">Création d'événements</a></li>
-                                    <li><a href="#">Modification d'événement</a></li>
-                                    <li><a href="#">Suppression d'événement</a></li>
+                                    <li><a href="modifierEventEntreprise.php">Modification d'événement</a></li>
+                                    <li><a href="supprimerEventEntreprise.php">Suppression d'événement</a></li>
                                 </ul>
                             </li>
                             <li class="has-dropdown">
-                                <a href="#">Offres</a> <!-- Select -->
+                                <a href="../offre/offre.php">Offres</a> <!-- Select -->
                                 <ul class="dropdown">
                                     <li><a href="../offre/creerOffre.php">Création d'offre d'emplois</a></li> <!-- insert -->
-                                    <li><a href="">Modification des offres d'emplois</a></li> <!-- Update -->
-                                    <li><a href="" >Suppression des offres d'emplois</a></li>
+                                    <li><a href="../offre/modifierOffre.php">Modification des offres d'emplois</a></li> <!-- Update -->
+                                    <li><a href="../offre/supprimerOffre.php" >Suppression des offres d'emplois</a></li>
                                 </ul>
                             </li>
-                            <li><a href="../entreprise/organiserRdv.php">RDV entreprise-étudiant</a></li>
+                            <li><a href="../RDV/organiserRdv.php">RDV entreprise-étudiant</a></li>
                             <li><a href="../entreprise/profil.php">Profil</a></li>
 
                             <li><a href="../contact.php">Contact</a></li>
@@ -104,43 +104,38 @@ session_start();
     <aside id="fh5co-hero">
         <div class="flexslider">
             <ul class="slides">
-                <li style="background-image: url(../../../src/style/image-entreprise/vecteezy_hand-shaking-which-print-screen-on-wooden-cube-block-in_6969586_600.jpg);">
-                    <div class="overlay-gradient"></div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2 text-center slider-text">
-                                <div class="slider-text-inner">
-                                    <h1>Bla bla ...</h1>
-                                   <!-- <h2>Bla bla ...<a href="../offre/creerOffre.php" target="_blank">Créer des offres d'emplois</a></h2>-->
-                                    <p><a class="btn btn-primary btn-lg" href="../offre/creerOffre.php">Créer des offres d'emplois</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
                 <li style="background-image: url(../../../src/style/image-entreprise/salon.webp);">
                     <div class="overlay-gradient"></div>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2 text-center slider-text">
                                 <div class="slider-text-inner">
-                                    <h1>Bla bla ...</h1>
-                                    <h2>Bla bla ...<a href="../evenement/creerEventEntreprise.php" target="_blank">Créer un evenement</a></h2>
-                                    <p><a class="btn btn-primary btn-lg btn-learn" href="../evenement/creerEventEntreprise.php">Création d'événement</a></p>
+                                    <h1></h1>
+                                    <p><a class="btn btn-primary btn-lg" href="creerEventEntreprise.php">Créer des événements</a></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </li>
-                <li style="background-image: url(../../../src/style/image-entreprise/rdv.webp);">
+                <li style="background-image: url(../../../src/style/image-entreprise/modifier.png);">
                     <div class="overlay-gradient"></div>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2 text-center slider-text">
                                 <div class="slider-text-inner">
-                                    <h1>Bla bla ...</h1>
-                                    <h2>Bla bla ... <a href="organiserRdv.php" target="_blank">RDV entreprise-étudiant</a></h2>
-                                    <p><a class="btn btn-primary btn-lg btn-learn" href="organiserRdv.php">Création RDV</a></p>
+                                    <p><a class="btn btn-primary btn-lg btn-learn" href="modifierEventEntreprise.php">Modification d'événement</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li style="background-image: url(../../../src/style/image-entreprise/supprimer.jpg);">
+                    <div class="overlay-gradient"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center slider-text">
+                                <div class="slider-text-inner">
+                                    <p><a class="btn btn-primary btn-lg btn-learn" href="supprimerEventEntreprise.php">Suppression d'événement</a></p>
                                 </div>
                             </div>
                         </div>
