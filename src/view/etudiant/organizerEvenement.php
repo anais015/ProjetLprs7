@@ -175,7 +175,7 @@ if (isset($_POST['enregistrer'])){
                         <div class='row form-group'>
                             <div class='col-md-6'>
                                 <label for='debut'><b>Heure de début</b></label>
-                                <input class='form-control' type='datetime-local' placeholder='Heure de début' name='debut' required>
+                                <input class='form-control' type='datetime-local' placeholder='Heure de début' name='debut' maxrequired>
                             </div>
                             <div class='col-md-6'>
                                 <label for='fin'><b>Heure de fin</b></label>

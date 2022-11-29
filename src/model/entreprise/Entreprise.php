@@ -10,6 +10,7 @@ class Entreprise extends Utilisateur
     private $valide;
     private Evenement $evenement;
     private Rdv $rdv;
+    private Connexion $conn;
 
     public function __construct(array $donnees){
         parent::__construct($donnees);
@@ -131,6 +132,7 @@ class Entreprise extends Utilisateur
             $this->setId($res['id_entreprise']);
 
             if (password_verify($MDPSaisi, $res['mot_de_passe'])) {
+                echo "password verified";
                 $this->conn = new Connexion(array('refentreprise'=>$this->id));
                 $this->conn->ajoutConnexionEntreprise($bdd);
                 return $res;
