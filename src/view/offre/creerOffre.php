@@ -78,22 +78,27 @@ require_once "../../model/administrateur/Type.php";
                             <ul>
                                 <li class="active"><a href="../../../index.php">Accueil</a></li>
                                 <li class="has-dropdown">
-                                    <a href="#">Evénement</a>
+                                    <a href="../evenement/evenement.php">Evénement</a>
                                     <ul class="dropdown">
                                         <li><a href="../evenement/creerEventEntreprise.php">Création d'événements</a></li>
-                                        <li><a href="#">Modification d'événement</a></li>
-                                        <li><a href="#">Suppression d'événement</a></li>
+                                        <li><a href="../evenement/modifierEventEntreprise.php">Modification d'événement</a></li>
+                                        <li><a href="../evenement/supprimerEventEntreprise.php">Suppression d'événement</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-dropdown">
-                                    <a href="#">Offres</a> <!-- Select -->
+                                    <a href="offre.php">Offres</a> <!-- Select -->
                                     <ul class="dropdown">
                                         <li><a href="creerOffre.php">Création d'offre d'emplois</a></li> <!-- insert -->
-                                        <li><a href="">Modification des offres d'emplois</a></li> <!-- Update -->
-                                        <li><a href="" >Suppression des offres d'emplois</a></li>
+                                        <li><a href="modifierOffre.php">Modification des offres d'emplois</a></li> <!-- Update -->
+                                        <li><a href="supprimerOffre.php" >Suppression des offres d'emplois</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="../entreprise/organiserRdv.php">RDV entreprise-étudiant</a></li>
+                                <li class="has-dropdown">
+                                    <a href="../RDV/gestionRDV.php">RDV entreprise-étudiant</a>
+                                    <ul class="dropdown">
+                                        <li><a href="../RDV/organiserRdv.php">Création de RDV</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="../entreprise/profil.php">Profil</a></li>
 
                                 <li><a href="../contact.php">Contact</a></li>
