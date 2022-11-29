@@ -22,20 +22,18 @@ if(isset($_POST['creerEvenement'])) {
 
     $eve = $event->entrepriseCreerEvenement($bdd);
 
-} else {
-    echo "la valeur n'existe pas ! ";
-    /*if($eve){
+    if($eve){
         echo "<script>
-        window.location.href = \"../../view/entreprise/creerEventEntreprise.php\";
+        window.location.href = \"../../view/evenement/creerEventEntreprise.php\";
         alert(\"Evénement enregistré\")
         </script>";
     }
     else{
         echo "<script>
-        window.location.href = \"../../view/entreprise/creerEventEntreprise.php\";
+        window.location.href = \"../../view/evenement/creerEventEntreprise.php\";
         alert(\"Erreur\")
         </script>";
-    }*/
+    }
 }
 
 ?>
