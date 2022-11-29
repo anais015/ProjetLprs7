@@ -161,7 +161,7 @@ class Evenement
     }
 
     public function entrepriseCreerEvenement($bdd){
-        $sql ='SELECT * FROM evenement WHERE debut=:debut, fin=:fin AND ref_entreprise=:ref_entreprise';
+        $sql ='SELECT * FROM evenement WHERE debut=:debut AND fin=:fin AND ref_entreprise=:ref_entreprise';
         $req = $bdd->prepare($sql);
         $req->execute(array(
             'debut'=> $this->debut,
@@ -170,7 +170,6 @@ class Evenement
         ));
         $res = $req->fetch();
         if (is_array($res)) return false;
-
         else{
             $sql='INSERT INTO evenement (nom_event, description, debut, fin, ref_entreprise) VALUES (:nom, :description, :debut, :fin, :ref_entreprise)';
             $request = $bdd->prepare($sql);
@@ -184,6 +183,21 @@ class Evenement
             if($execute) return true;
             else return false;
         }
+    }
+
+    public function listEventEntreprise(PDO $bdd){
+        $sql="
+                SELECT e.id_evenement, e.nom_event, e.debut, e.fin, e.description, e.ref_entreprise, e.valide, s.nom 
+                FROM evenement AS e
+                LEFT JOIN salle AS s ON e.ref_salle = s.id_salle 
+                WHERE e.ref_entreprise=:ref_entreprise
+                ORDER BY e.debut
+                ";
+        $request= $bdd->prepare($sql);
+        $request->execute(array('ref_entreprise'=> $this->ref_entreprise));
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        if(is_array($result)&&count($result)>0) return $result;
+        else return false;
     }
 
     public function etudiantOrganiseEvenement (PDO $bdd){
