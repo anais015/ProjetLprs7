@@ -6,11 +6,15 @@ require_once "../../model/entreprise/Entreprise.php";
 $bdd = new Bdd();
 $etudiant = new Etudiant(array());
 $entreprise = new Entreprise(array());
-$pendingaccounts = $etudiant->getPendingAccount($bdd) + $entreprise->getPendingAccount($bdd); #ajouter méthode pour avoir les event en attente de validation;
+$pendingaccounts = array_merge($etudiant->getPendingAccount($bdd),$entreprise->getPendingAccount($bdd));
 if (count($pendingaccounts)>=1){
     $page = "<b>Liste des comptes en attentes</b>";
     foreach ($pendingaccounts as $account) {
-        $html = "<div style='background-color: lightgray'><h3>".$account['nom']."</h3><br><p>".$account['prenom']."</p></div>";
+        if (isset($account['id_etudiant'])){
+            $html = "<div style='background-color: lightgray'><h3>".$account['nom']." ".$account['prenom']."</h3><p>Étudiant</p><br><p><form method='post' action='../../../src/traitement/administration/validationcompte.php'><input hidden name='id_etudiant' value='".$account['id_etudiant']."'><button type='submit'>Valider le compte</button></form></p></div>";
+        }else{
+            $html = "<div style='background-color: lightgray'><h3>".$account['nom']." ".$account['prenom']."</h3><p>Enteprise</p><br><p><form method='post' action='../../../src/traitement/administration/validationcompte.php'><input hidden name='id_entreprise' value='".$account['id_entreprise']."'><button type='submit'>Valider le compte</button></form></p></div>";
+        }
         $page .= $html;
     }
 }else{

@@ -190,6 +190,14 @@ class Entreprise extends Utilisateur
         if($execute) return true;
         else return false;
     }
+
+    public function validerCompte(BDD $bdd){
+        $req = $bdd->getBdd()->prepare('UPDATE entreprise SET valide=1 WHERE id_entreprise=:id');
+        $req->execute(array(
+            "id"=>$this->getId()
+        ));
+
+    }
 }
 
 ?>

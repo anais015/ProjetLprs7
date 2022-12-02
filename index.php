@@ -1,6 +1,5 @@
 <?php
 session_start();
-var_dump($_SESSION);
 $button = "<li class='btn-cta'><a href='src/view/connexion.php'><span>Se connecter</span></a></li>
            <li class='btn-cta'><a href='src/view/inscription.php'><span>S'inscrire</span></a></li>";
 if (isset($_SESSION['administrateur'])){

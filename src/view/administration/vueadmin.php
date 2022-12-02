@@ -18,7 +18,6 @@ if(isset($_SESSION['id_admin'])){
 }else{
     $page = "Vous n'êtes pas connecté en tant qu'administrateur";
 }
-var_dump($_SESSION);
 ?>
 <html lang="fr">
 <head>
