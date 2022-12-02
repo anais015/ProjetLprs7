@@ -14,33 +14,33 @@ require_once "../../model/administrateur/Type.php";
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400" rel="stylesheet">
 
         <!-- Animate.css -->
-        <link rel="stylesheet" href="../../../src/style/css/animate.css">
+        <link rel="stylesheet" href="../../style/css/animate.css">
         <!-- Icomoon Icon Fonts-->
-        <link rel="stylesheet" href="../../../src/style/css/icomoon.css">
+        <link rel="stylesheet" href="../../style/css/icomoon.css">
         <!-- Bootstrap  -->
-        <link rel="stylesheet" href="../../../src/style/css/bootstrap.css">
+        <link rel="stylesheet" href="../../style/css/bootstrap.css">
 
         <!-- Magnific Popup -->
-        <link rel="stylesheet" href="../../../src/style/css/magnific-popup.css">
+        <link rel="stylesheet" href="../../style/css/magnific-popup.css">
 
         <!-- Owl Carousel  -->
-        <link rel="stylesheet" href="../../../src/style/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="../../../src/style/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="../../style/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="../../style/css/owl.theme.default.min.css">
 
         <!-- Flexslider  -->
-        <link rel="stylesheet" href="../../../src/style/css/flexslider.css">
+        <link rel="stylesheet" href="../../style/css/flexslider.css">
 
         <!-- Pricing -->
-        <link rel="stylesheet" href="../../../src/style/css/pricing.css">
+        <link rel="stylesheet" href="../../style/css/pricing.css">
 
         <!-- Theme style  -->
-        <link rel="stylesheet" href="../../../src/style/css/style.css">
+        <link rel="stylesheet" href="../../style/css/style.css">
 
         <!-- Modernizr JS -->
-        <script src="../../../src/style/js/modernizr-2.6.2.min.js"></script>
+        <script src="../../style/js/modernizr-2.6.2.min.js"></script>
         <!-- FOR IE9 below -->
         <!--[if lt IE 9]>
-        <script src="../../../src/style/js/respond.min.js"></script>
+        <script src="../../style/js/respond.min.js"></script>
         <![endif]-->
     </head>
     <body>
@@ -78,28 +78,31 @@ require_once "../../model/administrateur/Type.php";
                             <ul>
                                 <li class="active"><a href="../../../index.php">Accueil</a></li>
                                 <li class="has-dropdown">
-                                    <a href="#">Evénement</a>
+                                    <a href="../evenement/evenement.php">Evénement</a>
                                     <ul class="dropdown">
-                                        <li><a href="#">Création d'événements</a></li>
-                                        <li><a href="#">Modification d'événement</a></li>
-                                        <li><a href="#">Suppression d'événement</a></li>
+                                        <li><a href="../evenement/creerEventEntreprise.php">Création d'événements</a></li>
+                                        <li><a href="../evenement/modifierEventEntreprise.php">Modification d'événement</a></li>
+                                        <li><a href="../evenement/supprimerEventEntreprise.php">Suppression d'événement</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-dropdown">
-                                    <a href="#">Offres</a> <!-- Select -->
+                                    <a href="offre.php">Offres</a> <!-- Select -->
                                     <ul class="dropdown">
                                         <li><a href="creerOffre.php">Création d'offre d'emplois</a></li> <!-- insert -->
-                                        <li><a href="">Modification des offres d'emplois</a></li> <!-- Update -->
-                                        <li><a href="" >Suppression des offres d'emplois</a></li>
+                                        <li><a href="modifierOffre.php">Modification des offres d'emplois</a></li> <!-- Update -->
+                                        <li><a href="supprimerOffre.php" >Suppression des offres d'emplois</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="creerEventEntreprise.php"></a></li>
-                                <li><a href="#">Vie de l'établissement</a></li>
-                                <li><a href="organiserRdv.php">RDV entreprise-étudiant</a></li>
-                                <li><a href="profil.php">Profil</a></li>
+                                <li class="has-dropdown">
+                                    <a href="../RDV/gestionRDV.php">RDV entreprise-étudiant</a>
+                                    <ul class="dropdown">
+                                        <li><a href="../RDV/organiserRdv.php">Création de RDV</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="../entreprise/profil.php">Profil</a></li>
 
                                 <li><a href="../contact.php">Contact</a></li>
-                                <li class="btn-cta"><a href="../../../src/view/entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
+                                <li class="btn-cta"><a href="../entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -169,7 +172,7 @@ require_once "../../model/administrateur/Type.php";
 
         <!-- Partie du bas -->
 
-        <footer id="fh5co-footer" role="contentinfo" style="background-image: url(../../../src/style/images/img_bg_4.jpg);">
+        <footer id="fh5co-footer" role="contentinfo" style="background-image: url(../../style/images/img_bg_4.jpg);">
             <div class="overlay"></div>
             <div class="container">
                 <div class="row row-pb-md">
@@ -215,28 +218,28 @@ require_once "../../model/administrateur/Type.php";
     </div>
 
     <!-- jQuery -->
-    <script src="../../../src/style/js/jquery.min.js"></script>
+    <script src="../../style/js/jquery.min.js"></script>
     <!-- jQuery Easing -->
-    <script src="../../../src/style/js/jquery.easing.1.3.js"></script>
+    <script src="../../style/js/jquery.easing.1.3.js"></script>
     <!-- Bootstrap -->
-    <script src="../../../src/style/js/bootstrap.min.js"></script>
+    <script src="../../style/js/bootstrap.min.js"></script>
     <!-- Waypoints -->
-    <script src="../../../src/style/js/jquery.waypoints.min.js"></script>
+    <script src="../../style/js/jquery.waypoints.min.js"></script>
     <!-- Stellar Parallax -->
-    <script src="../../../src/style/js/jquery.stellar.min.js"></script>
+    <script src="../../style/js/jquery.stellar.min.js"></script>
     <!-- Carousel -->
-    <script src="../../../src/style/js/owl.carousel.min.js"></script>
+    <script src="../../style/js/owl.carousel.min.js"></script>
     <!-- Flexslider -->
-    <script src="../../../src/style/js/jquery.flexslider-min.js"></script>
+    <script src="../../style/js/jquery.flexslider-min.js"></script>
     <!-- countTo -->
-    <script src="../../../src/style/js/jquery.countTo.js"></script>
+    <script src="../../style/js/jquery.countTo.js"></script>
     <!-- Magnific Popup -->
-    <script src="../../../src/style/js/jquery.magnific-popup.min.js"></script>
-    <script src="../../../src/style/js/magnific-popup-options.js"></script>
+    <script src="../../style/js/jquery.magnific-popup.min.js"></script>
+    <script src="../../style/js/magnific-popup-options.js"></script>
     <!-- Count Down -->
-    <script src="../../../src/style/js/simplyCountdown.js"></script>
+    <script src="../../style/js/simplyCountdown.js"></script>
     <!-- Main -->
-    <script src="../../../src/style/js/main.js"></script>
+    <script src="../../style/js/main.js"></script>
     <script>
         var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
 

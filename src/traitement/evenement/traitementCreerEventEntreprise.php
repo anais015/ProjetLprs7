@@ -11,6 +11,7 @@ $connexion = new Bdd();
 $bdd = $connexion->getBdd();
 
 if(isset($_POST['creerEvenement'])) {
+
     $event = new Evenement(array(
         'nom'=> $_POST['nom_event'],
         'description'=> $_POST['description'],
@@ -18,18 +19,21 @@ if(isset($_POST['creerEvenement'])) {
         'fin'=> $_POST['fin'],
         'ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']
     ));
+
     $eve = $event->entrepriseCreerEvenement($bdd);
+
     if($eve){
         echo "<script>
-        window.location.href = \"../../view/entreprise/creerEventEntreprise.php\";
+        window.location.href = \"../../view/evenement/creerEventEntreprise.php\";
         alert(\"Evénement enregistré\")
         </script>";
     }
     else{
         echo "<script>
-        window.location.href = \"../../view/entreprise/creerEventEntreprise.php\";
+        window.location.href = \"../../view/evenement/creerEventEntreprise.php\";
         alert(\"Erreur\")
         </script>";
     }
 }
+
 ?>

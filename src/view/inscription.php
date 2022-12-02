@@ -27,7 +27,7 @@ if(isset($_POST['selectIdentity'])) {
 			</div>
 
 			<div class='form-group text-center'>
-				<input type='submit' value=\"S'incrire\" name='inscription' id='inscription' class='btn btn-primary'>
+				<input type='submit' value=\"S'inscrire\" name='inscription' id='inscription' class='btn btn-primary'>
 				</form>
 			</div>
                 ";
@@ -79,7 +79,7 @@ if(isset($_POST['selectIdentity'])) {
 				</div>
 			</div>
 			<div class='form-group text-center'>
-				<input type='submit' value=\"S'incrire\" name='inscription' id='inscription' class='btn btn-primary'>
+				<input type='submit' value=\"S'inscrire\" name='inscription' id='inscription' class='btn btn-primary'>
 				</form>
 			</div>
                 ";
@@ -114,7 +114,7 @@ if(isset($_POST['selectIdentity'])) {
 				</div>
 			</div>
 			<div class='form-group text-center'>
-				<input type='submit' value=\"S'incrire\" name='inscription' id='inscription' class='btn btn-primary'>
+				<input type='submit' value=\"S'inscrire\" name='inscription' id='inscription' class='btn btn-primary'>
 				</form>
 			</div>
             ";

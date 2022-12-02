@@ -273,7 +273,7 @@ class Evenement
                 FROM evenement AS e
                 LEFT JOIN salle AS s
                 ON e.ref_salle = s.id_salle 
-                WHERE valide=1 AND e.debut>NOW()+INTERVAL 1 DAY AND (`ref_etudiant` IS NULL OR `ref_etudiant`<>:ref_etudiant)
+                WHERE valide=1 AND e.debut>NOW() AND (`ref_etudiant` IS NULL OR `ref_etudiant`<>:ref_etudiant)
                 ORDER BY e.debut desc ';
         $request= $bdd->prepare($sql);
         $request->execute(array('ref_etudiant'=> $this->ref_etudiant));

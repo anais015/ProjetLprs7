@@ -47,6 +47,14 @@ class Offre
         ));
     }
 
+    public function entrepriseModifierOffre(PDO $bdd){
+
+    }
+
+    public function entrepriseSupprimerOffre(PDO $bdd){
+
+    }
+
     public function getId()
     {
         return $this->id;

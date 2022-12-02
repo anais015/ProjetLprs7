@@ -153,14 +153,21 @@ class Etudiant extends Utilisateur
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function validerCompte(BDD $bdd){
+        $req = $bdd->getBdd()->prepare('UPDATE etudiant SET valide=1 WHERE id_etudiant=:id');
+        $req->execute(array(
+            "id"=>$this->getId()
+        ));
+    }
+
     public function listeCandidature(PDO $bdd){
-        $sql='SELECT p.ref_offre, e.nom_entreprise, o.titre, t.nom_type, r.id_rdv, p.ref_etudiant, p.date
+        $sql="SELECT p.ref_offre, e.nom_entreprise, o.titre, t.nom_type, r.id_rdv, p.ref_etudiant, p.date
               FROM entreprise AS e
               JOIN offre AS o ON e.id_entreprise = o.ref_entreprise
               JOIN type AS t ON o.ref_type = t.id_type
               JOIN postule AS p ON o.id_offre = p.ref_offre
               LEFT JOIN rdv AS r ON p.ref_offre = r.ref_offre
-              WHERE p.ref_etudiant=:id';
+              WHERE p.ref_etudiant=:id";
         $request = $bdd->prepare($sql);
         $execute=$request->execute(array(
             'id'=>$this->id

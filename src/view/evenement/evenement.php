@@ -1,46 +1,47 @@
-<?php ?>
-
 <!doctype html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Page d'accueil pour entreprise </title>
+    <title>Page des événements</title>
     <!--<link rel="stylesheet" href="../../style/styleEntreprise.css">-->
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400" rel="stylesheet">
 
     <!-- Animate.css -->
-    <link rel="stylesheet" href="../../../src/style/css/animate.css">
+    <link rel="stylesheet" href="../../style/css/animate.css">
     <!-- Icomoon Icon Fonts-->
-    <link rel="stylesheet" href="../../../src/style/css/icomoon.css">
+    <link rel="stylesheet" href="../../style/css/icomoon.css">
     <!-- Bootstrap  -->
-    <link rel="stylesheet" href="../../../src/style/css/bootstrap.css">
+    <link rel="stylesheet" href="../../style/css/bootstrap.css">
 
     <!-- Magnific Popup -->
-    <link rel="stylesheet" href="../../../src/style/css/magnific-popup.css">
+    <link rel="stylesheet" href="../../style/css/magnific-popup.css">
 
     <!-- Owl Carousel  -->
-    <link rel="stylesheet" href="../../../src/style/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../../../src/style/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../../style/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../style/css/owl.theme.default.min.css">
 
     <!-- Flexslider  -->
-    <link rel="stylesheet" href="../../../src/style/css/flexslider.css">
+    <link rel="stylesheet" href="../../style/css/flexslider.css">
 
     <!-- Pricing -->
-    <link rel="stylesheet" href="../../../src/style/css/pricing.css">
+    <link rel="stylesheet" href="../../style/css/pricing.css">
 
     <!-- Theme style  -->
-    <link rel="stylesheet" href="../../../src/style/css/style.css">
+    <link rel="stylesheet" href="../../style/css/style.css">
 
     <!-- Modernizr JS -->
-    <script src="../../../src/style/js/modernizr-2.6.2.min.js"></script>
+    <script src="../../style/js/modernizr-2.6.2.min.js"></script>
     <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
-    <script src="../../../src/style/js/respond.min.js"></script>
+    <script src="../../style/js/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
+<?php
+session_start();
+?>
 
 <!--<div class="fh5co-loader"></div>-->
 
@@ -72,29 +73,26 @@
                         <ul>
                             <li class="active"><a href="../../../index.php">Accueil</a></li>
                             <li class="has-dropdown">
-                                <a href="#">Formations</a>
+                                <a href="evenement.php">Evénement</a>
                                 <ul class="dropdown">
-                                    <li><a href="#">Lycée Professionnel</a></li>
-                                    <li><a href="#">Lycée Technologique</a></li>
-                                    <li><a href="#">Enseignement supérieur et UFA</a></li>
-                                    <li><a href="#">Organigramme</a></li>
+                                    <li><a href="creerEventEntreprise.php">Création d'événements</a></li>
+                                    <li><a href="modifierEventEntreprise.php">Modification d'événement</a></li>
+                                    <li><a href="supprimerEventEntreprise.php">Suppression d'événement</a></li>
                                 </ul>
                             </li>
                             <li class="has-dropdown">
-                                <a href="#">Partie Entreprise</a>
+                                <a href="../offre/offre.php">Offres</a> <!-- Select -->
                                 <ul class="dropdown">
-                                    <li><a href="profil.php">Profil</a></li>
-                                    <li><a href="creerOffre.php">Création d'offre d'emplois</a></li>
-                                    <li><a href="creerEventEntreprise.php">Création d'événements</a></li>
-                                    <li><a href="organiserRdv.php">RDV entreprise-étudiant</a></li>
+                                    <li><a href="../offre/creerOffre.php">Création d'offre d'emplois</a></li> <!-- insert -->
+                                    <li><a href="../offre/modifierOffre.php">Modification des offres d'emplois</a></li> <!-- Update -->
+                                    <li><a href="../offre/supprimerOffre.php" >Suppression des offres d'emplois</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Vie de l'établissement</a></li>
-                            <li><a href="#">International</a></li>
-                            <li><a href="#">Erasmus+</a></li>
+                            <li><a href="../RDV/organiserRdv.php">RDV entreprise-étudiant</a></li>
+                            <li><a href="../entreprise/profil.php">Profil</a></li>
 
                             <li><a href="../contact.php">Contact</a></li>
-                            <li class="btn-cta"><a href="../../../src/view/entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
+                            <li class="btn-cta"><a href="../entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -103,27 +101,53 @@
         </div>
     </nav>
 
-    <!-- création d'un rdv -->
-
-    <p> Création d'un rdv</p>
-
-    <form action='../../traitement/entreprise/traitementCreerRDV.php' method='POST'>
-        <label for="choix-etudiant">Etudiant :</label>
-        <select name="etudiant" id="choix-etudiant">
-            <option value="">Choisissez l'étudiant</option>
-        </select>
-        <br/><br/>
-        <label for="choix-horaire">Horaire :</label>
-        <input type="time" id="choix-horaire" name="horaire"
-               min="06:00" max="22:00" required>
-        <br/><br/>
-        <label for="choix-lieux">Lieux :</label>
-        <input type='text' placeholder='Lieux' name='lieux'  required>
-    </form>
+    <aside id="fh5co-hero">
+        <div class="flexslider">
+            <ul class="slides">
+                <li style="background-image: url(../../../src/style/image-entreprise/salon.webp);">
+                    <div class="overlay-gradient"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center slider-text">
+                                <div class="slider-text-inner">
+                                    <h1></h1>
+                                    <p><a class="btn btn-primary btn-lg" href="creerEventEntreprise.php">Créer des événements</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li style="background-image: url(../../../src/style/image-entreprise/modifier.png);">
+                    <div class="overlay-gradient"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center slider-text">
+                                <div class="slider-text-inner">
+                                    <p><a class="btn btn-primary btn-lg btn-learn" href="modifierEventEntreprise.php">Modification d'événement</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li style="background-image: url(../../../src/style/image-entreprise/supprimer.jpg);">
+                    <div class="overlay-gradient"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center slider-text">
+                                <div class="slider-text-inner">
+                                    <p><a class="btn btn-primary btn-lg btn-learn" href="supprimerEventEntreprise.php">Suppression d'événement</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
 
     <!-- Partie du bas -->
 
-    <footer id="fh5co-footer" role="contentinfo" style="background-image: url(../../../src/style/images/img_bg_4.jpg);">
+    <footer id="fh5co-footer" role="contentinfo" style="background-image: url(../../style/images/img_bg_4.jpg);">
         <div class="overlay"></div>
         <div class="container">
             <div class="row row-pb-md">
@@ -169,28 +193,28 @@
 </div>
 
 <!-- jQuery -->
-<script src="../../../src/style/js/jquery.min.js"></script>
+<script src="../../style/js/jquery.min.js"></script>
 <!-- jQuery Easing -->
-<script src="../../../src/style/js/jquery.easing.1.3.js"></script>
+<script src="../../style/js/jquery.easing.1.3.js"></script>
 <!-- Bootstrap -->
-<script src="../../../src/style/js/bootstrap.min.js"></script>
+<script src="../../style/js/bootstrap.min.js"></script>
 <!-- Waypoints -->
-<script src="../../../src/style/js/jquery.waypoints.min.js"></script>
+<script src="../../style/js/jquery.waypoints.min.js"></script>
 <!-- Stellar Parallax -->
-<script src="../../../src/style/js/jquery.stellar.min.js"></script>
+<script src="../../style/js/jquery.stellar.min.js"></script>
 <!-- Carousel -->
-<script src="../../../src/style/js/owl.carousel.min.js"></script>
+<script src="../../style/js/owl.carousel.min.js"></script>
 <!-- Flexslider -->
-<script src="../../../src/style/js/jquery.flexslider-min.js"></script>
+<script src="../../style/js/jquery.flexslider-min.js"></script>
 <!-- countTo -->
-<script src="../../../src/style/js/jquery.countTo.js"></script>
+<script src="../../style/js/jquery.countTo.js"></script>
 <!-- Magnific Popup -->
-<script src="../../../src/style/js/jquery.magnific-popup.min.js"></script>
-<script src="../../../src/style/js/magnific-popup-options.js"></script>
+<script src="../../style/js/jquery.magnific-popup.min.js"></script>
+<script src="../../style/js/magnific-popup-options.js"></script>
 <!-- Count Down -->
-<script src="../../../src/style/js/simplyCountdown.js"></script>
+<script src="../../style/js/simplyCountdown.js"></script>
 <!-- Main -->
-<script src="../../../src/style/js/main.js"></script>
+<script src="../../style/js/main.js"></script>
 <script>
     var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
 

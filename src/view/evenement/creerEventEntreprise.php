@@ -39,6 +39,7 @@
         <!--[if lt IE 9]>
         <script src="../../../src/style/js/respond.min.js"></script>
         <![endif]-->
+        <style> #rouge{ color: red; }</style>
     </head>
     <body>
     <?php
@@ -73,30 +74,26 @@
                             <ul>
                                 <li class="active"><a href="../../../index.php">Accueil</a></li>
                                 <li class="has-dropdown">
-                                    <a href="#">Formations</a>
+                                    <a href="evenement.php">Evénement</a>
                                     <ul class="dropdown">
-                                        <li><a href="#">Lycée Professionnel</a></li>
-                                        <li><a href="#">Lycée Technologique</a></li>
-                                        <li><a href="#">Enseignement supérieur et UFA</a></li>
-                                        <li><a href="#">Organigramme</a></li>
+                                        <li><a href="creerEventEntreprise.php">Création d'événements</a></li>
+                                        <li><a href="modifierEventEntreprise.php">Modification d'événement</a></li>
+                                        <li><a href="supprimerEventEntreprise.php">Suppression d'événement</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-dropdown">
-                                    <a href="#">Partie Entreprise</a>
+                                    <a href="../offre/offre.php">Offres</a> <!-- Select -->
                                     <ul class="dropdown">
-                                        <li><a href="profil.php">Profil</a></li>
-                                        <li><a href="creerOffre.php">Création d'offre d'emplois</a></li>
-                                        <li><a href="creerEventEntreprise.php">Création d'événements</a></li>
-                                        <li><a href="listeEventEntreprise.php">Liste d'événements</a></li>
-                                        <li><a href="organiserRdv.php">RDV entreprise-étudiant</a></li>
+                                        <li><a href="../offre/creerOffre.php">Création d'offre d'emplois</a></li> <!-- insert -->
+                                        <li><a href="../offre/modifierOffre.php">Modification des offres d'emplois</a></li> <!-- Update -->
+                                        <li><a href="../offre/supprimerOffre.php" >Suppression des offres d'emplois</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Vie de l'établissement</a></li>
-                                <li><a href="#">International</a></li>
-                                <li><a href="#">Erasmus+</a></li>
+                                <li><a href="../RDV/organiserRdv.php">RDV entreprise-étudiant</a></li>
+                                <li><a href="../entreprise/profil.php">Profil</a></li>
 
                                 <li><a href="../contact.php">Contact</a></li>
-                                <li class="btn-cta"><a href="../../../src/view/entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
+                                <li class="btn-cta"><a href="../entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -131,7 +128,6 @@
                                 <div class="col-md-12">
                                     <label for='debut'><b>Date et heure de début :</b></label>
                                     <input type='datetime-local' class="form-control" placeholder='début' name='debut' required>
-                                    <small>L'événement ne peut commencer qu'à partir de 18h de Lundi à Vendredi</small>
                                 </div>
                             </div>
 
@@ -139,11 +135,11 @@
                                 <div class="col-md-12">
                                     <label for='fin'><b>Date et heure de fin : </b></label>
                                     <input type='datetime-local' class="form-control" placeholder='fin' name='fin' required>
-                                    <small>L'événement finit le plus tard à 23h</small>
                                 </div>
                             </div>
 
                         <div class="form-group text-center">
+                            <p id="rouge">Attention : la date de l'événement doit être le même jour et l'heure doit être entre 18h et 23h</p>
                             <br>
                             <input type='submit' value="Créer un événement" name='creerEvenement' id='creerEvenement' class="btn btn-primary"></input>
                             </form>

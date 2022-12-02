@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "../../model/bdd/Bdd.php";
 require_once "../../model/Utilisateur.php";
 require_once "../../model/entreprise/Entreprise.php";
@@ -106,8 +107,8 @@ if(isset($_SESSION['id_admin'])){
                                 <li><a href="#">Erasmus+</a></li>
 
                                 <li><a href="#">Contact</a></li>
-                                <li class="btn-cta"><a href="../../../src/view/connexion.php"><span>Se connecter</span></a></li>
-                                <li class="btn-cta"><a href="../../../src/view/inscription.php"><span>S'inscrire</span></a></li>
+                                <li class='btn-cta'><a href='../../../src/view/administration/vueadmin.php'><span>Tableau de bord</span></a></li>
+                                <li class='btn-cta'><a href='../../../src/view/administration/deconnexion.php'><span>S'inscrire</span></a></li>
                             </ul>
                         </div>
                     </div>
