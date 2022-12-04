@@ -26,9 +26,10 @@ class Type
     }
 
     public function ajoutType(BDD $bdd){
-        $req = $bdd->getBdd()->prepare('INSERT INTO type(nom_type) VALUES (:nom)');
+        $req = $bdd->getBdd()->prepare('INSERT INTO type(nom_type,ref_admin) VALUES (:nom,:refadmin)');
         $req->execute(array(
-            "nom"=>$this->getNom()
+            "nom"=>$this->getNom(),
+            "refadmin"=>$this->getRefadmin()
         ));
     }
 

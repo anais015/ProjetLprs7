@@ -108,7 +108,7 @@ if(isset($_SESSION['id_admin'])){
 
                                 <li><a href="#">Contact</a></li>
                                 <li class='btn-cta'><a href='../../../src/view/administration/vueadmin.php'><span>Tableau de bord</span></a></li>
-                                <li class='btn-cta'><a href='../../../src/view/administration/deconnexion.php'><span>S'inscrire</span></a></li>
+                                <li class='btn-cta'><a href='../../../src/view/administration/deconnexion.php'><span>Déconnexion</span></a></li>
                             </ul>
                         </div>
                     </div>
