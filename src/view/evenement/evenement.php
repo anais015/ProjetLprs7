@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Page des événements</title>
+    <title>Page - événements</title>
     <!--<link rel="stylesheet" href="../../style/styleEntreprise.css">-->
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">

@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Créer une offre</title>
+    <title>Page - offre</title>
     <!--<link rel="stylesheet" href="../../style/styleEntreprise.css">-->
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">

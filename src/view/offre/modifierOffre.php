@@ -7,7 +7,7 @@ require_once "../../model/administrateur/Type.php";
 <head>
 
     <meta charset="utf-8">
-    <title>Créer une offre</title>
+    <title>Modifier une offre</title>
     <!--<link rel="stylesheet" href="../../style/styleEntreprise.css">-->
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
@@ -121,14 +121,14 @@ session_start();
 
                     <div class="row form-group">
                         <div class="col-md-12">
-                            <form action='../../traitement/entreprise/traitementModifProfilEntreprise.php' method='POST'>
+                            <form action='../../traitement/offre/traitementModifierOffre.php' method='POST'>
                                 <select name="type" class="form-control">
                                     <option value="" disabled selected> Choississez l'offre à modifier </option>
 
                                     <?php
                                     $bdd = new Bdd();
                                     $offre = new Offre(array());
-                                    $donnees = $offre->exist($bdd,$offre->getId());
+                                    $donnees = $offre->affichage($bdd);
 
                                     foreach($donnees as $value) {
 

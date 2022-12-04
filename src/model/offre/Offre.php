@@ -27,11 +27,8 @@ class Offre
     }
 
     public function affichage($bdd){
-        $sql='SELECT * FROM offre';
-        $req = $bdd->prepare($sql);
-        $execute = $req->execute(array(
-        ));
-        return $req->fetchall();
+        $req = $bdd->getBdd()->query('SELECT * FROM offre');
+        return $req->fetchAll();
     }
 
     public function entrepriseCreerOffre(PDO $bdd){

@@ -17,19 +17,20 @@ if(isset($_POST['modifierOffre'])) {
         'description'=> $_POST['description'],
         'domaine'=>$_POST['domaine'],
         'refType'=>$_POST['type'],
+        'id'=>$_POST['id_offre']
         ));
     var_dump($offre);
     $uneoffre = $offre->entrepriseModifierOffre($bdd);
 
     echo "<script>
-        window.location.href = \"../../view/offre/creerOffre.php\";
-        alert(\"Création effectuée !\")
+        window.location.href = \"../../view/offre/modifierOffre.php\";
+        alert(\"Modification effectuée !\")
         </script>";
 
 } else {
     echo "<script>
-        window.location.href = \"../../view/offre/creerOffre.php\";
-        alert(\"Echec de la création !\")
+        window.location.href = \"../../view/offre/modifierOffre.php\";
+        alert(\"Echec de la modification !\")
          </script>";
 }
 ?>
