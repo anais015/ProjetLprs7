@@ -121,7 +121,7 @@ require_once "../../model/administrateur/Type.php";
 
                             <div class="row form-group">
                                 <div class="col-md-12">
-                                    <form action='../../traitement/entreprise/traitementCreerOffre.php' method='POST'>
+                                    <form action='../../traitement/offre/traitementCreerOffre.php' method='POST'>
                                         <!--<label for='titre'><b>Titre de l'offre :</b></label>-->
                                         <input type='text' class="form-control" placeholder="Titre de l'offre" name='titre'  required><br/>
                                 </div>
