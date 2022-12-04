@@ -198,6 +198,15 @@ class Entreprise extends Utilisateur
         ));
 
     }
+
+    public function listeCandidats (PDO $bdd){
+        $request=$bdd->prepare
+        ('SELECT p.ref_offre, p.ref_etudiant, p.date, e.email 
+                FROM postule AS p
+                JOIN etudiant AS e ON p.ref_etudiant= e.id_etudiant
+                WHERE ref_offre=:ref_offre;
+        ');
+    }
 }
 
 ?>

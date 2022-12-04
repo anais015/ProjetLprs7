@@ -26,12 +26,17 @@ class Offre
         }
     }
 
-    public function affichage($bdd){
-        $sql='SELECT * FROM offre';
-        $req = $bdd->prepare($sql);
-        $execute = $req->execute(array(
-        ));
-        return $req->fetchall();
+    public function listOffreEntreprise(PDO $bdd){
+        $sql='
+            SELECT o.id_offre, o.titre, o.description, o.domaine, t.nom_type
+            FROM offre AS o 
+            JOIN type AS t ON t.id_type = o.ref_type
+            WHERE o.ref_entreprise=:ref_entreprise';
+        $request = $bdd->prepare($sql);
+        $request->execute(array('ref_entreprise'=>$this->ref_entreprise));
+        $result=$request->fetchAll(PDO::FETCH_ASSOC);
+        if (is_array($result)&&count($result)>0) return $result;
+        return false;
     }
 
     public function entrepriseCreerOffre(PDO $bdd){
