@@ -26,7 +26,7 @@ class Type
     }
 
     public function ajoutType(BDD $bdd){
-        $req = $bdd->getBdd()->prepare('INSERT INTO type(nom) VALUES (:nom)');
+        $req = $bdd->getBdd()->prepare('INSERT INTO type(nom_type) VALUES (:nom)');
         $req->execute(array(
             "nom"=>$this->getNom()
         ));
