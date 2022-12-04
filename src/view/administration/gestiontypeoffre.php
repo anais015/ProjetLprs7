@@ -9,7 +9,7 @@ $table = "<table><thead><tr><th>ID</th><th>Nom</th></tr></thead><tbody>";
 foreach ($typesoffre as $type){
     $table .= "<tr>
                 <td>".$type['id_type']."</td>
-                <td>".$type['nom']."</td>
+                <td>".$type['nom_type']."</td>
                 <td>
                 <form action='../../traitement/administration/supprimertypeoffre.php' method='post'>
                     <input hidden name='idtype' value='".$type['id_type']."'>
@@ -109,7 +109,7 @@ $table .= "</tbody></table>";
 
                             <li><a href="#">Contact</a></li>
                             <li class='btn-cta'><a href='../../../src/view/administration/vueadmin.php'><span>Tableau de bord</span></a></li>
-                            <li class='btn-cta'><a href='../../../src/view/administration/deconnexion.php'><span>S'inscrire</span></a></li>
+                            <li class='btn-cta'><a href='../../../src/view/administration/deconnexion.php'><span>Déconnexion</span></a></li>
                         </ul>
                     </div>
                 </div>

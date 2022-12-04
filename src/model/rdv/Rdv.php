@@ -34,11 +34,14 @@ class Rdv
     }
 
     public function creation($bdd){
-        $sql='INSERT INTO rdv (horaire, lieux) VALUES :horaire,:lieux';
+        $sql='INSERT INTO rdv (horaire, lieux, ref_etudiant, ref_offre) 
+VALUES (:horaire,:lieux, :refEtudiant, :refOffre)';
         $req = $bdd->prepare($sql);
         $execute=$req->execute(array(
             'horaire' => $this->horaire,
-            'lieux' =>$this->lieux
+            'lieux' =>$this->lieux,
+            'refEtudiant'=>$this->refEtudiant,
+            'refOffre'=>$this->refOffre
         ));
     }
 

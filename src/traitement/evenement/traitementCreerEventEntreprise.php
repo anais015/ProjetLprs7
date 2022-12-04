@@ -1,11 +1,11 @@
 <?php
 
+session_start();
+
 require_once "../../model/Utilisateur.php"; // D'abord instancier Utilisateur puis le reste !!
 require_once "../../model/entreprise/Entreprise.php";
 require_once "../../model/evenement/Evenement.php";
 require_once "../../model/bdd/Bdd.php";
-
-session_start();
 
 $connexion = new Bdd();
 $bdd = $connexion->getBdd();
@@ -21,19 +21,15 @@ if(isset($_POST['creerEvenement'])) {
     ));
 
     $eve = $event->entrepriseCreerEvenement($bdd);
-
-    if($eve){
         echo "<script>
         window.location.href = \"../../view/evenement/creerEventEntreprise.php\";
         alert(\"Evénement enregistré\")
         </script>";
-    }
-    else{
+    } else{
         echo "<script>
         window.location.href = \"../../view/evenement/creerEventEntreprise.php\";
         alert(\"Erreur\")
         </script>";
     }
-}
 
 ?>

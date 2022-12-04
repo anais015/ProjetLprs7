@@ -21,11 +21,16 @@ $offre = new Offre(array(
 ));
 var_dump($offre);
 $uneoffre = $offre->entrepriseCreerOffre($bdd);
-echo "Création effectuée !";
-header('Location: ../../view/entreprise/creerOffre.php');
+
+echo "<script>
+        window.location.href = \"../../view/offre/creerOffre.php\";
+        alert(\"Création effectuée !\")
+        </script>";
 
 } else {
-    echo "Echec de la création !";
-    header('Location: ../../view/entreprise/creerOffre.php');
+    echo "<script>
+        window.location.href = \"../../view/offre/creerOffre.php\";
+        alert(\"Echec de la création !\")
+         </script>";
 }
 ?>

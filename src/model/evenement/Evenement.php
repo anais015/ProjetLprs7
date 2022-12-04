@@ -137,6 +137,16 @@ class Evenement
         $this->refAdmin = $refAdmin;
     }
 
+    public function choisirParIdEvent($bdd){
+        $sql=('SELECT * FROM evenement WHERE ref_entreprise=`ref_entreprise`');
+        $request= $bdd->getBdd()->query($sql);
+        $request->execute(array(
+            'ref_entreprise'=> $this->ref_entreprise
+        ));
+        $result = $request->fetchAll();
+        if(is_array($result)) return $result;
+        else return false;
+    }
     public function modifierEvenement (PDO $bdd){
         $sql='UPDATE evenement SET nom_event=:nom, description=:description, debut=:debut, fin=:fin
               WHERE id_evenement=:id';
@@ -160,7 +170,7 @@ class Evenement
         else return false;
     }
 
-    public function entrepriseCreerEvenement($bdd){
+    public function entrepriseCreerEvenement(PDO $bdd){
         $sql ='SELECT * FROM evenement WHERE debut=:debut AND fin=:fin AND ref_entreprise=:ref_entreprise';
         $req = $bdd->prepare($sql);
         $req->execute(array(
@@ -171,7 +181,8 @@ class Evenement
         $res = $req->fetch();
         if (is_array($res)) return false;
         else{
-            $sql='INSERT INTO evenement (nom_event, description, debut, fin, ref_entreprise) VALUES (:nom, :description, :debut, :fin, :ref_entreprise)';
+            $sql='INSERT INTO evenement (nom_event, description, debut, fin, ref_entreprise) 
+            VALUES (:nom, :description, :debut, :fin, :ref_entreprise)';
             $request = $bdd->prepare($sql);
             $execute=$request->execute(array(
                 'nom'=> $this->nom,

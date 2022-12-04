@@ -1,10 +1,15 @@
-<?php ?>
+<?php
+require_once "../../model/bdd/Bdd.php";
+require_once "../../model/administrateur/Type.php";
+require_once "../../model/etudiant/Etudiant.php";
+require_once "../../model/offre/Offre.php";
+?>
 
 <!doctype html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Page d'accueil pour entreprise </title>
+    <title>Organiser RDV </title>
     <!--<link rel="stylesheet" href="../../style/styleEntreprise.css">-->
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
@@ -107,11 +112,37 @@
 
     <p> Création d'un rdv</p>
 
-    <form action='../../traitement/entreprise/traitementCreerRDV.php' method='POST'>
+    <form action='../../traitement/rdv/traitementCreerRDV.php' method='POST'>
         <label for="choix-etudiant">Etudiant :</label>
         <select name="etudiant" id="choix-etudiant">
             <option value="">Choisissez l'étudiant</option>
+            <?php
+            $bdd = new Bdd();
+            $etu = new Etudiant(array());
+            $donnees = $etu->selectParId($bdd);
+
+            foreach($donnees as $value) {
+
+                echo "<option value=".$value['id_etudiant'].">".$value['nom']."</option>";
+            }
+            ?>
         </select>
+        <br/><br/>
+        <label for="choix-offre">Offre :</label>
+        <select name="offre" id="choix-offre">
+            <option value="">Choisissez l'offre</option>
+            <?php
+            $bdd = new Bdd();
+            $offre = new Offre(array());
+            $donnees = $offre->affichage($bdd);
+
+            foreach($donnees as $value) {
+
+                echo "<option value=".$value['id_offre'].">".$value['titre']."</option>";
+            }
+            ?>
+        </select>
+
         <br/><br/>
         <label for="choix-horaire">Horaire :</label>
         <input type="time" id="choix-horaire" name="horaire"
