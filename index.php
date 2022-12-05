@@ -1,21 +1,23 @@
 <?php
 session_start();
-$button = "<li class='btn-cta'><a href='src/view/connexion.php'><span>Se connecter</span></a></li>
-           <li class='btn-cta'><a href='src/view/inscription.php'><span>S'inscrire</span></a></li>";
+$button='';
 if (isset($_SESSION['administrateur'])){
     $button = "<li class='btn-cta'><a href='src/view/administration/vueadmin.php'><span>Tableau de bord</span></a></li>
-               <li class='btn-cta'><a href='src/view/administration/deconnexion.php'><span>S'inscrire</span></a></li>";
+               <li class='btn-cta'><a href='src/view/administration/deconnexion.php'><span>Se déconnecter</span></a></li>";
 }
 
 if (isset($_SESSION['etudiant'])){
     $button .= "<!--<li class='btn-cta'><a href='src/view/connexion.php'><span>Se connecter</span></a></li>-->
-                <li class='btn-cta'><a href='src/view/etudiant/deconnexion.php'><span>S'inscrire</span></a></li>";
+                <li class='btn-cta'><a href='src/view/etudiant/deconnexion.php'><span>Se déconnecter</span></a></li>";
 }
 
 if (isset($_SESSION['entreprise'])){
     $button .= "<!--<li class='btn-cta'><a href='src/view/connexion.php'><span>Se connecter</span></a></li>-->
-                <li class='btn-cta'><a href='src/view/etudiant/deconnexion.php'><span>S'inscrire</span></a></li>";
+                <li class='btn-cta'><a href='src/view/etudiant/deconnexion.php'><span>Se déconnecter</span></a></li>";
 }
+if (!isset($_SESSION['administrateur']) && !isset($_SESSION['etudiant']) && !isset($_SESSION['entreprise']))
+    $button = "<li class='btn-cta'><a href='src/view/connexion.php'><span>Se connecter</span></a></li>
+            <li class='btn-cta'><a href='src/view/inscription.php'><span>S'inscrire</span></a></li>";
 ?>
 
 
