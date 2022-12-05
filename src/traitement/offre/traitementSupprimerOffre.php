@@ -17,7 +17,7 @@ if(isset($_POST['supprimerOffre'])){
 
     $supp = $offre->entrepriseSupprimerOffre($bdd);
 
-   /* echo "<script>
+    echo "<script>
         window.location.href = \"../../view/offre/supprimerOffre.php\";
         alert(\"Suppression effectuée !\")
         </script>";
@@ -26,6 +26,6 @@ if(isset($_POST['supprimerOffre'])){
     echo "<script>
         window.location.href = \"../../view/offre/supprimerOffre.php\";
         alert(\"Echec de la suppression !\")
-         </script>";*/
+         </script>";
 }
 ?>
