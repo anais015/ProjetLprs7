@@ -7,7 +7,7 @@ class Rdv
     private ?string $lieux='';
     private ?bool $accepte=false;
     private ?int$refOffre=null;
-    private ?int$refEntreprise=null;
+    private ?int$ref_entreprise=null;
     private ?int$refEtudiant=null;
 
     public function __construct(array $donnees)
@@ -26,11 +26,14 @@ class Rdv
     }
 
     public function affichage($bdd){
-        $sql='SELECT * FROM rdv WHERE ref_entreprise=?, ref_etudiant=?';
-        $req = $bdd->prepare($sql);
-        $execute = $req->execute(array(
+        $sql='SELECT * FROM rdv WHERE ref_entreprise=:ref_entreprise';
+        $request= $bdd->prepare($sql);
+        $request->execute(array(
+            'ref_entreprise'=> $this->ref_entreprise
         ));
-        return $req->fetchall();
+        $result = $request->fetchAll();
+        if(is_array($result)) return $result;
+        else return false;
     }
 
     public function creation($bdd){
@@ -88,12 +91,12 @@ VALUES (:horaire,:lieux, :refEtudiant, :refOffre)';
         $this->refOffre = $refOffre;
     }
 
-    public function getRefEntreprise() {
-        return $this->refEntreprise;
+    public function getRef_entreprise() {
+        return $this->ref_entreprise;
     }
 
-    public function setRefEntreprise($refEntreprise): void {
-        $this->refEntreprise = $refEntreprise;
+    public function setRef_entreprise($ref_entreprise): void {
+        $this->ref_entreprise = $ref_entreprise;
     }
 
     public function getRefEtudiant() {
