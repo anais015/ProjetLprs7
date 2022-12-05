@@ -60,9 +60,9 @@ class Offre
     public function entrepriseSupprimerOffre(PDO $bdd){
         $sql='DELETE FROM offre WHERE id_offre=:id';
         $request=$bdd->prepare($sql);
-        $execute=$request->execute(array('id'=>$this->id));
-        if($execute) return true;
-        else return false;
+        $execute=$request->execute(array(
+            'id'=>$this->id
+        ));
     }
 
     public function getId()
