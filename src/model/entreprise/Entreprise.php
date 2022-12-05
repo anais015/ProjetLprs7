@@ -136,8 +136,8 @@ class Entreprise extends Utilisateur
                 $this->conn = new Connexion(array('refentreprise'=>$this->id));
                 $this->conn->ajoutConnexionEntreprise($bdd);
                 return $res;
-            } else return false;
-        } else return false;
+            } else return $res;
+        } else return $res;
     }
 
     public function inscription($bdd){
@@ -191,12 +191,20 @@ class Entreprise extends Utilisateur
         else return false;
     }
 
-    public function validerCompte(BDD $bdd){
+    public function validerCompte(BDD $bdd,Mail $mail){
         $req = $bdd->getBdd()->prepare('UPDATE entreprise SET valide=1 WHERE id_entreprise=:id');
         $req->execute(array(
             "id"=>$this->getId()
         ));
+        $mail->sendMail($_POST['email'],"Votre compte à été validé","Votre compte entreprise à bien été validé et vous pouvez à présent vous connecter");
 
+    }
+
+    public function deleteAccount(BDD $bdd){
+        $req=$bdd->getBdd()->prepare('DELETE FROM entreprise WHERE id_entreprise=:id');
+        $req->execute(array(
+            "id"=>$this->getId()
+        ));
     }
 }
 

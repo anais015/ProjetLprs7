@@ -153,11 +153,12 @@ class Etudiant extends Utilisateur
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function validerCompte(BDD $bdd){
+    public function validerCompte(BDD $bdd,Mail $mail){
         $req = $bdd->getBdd()->prepare('UPDATE etudiant SET valide=1 WHERE id_etudiant=:id');
         $req->execute(array(
             "id"=>$this->getId()
         ));
+        $mail->sendMail($this->getEmail(),"Votre compte à été validé!","Votre compte à été validé par un administrateur et vous pouver à présent vous connecter");
     }
 
     public function listeCandidature(PDO $bdd){
@@ -270,6 +271,13 @@ class Etudiant extends Utilisateur
         ));
         if($execute) return true;
         else return false;
+    }
+
+    public function deleteAccount(BDD $bdd){
+        $req=$bdd->getBdd()->prepare('DELETE FROM etudiant WHERE id_etudiant=:id');
+        $req->execute(array(
+            "id"=>$this->getId()
+        ));
     }
 
 }

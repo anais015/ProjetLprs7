@@ -4,7 +4,7 @@ $button = "<li class='btn-cta'><a href='src/view/connexion.php'><span>Se connect
            <li class='btn-cta'><a href='src/view/inscription.php'><span>S'inscrire</span></a></li>";
 if (isset($_SESSION['administrateur'])){
     $button = "<li class='btn-cta'><a href='src/view/administration/vueadmin.php'><span>Tableau de bord</span></a></li>
-               <li class='btn-cta'><a href='src/view/administration/deconnexion.php'><span>S'inscrire</span></a></li>";
+               <li class='btn-cta'><a href='src/view/administration/deconnexion.php'><span>Déconnexion</span></a></li>";
 }
 
 if (isset($_SESSION['etudiant'])){
