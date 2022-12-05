@@ -8,20 +8,20 @@ if(isset($_POST['selectIdentity'])) {
                 <div class='row form-group'>
 				<form action='../traitement/administration/traitementInscription.php' method='POST'>
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Nom' name='nom'  required='required'>
+					<input type='text' class='form-control' placeholder='Nom' name='nom'  required>
 				</div>
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required='required'>
+					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='email' class='form-control' placeholder='Email' name='email' required='required'>
+					<input type='email' class='form-control' placeholder='Email' name='email' required>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='password' class='form-control' placeholder='Password' name='password' required='required'>
+					<input type='password' class='form-control' placeholder='Mot de passe' name='password' required>
                     <small>Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial</small>
 				</div>
 			</div>
@@ -38,43 +38,43 @@ if(isset($_POST['selectIdentity'])) {
         <div class='row form-group'>
 				<form action='../traitement/entreprise/traitementInscriptionEntreprise.php' method='POST'>  
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Nom' name='nom' required='required'>
+					<input type='text' class='form-control' placeholder='Nom' name='nom' required>
 				</div>
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required='required'>
+					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='text' class='form-control' placeholder='Rôle de la société' name='role_societe' required='required'>
+					<input type='text' class='form-control' placeholder='Rôle de la société' name='role_societe' required>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-                <input type='text' class='form-control' placeholder='Nom de l Entreprise' name='nom_entreprise' required='required'>
+                <input type='text' class='form-control' placeholder='Nom de l Entreprise' name='nom_entreprise' required>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='text' class='form-control' placeholder='Rue' name='rue_entreprise' required='required'>
+					<input type='text' class='form-control' placeholder='Rue' name='rue_entreprise' required>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-6'>
-					<input type='text' class='form-control'placeholder='Ville' name='ville_entreprise' required='required'>
+					<input type='text' class='form-control'placeholder='Ville' name='ville_entreprise' required>
 				</div>
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Code Postal' name='cp_entreprise' required='required'>
+					<input type='text' class='form-control' placeholder='Code Postal' name='cp_entreprise' required>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='email' class='form-control' placeholder='Email' name='email' required='required'>
+					<input type='email' class='form-control' placeholder='Email' name='email' required>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='password' class='form-control' placeholder='Password' name='password' required='required'>
+					<input type='password' class='form-control' placeholder='Mot de passe' name='password' required>
 					<small>Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial</small>
 				</div>
 			</div>
@@ -91,25 +91,25 @@ if(isset($_POST['selectIdentity'])) {
                 <div class='row form-group'>
 				<form action='../traitement/etudiant/traitementInscription.php' method='POST'>   
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Nom' name='nom' required='required'>
+					<input type='text' class='form-control' placeholder='Nom' name='nom' required>
 				</div>
 				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required='required'>
+					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='text' class='form-control' placeholder=\"Domaine d'étude\" name='domaine' required='required'>
+					<input type='text' class='form-control' placeholder=\"Domaine d'étude\" name='domaine' required>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='email' class='form-control' placeholder='Email' name='email' required='required'>
+					<input type='email' class='form-control' placeholder='Email' name='email' required>
 				</div>
 			</div>
 			<div class='row form-group'>
 				<div class='col-md-12'>
-					<input type='password' class='form-control' placeholder='Password' name='password' required='required'>
+					<input type='password' class='form-control' placeholder='Mot de passe' name='password' required>
                     <small>Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial</small>
 				</div>
 			</div>
