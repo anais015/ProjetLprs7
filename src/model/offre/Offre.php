@@ -27,8 +27,14 @@ class Offre
     }
 
     public function affichage($bdd){
-        $req = $bdd->getBdd()->query('SELECT * FROM offre');
-        return $req->fetchAll();
+        $sql='SELECT * FROM offre WHERE ref_entreprise=:ref_entreprise';
+        $request= $bdd->prepare($sql);
+        $request->execute(array(
+            'ref_entreprise'=> $this->ref_entreprise
+        ));
+        $result = $request->fetchAll();
+        if(is_array($result)) return $result;
+        else return false;
     }
 
     public function entrepriseCreerOffre(PDO $bdd){

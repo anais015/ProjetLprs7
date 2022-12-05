@@ -128,7 +128,8 @@ session_start();
 
                                     <?php
                                     $bdd = new Bdd();
-                                    $offre = new Offre(array());
+                                    $bdd=$bdd->getBdd();
+                                    $offre = new Offre(array('ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']));
                                     $donnees = $offre->affichage($bdd);
 
                                     foreach($donnees as $value) {
