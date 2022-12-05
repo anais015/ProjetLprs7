@@ -1,5 +1,6 @@
 <?php
 require_once "../../model/bdd/Bdd.php";
+require_once "../../model/Utilisateur.php";
 require_once "../../model/administrateur/Type.php";
 require_once "../../model/etudiant/Etudiant.php";
 require_once "../../model/offre/Offre.php";

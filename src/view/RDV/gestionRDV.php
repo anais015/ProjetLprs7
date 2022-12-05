@@ -246,7 +246,7 @@ session_start();
                                             <th>id de rdv</th>
                                             <th>Horaire</th>
                                             <th>Lieu</th>
-                                            <th>accepte</th>s
+                                            <th>accepte</th>
                                             <!-- <th>Type</th>-->
                                         </tr>
                                         </thead>
