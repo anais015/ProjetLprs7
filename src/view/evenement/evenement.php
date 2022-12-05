@@ -1,3 +1,10 @@
+<?php
+require_once "../../model/bdd/Bdd.php";
+require_once "../../model/administrateur/Type.php";
+require_once "../../model/evenement/Evenement.php";
+session_start();
+?>
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -37,11 +44,102 @@
     <!--[if lt IE 9]>
     <script src="../../style/js/respond.min.js"></script>
     <![endif]-->
+
+    <!-- pour le tableau -->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+    <style>
+        table{
+            background-color: #fd7e14;
+            table-layout: auto;
+            width: 250px;
+        }
+        td, th{
+            color: #1e2125;
+            font-family: "Rage Italic";
+        }
+        .main-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .left-part, form {
+            padding: 25px;
+        }
+        .left-part {
+            text-align: center;
+        }
+        .fa-graduation-cap {
+            font-size: 72px;
+        }
+        form {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .info {
+            display: flex;
+            flex-direction: column;
+        }
+        input, select {
+            padding: 5px;
+            margin-bottom: 30px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #eee;
+        }
+        input::placeholder {
+            color: #eee;
+        }
+
+        option:focus {
+            border: none;
+        }
+        option {
+            background: black;
+            border: none;
+        }
+        .checkbox input {
+            margin: 0 10px 0 0;
+            vertical-align: middle;
+        }
+
+        @media (min-width: 568px) {
+            .main-block {
+                flex-direction: row;
+                height: calc(100% - 50px);
+            }
+            .left-part, form {
+                flex: 1;
+                height: auto;
+            }
+
+        select, p {
+            padding: 0;
+            margin: 0;
+            outline: none;
+            font-family: Roboto, Arial, sans-serif;
+            font-size: 16px;
+            color: #eee;
+        }
+    </style>
 </head>
 <body>
-<?php
-session_start();
-?>
 
 <!--<div class="fh5co-loader"></div>-->
 
@@ -145,6 +243,54 @@ session_start();
         </div>
     </aside>
 
+    <div id="fh5co-contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 align-self-start"></div>
+                <div class="col-md-6 align-self-center">
+
+                    <h3 class="text-center">Liste des événements créé</h3>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <div class="main-block">
+                                <div class="left-part">
+                            <table id="table_id" class="display">
+                                <thead>
+                                <tr>
+                                    <th>id de evenement</th>
+                                    <th>Nom de événements</th>
+                                    <th>Description</th>
+                                    <th>Début</th>
+                                    <th>Fin</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $bdd = new Bdd();
+                                $bdd=$bdd->getBdd();
+                                $eve = new Evenement(array('ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']));
+                                $donnees = $eve->choisirParIdEvent($bdd);
+
+                                foreach($donnees as $value){
+
+                                    echo "<tr><td>".$value['id_evenement']."</td><td>"
+                                        .$value['nom_event']."</td><td>".$value['description']."</td><td>"
+                                        .$value['debut']."</td><td>".$value['fin']."</td></tr>";
+
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Partie du bas -->
 
     <footer id="fh5co-footer" role="contentinfo" style="background-image: url(../../style/images/img_bg_4.jpg);">
@@ -233,5 +379,8 @@ session_start();
         enableUtc: false
     });
 </script>
+<script> $(document).ready( function () {
+        $('#table_id').DataTable();
+    } );</script>
 </body>
 </html>
