@@ -2,6 +2,7 @@
 require_once "../../model/bdd/Bdd.php";
 require_once "../../model/administrateur/Type.php";
 require_once "../../model/evenement/Evenement.php";
+session_start();
 ?>
 
 <!doctype html>
@@ -49,7 +50,7 @@ require_once "../../model/evenement/Evenement.php";
 </head>
 <body>
 <?php
-session_start();
+
 //var_dump($_SESSION);
 ?>
 <div id="page">
@@ -119,14 +120,16 @@ session_start();
                     <div class="row form-group">
                         <div class="col-md-12">
                             <form action='../../traitement/evenement/traitementModifierEventEntreprise.php' method='POST'>
-                                <select name="event" class="form-control">
+                                <select name="id_evenement" class="form-control">
                                     <option value="" disabled selected> Choississez l'événement à modifier </option>
 
                                         <?php
                                         $bdd = new Bdd();
-                                        $event = new Evenement(array());
+                                        $bdd=$bdd->getBdd();
+                                        $event = new Evenement(array('ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']));
+                                        var_dump($event);
                                         $donnees = $event->choisirParIdEvent($bdd);
-
+                                        var_dump($donnees);
                                         foreach($donnees as $value) {
 
                                             echo "<option value=".$value['id_evenement'].">".$value['nom_event']."</option>";

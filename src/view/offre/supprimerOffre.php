@@ -1,13 +1,14 @@
 <?php
 require_once "../../model/bdd/Bdd.php";
 require_once "../../model/administrateur/Type.php";
+require_once "../../model/offre/Offre.php";
 ?>
 <!doctype html>
 <html lang="fr">
 <head>
 
     <meta charset="utf-8">
-    <title>Créer une offre</title>
+    <title>Supprimer une offre</title>
     <!--<link rel="stylesheet" href="../../style/styleEntreprise.css">-->
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
@@ -117,22 +118,19 @@ session_start();
                 <div class="col-md-3 align-self-start"></div>
                 <div class="col-md-6 align-self-center">
 
-                    <h3 class="text-center">Création d'une offre</h3>
+                    <h3 class="text-center">Supprimer une offre</h3>
 
                     <div class="row form-group">
                         <div class="col-md-12">
-                            <!--<label for='titre'><b>Titre de l'offre :</b></label>-->
+                            <form action='../../traitement/offre/traitementSupprimerOffre.php' method='POST'>
 
-                    <div class="row form-group">
-                        <div class="col-md-12">
-                            <form action='../../traitement/' method='POST'>
-
-                            <select name="type" class="form-control">
+                            <select name="id_offre" class="form-control">
                                 <option value="" disabled selected> Choississez l'offre à supprimer</option>
 
                                 <?php
                                 $bdd = new Bdd();
-                                $offre = new Offre(array());
+                                $bdd=$bdd->getBdd();
+                                $offre = new Offre(array('ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']));
                                 $donnees = $offre->affichage($bdd);
 
                                 foreach($donnees as $value) {

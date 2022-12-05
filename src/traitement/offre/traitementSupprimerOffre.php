@@ -9,8 +9,8 @@ require_once "../../model/bdd/Bdd.php";
 
 $connexion = new Bdd();
 $bdd = $connexion->getBdd();
-
 if(isset($_POST['supprimerOffre'])){
+
     $offre = new Offre(array(
         'id'=>$_POST['id_offre']
     ));

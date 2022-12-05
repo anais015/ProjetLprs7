@@ -1,6 +1,7 @@
 <?php
 require_once "../../model/bdd/Bdd.php";
 require_once "../../model/administrateur/Type.php";
+require_once "../../model/offre/Offre.php";
 ?>
 <!doctype html>
 <html lang="fr">
@@ -127,7 +128,8 @@ session_start();
 
                                     <?php
                                     $bdd = new Bdd();
-                                    $offre = new Offre(array());
+                                    $bdd=$bdd->getBdd();
+                                    $offre = new Offre(array('ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']));
                                     $donnees = $offre->affichage($bdd);
 
                                     foreach($donnees as $value) {

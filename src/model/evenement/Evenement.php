@@ -138,8 +138,8 @@ class Evenement
     }
 
     public function choisirParIdEvent($bdd){
-        $sql=('SELECT * FROM evenement WHERE ref_entreprise=`ref_entreprise`');
-        $request= $bdd->getBdd()->query($sql);
+        $sql='SELECT * FROM evenement WHERE ref_entreprise=:ref_entreprise';
+        $request= $bdd->prepare($sql);
         $request->execute(array(
             'ref_entreprise'=> $this->ref_entreprise
         ));
