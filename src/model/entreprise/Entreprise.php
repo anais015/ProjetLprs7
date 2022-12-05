@@ -206,6 +206,20 @@ class Entreprise extends Utilisateur
             "id"=>$this->getId()
         ));
     }
+
+    /**
+     * @throws Exception
+     */
+    public function newCode(PDO $bdd, Mail $mail){
+        $code = random_int(1000,9999);
+        $req=$bdd->prepare('UPDATE administrateur SET code = :code WHERE email = :email');
+        $req->execute(array(
+            "code"=>$code,
+            "email"=>$this->getEmail()
+        ));
+        $mail->sendMail($this->getEmail(),"Code Mot de passe oublié","Votre code pour modifer votre mot de passe est : ".$code);
+    }
+
 }
 
 ?>
