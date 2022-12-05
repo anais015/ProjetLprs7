@@ -1,133 +1,22 @@
 <?php
-$table="";
-$placeHolder='Vous êtes';
-if(isset($_POST['selectIdentity'])) {
-    if ($_POST['selectIdentity'] == 'administrateur') {
-        $placeHolder = 'Administrateur';
-        $table .= "
-                <div class='row form-group'>
-				<form action='../traitement/administration/traitementInscription.php' method='POST'>
-				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Nom' name='nom'  required>
-				</div>
-				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required>
-				</div>
-			</div>
-			<div class='row form-group'>
-				<div class='col-md-12'>
-					<input type='email' class='form-control' placeholder='Email' name='email' required>
-				</div>
-			</div>
-			<div class='row form-group'>
-				<div class='col-md-12'>
-					<input type='password' class='form-control' placeholder='Mot de passe' name='password' required>
-                    <small>Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial</small>
-				</div>
-			</div>
+session_start();
+require_once "../model/bdd/Bdd.php";
+require_once "../model/Utilisateur.php";
+require_once "../model/etudiant/Etudiant.php";
+require_once "../model/entreprise/Entreprise.php";
+require_once "../model/administrateur/Administrateur.php";
 
-			<div class='form-group text-center'>
-				<input type='submit' value=\"S'inscrire\" name='inscription' id='inscription' class='btn btn-primary'>
-				</form>
-			</div>
-                ";
-    }
-    if ($_POST['selectIdentity'] == 'entreprise') {
-        $placeHolder = 'Entreprise';
-        $table .= "
-        <div class='row form-group'>
-				<form action='../traitement/entreprise/traitementInscriptionEntreprise.php' method='POST'>  
-				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Nom' name='nom' required>
-				</div>
-				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required>
-				</div>
-			</div>
-			<div class='row form-group'>
-				<div class='col-md-12'>
-					<input type='text' class='form-control' placeholder='Rôle de la société' name='role_societe' required>
-				</div>
-			</div>
-			<div class='row form-group'>
-				<div class='col-md-12'>
-                <input type='text' class='form-control' placeholder='Nom de l Entreprise' name='nom_entreprise' required>
-				</div>
-			</div>
-			<div class='row form-group'>
-				<div class='col-md-12'>
-					<input type='text' class='form-control' placeholder='Rue' name='rue_entreprise' required>
-				</div>
-			</div>
-			<div class='row form-group'>
-				<div class='col-md-6'>
-					<input type='text' class='form-control'placeholder='Ville' name='ville_entreprise' required>
-				</div>
-				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Code Postal' name='cp_entreprise' required>
-				</div>
-			</div>
-			<div class='row form-group'>
-				<div class='col-md-12'>
-					<input type='email' class='form-control' placeholder='Email' name='email' required>
-				</div>
-			</div>
-			<div class='row form-group'>
-				<div class='col-md-12'>
-					<input type='password' class='form-control' placeholder='Mot de passe' name='password' required>
-					<small>Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial</small>
-				</div>
-			</div>
-			<div class='form-group text-center'>
-				<input type='submit' value=\"S'inscrire\" name='inscription' id='inscription' class='btn btn-primary'>
-				</form>
-			</div>
-                ";
-    }
+$cnx = new Bdd();
+$bdd = $cnx->getBdd();
 
-    if ($_POST['selectIdentity'] == 'etudiant') {
-        $placeHolder = 'Etudiant';
-        $table .= "
-                <div class='row form-group'>
-				<form action='../traitement/etudiant/traitementInscription.php' method='POST'>   
-				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Nom' name='nom' required>
-				</div>
-				<div class='col-md-6'>
-					<input type='text' class='form-control' placeholder='Prénom' name='prenom' required>
-				</div>
-			</div>
-			<div class='row form-group'>
-				<div class='col-md-12'>
-					<input type='text' class='form-control' placeholder=\"Domaine d'étude\" name='domaine' required>
-				</div>
-			</div>
-			<div class='row form-group'>
-				<div class='col-md-12'>
-					<input type='email' class='form-control' placeholder='Email' name='email' required>
-				</div>
-			</div>
-			<div class='row form-group'>
-				<div class='col-md-12'>
-					<input type='password' class='form-control' placeholder='Mot de passe' name='password' required>
-                    <small>Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial</small>
-				</div>
-			</div>
-			<div class='form-group text-center'>
-				<input type='submit' value=\"S'inscrire\" name='inscription' id='inscription' class='btn btn-primary'>
-				</form>
-			</div>
-            ";
-    }
-}
 ?>
 
 <!DOCTYPE HTML>
-<html lang="fr">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>S'inscrire &mdash; LPRS</title>
+    <title>Mot de passe oublié &mdash; LPRS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
     <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -244,13 +133,13 @@ if(isset($_POST['selectIdentity'])) {
     <aside id="fh5co-hero">
         <div class="flexslider">
             <ul class="slides">
-                <li style="background-image: url(../style/images/img_bg_5.jpg);">
+                <li style="background-image: url(../style/images/forget.jpg);">
                     <div class="overlay-gradient"></div>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2 text-center slider-text">
                                 <div class="slider-text-inner">
-                                    <h1 class="heading-section">S'inscrire</h1>
+                                    <h1 class="heading-section">Mot de passe oublié</h1>
                                 </div>
                             </div>
                         </div>
@@ -265,31 +154,38 @@ if(isset($_POST['selectIdentity'])) {
             <div class="row">
                 <div class="col-md-3 align-self-start"></div>
                 <div class="col-md-6 align-self-center">
-                    <h3 class="text-center">S'inscrire</h3>
+                    <h3 class="text-center">Mot de passe oublié</h3>
                     <div class="row form-group">
-                        <div class="col-md-13">
-                            <form action="" method="post">
-                                <select class="form-control" name="selectIdentity" id="selectIdentity" required onchange="this.form.submit()">
-                                    <option selected hidden disabled><?=$placeHolder;?></option>
+                        <div class="col-md-12">
+
+                            <form action="../traitement/mdp_oublie.php" method='POST'>
+                                <select name="selectIdentity" id="selectIdentity" class="form-control" required>
+                                    <option selected hidden disabled>Vous êtes</option>
                                     <option value="administrateur">Administrateur</option>
                                     <option value="entreprise">Entreprise</option>
                                     <option value="etudiant">Etudiant</option>
                                 </select>
-                            </form>
                         </div>
                     </div>
 
                     <div class="row form-group">
-                        <?=$table;?>
+                        <div class="col-md-12">
+                            <input type='email' class="form-control" placeholder='Veuillez saisir votre email' name='email' required>
+                        </div>
                     </div>
+
+                    <div class="form-group text-center">
+                        <input type="submit" name='connexion' id='connexion' class="btn btn-primary">
+                    </div>
+                    </form>
                 </div>
                 <div class="col-md-3 align-self-end"></div>
-                </div>
+            </div>
 
         </div>
     </div>
 
-    <footer id="fh5co-footer" role="contentinfo" style="background-image: url(../style/images/img_bg_5.jpg);">
+    <footer id="fh5co-footer" role="contentinfo" style="background-image: url(../style/images/forget.jpg);">
         <div class="overlay"></div>
         <div class="container">
             <div class="row row-pb-md">
@@ -361,6 +257,13 @@ if(isset($_POST['selectIdentity'])) {
 <script src="../style/js/simplyCountdown.js"></script>
 <!-- Main -->
 <script src="../style/js/main.js"></script>
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") x.type = "text";
+        else x.type = "password";
+    }
+</script>
 
 </body>
 </html>

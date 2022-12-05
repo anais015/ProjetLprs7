@@ -146,6 +146,26 @@ VALUES (:horaire,:lieux, :refEtudiant, :refOffre)';
         return false;
     }
 
+    public function rdvDecline (PDO $bdd){
+        $sql='SELECT o.id_offre, e.nom_entreprise, o.titre, o.description, o.domaine,
+              t.nom_type, r.id_rdv, r.horaire, r.lieux, r.accepte
+              FROM entreprise AS e
+              JOIN offre AS o ON e.id_entreprise = o.ref_entreprise
+              JOIN type AS t ON o.ref_type = t.id_type
+              LEFT JOIN rdv AS r ON o.id_offre = r.ref_offre
+              WHERE r.ref_etudiant=:refEtudiant AND r.accepte = 0
+              ORDER BY r.horaire desc';
+        $request = $bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'refEtudiant'=>$this->refEtudiant
+        ));
+        if ($execute){
+            $result = $request->fetchAll(PDO::FETCH_ASSOC);
+            if(is_array($result)) return $result;
+        }
+        return false;
+    }
+
     public function accepterRdv (PDO $bdd){
         $sql = 'UPDATE rdv SET accepte = 1 WHERE id_rdv =:id AND ref_etudiant=:refEtudiant';
         $request=$bdd->prepare($sql);

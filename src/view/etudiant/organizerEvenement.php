@@ -181,10 +181,10 @@ if (isset($_POST['enregistrer'])){
                                 <label for='fin'><b>Heure de fin</b></label>
                                 <input class='form-control' type='datetime-local' placeholder='Heure de fin' name='fin' required>
                             </div>
+                            <div class="col-md-12 text-center">
+                                <small>Des événements ne peuvent pas avoir lieu que dans la semaine, de 18h à 23h.</small>
+                            </div>
                         </div>
-
-
-
                     <div class="form-group text-center">
                         <input type='submit' value="Organiser" name='enregistrer' id='enregistrer' class='btn btn-primary'>
                         </form>

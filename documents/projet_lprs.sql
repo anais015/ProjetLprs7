@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `rdv`
     `horaire` DATETIME NOT NULL,
     `lieux` varchar(255)NOT NULL,
     `accepte` BOOLEAN NULL,
-    `ref_etudiant` int(11) NULL,
+     `ref_etudiant` int(11) NOT NULL,
     `ref_offre` int(11)NOT NULL,
     PRIMARY KEY(`id_rdv`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
