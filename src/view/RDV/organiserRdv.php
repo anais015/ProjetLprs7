@@ -49,6 +49,7 @@ require_once "../../model/offre/Offre.php";
 
 <!--<div class="fh5co-loader"></div>-->
 
+
 <div id="page">
     <nav class="fh5co-nav" role="navigation">
         <div class="top">
@@ -77,26 +78,28 @@ require_once "../../model/offre/Offre.php";
                         <ul>
                             <li class="active"><a href="../entreprise/page_accueil.php">Accueil</a></li>
                             <li class="has-dropdown">
-                                <a href="#">Formations</a>
+                                <a href="../evenement/evenement.php">Evénement</a>
                                 <ul class="dropdown">
-                                    <li><a href="#">Lycée Professionnel</a></li>
-                                    <li><a href="#">Lycée Technologique</a></li>
-                                    <li><a href="#">Enseignement supérieur et UFA</a></li>
-                                    <li><a href="#">Organigramme</a></li>
+                                    <li><a href="../evenement/creerEventEntreprise.php">Création d'événements</a></li>
+                                    <li><a href="../evenement/modifierEventEntreprise.php">Modification d'événement</a></li>
+                                    <li><a href="../evenement/supprimerEventEntreprise.php">Suppression d'événement</a></li>
                                 </ul>
                             </li>
                             <li class="has-dropdown">
-                                <a href="#">Partie Entreprise</a>
+                                <a href="../offre/offre.php">Offres</a> <!-- Select -->
                                 <ul class="dropdown">
-                                    <li><a href="../entreprise/profil.php">Profil</a></li>
-                                    <li><a href="../offre/creerOffre.php">Création d'offre d'emplois</a></li>
-                                    <li><a href="../evenement/creerEventEntreprise.php">Création d'événements</a></li>
-                                    <li><a href="organiserRdv.php">RDV entreprise-étudiant</a></li>
+                                    <li><a href="../offre/creerOffre.php">Création d'offre d'emplois</a></li> <!-- insert -->
+                                    <li><a href="../offre/modifierOffre.php">Modification des offres d'emplois</a></li> <!-- Update -->
+                                    <li><a href="../offre/supprimerOffre.php" >Suppression des offres d'emplois</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Vie de l'établissement</a></li>
-                            <li><a href="#">International</a></li>
-                            <li><a href="#">Erasmus+</a></li>
+                            <li class="has-dropdown">
+                                <a href="../RDV/gestionRDV.php">RDV entreprise-étudiant</a>
+                                <ul class="dropdown">
+                                    <li><a href="../RDV/organiserRdv.php">Création de RDV</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="../entreprise/profil.php">Profil</a></li>
 
                             <li><a href="../contact.php">Contact</a></li>
                             <li class="btn-cta"><a href="../entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>

@@ -100,8 +100,12 @@ session_start();
                                     <li><a href="../RDV/organiserRdv.php">Création de RDV</a></li>
                                 </ul>
                             </li>
-                            <li><a href="../entreprise/profil.php">Profil</a></li>
-
+                            <li class="has-dropdown">
+                                <a href="../entreprise/profil.php">Profil</a>
+                                <ul class="dropdown">
+                                    <li><a href="../entreprise/modifProfil.php">Modifier Profil</a></li>
+                                </ul>
+                            </li>
                             <li><a href="../contact.php">Contact</a></li>
                             <li class="btn-cta"><a href="../entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
                         </ul>

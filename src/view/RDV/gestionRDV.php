@@ -1,3 +1,10 @@
+<?php
+require_once "../../model/bdd/Bdd.php";
+require_once "../../model/administrateur/Type.php";
+require_once "../../model/rdv/Rdv.php";
+session_start();
+?>
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -37,10 +44,105 @@
     <!--[if lt IE 9]>
     <script src="../../style/js/respond.min.js"></script>
     <![endif]-->
+
+    <!-- pour le tableau -->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+    <style>
+        table{
+            background-color: #fd7e14;
+            table-layout: auto;
+            width: 250px;
+        }
+        td, th{
+            color: #1e2125;
+            font-family: "Rage Italic";
+        }
+        .main-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .left-part, form {
+            padding: 25px;
+        }
+        .left-part {
+            text-align: center;
+        }
+        .fa-graduation-cap {
+            font-size: 72px;
+        }
+        form {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .info {
+            display: flex;
+            flex-direction: column;
+        }
+        input, select {
+            padding: 5px;
+            margin-bottom: 30px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #eee;
+        }
+        input::placeholder {
+            color: #eee;
+        }
+
+        option:focus {
+            border: none;
+        }
+        option {
+            background: black;
+            border: none;
+        }
+        .checkbox input {
+            margin: 0 10px 0 0;
+            vertical-align: middle;
+        }
+
+        @media (min-width: 568px) {
+            .main-block {
+                flex-direction: row;
+                height: calc(100% - 50px);
+            }
+            .left-part, form {
+                flex: 1;
+                height: auto;
+            }
+
+            select, p {
+                padding: 0;
+                margin: 0;
+                outline: none;
+                font-family: Roboto, Arial, sans-serif;
+                font-size: 16px;
+                color: #eee;
+            }
+    </style>
 </head>
 <body>
 
 <!--<div class="fh5co-loader"></div>-->
+
 
 <div id="page">
     <nav class="fh5co-nav" role="navigation">
@@ -70,27 +172,33 @@
                         <ul>
                             <li class="active"><a href="../entreprise/page_accueil.php">Accueil</a></li>
                             <li class="has-dropdown">
-                                <a href="#">Formations</a>
+                                <a href="../evenement/evenement.php">Evénement</a>
                                 <ul class="dropdown">
-                                    <li><a href="#">Lycée Professionnel</a></li>
-                                    <li><a href="#">Lycée Technologique</a></li>
-                                    <li><a href="#">Enseignement supérieur et UFA</a></li>
-                                    <li><a href="#">Organigramme</a></li>
+                                    <li><a href="../evenement/creerEventEntreprise.php">Création d'événements</a></li>
+                                    <li><a href="../evenement/modifierEventEntreprise.php">Modification d'événement</a></li>
+                                    <li><a href="../evenement/supprimerEventEntreprise.php">Suppression d'événement</a></li>
                                 </ul>
                             </li>
                             <li class="has-dropdown">
-                                <a href="#">Partie Entreprise</a>
+                                <a href="../offre/offre.php">Offres</a> <!-- Select -->
                                 <ul class="dropdown">
-                                    <li><a href="../entreprise/profil.php">Profil</a></li>
-                                    <li><a href="../offre/creerOffre.php">Création d'offre d'emplois</a></li>
-                                    <li><a href="../evenement/creerEventEntreprise.php">Création d'événements</a></li>
-                                    <li><a href="organiserRdv.php">RDV entreprise-étudiant</a></li>
+                                    <li><a href="../offre/creerOffre.php">Création d'offre d'emplois</a></li> <!-- insert -->
+                                    <li><a href="../offre/modifierOffre.php">Modification des offres d'emplois</a></li> <!-- Update -->
+                                    <li><a href="../offre/supprimerOffre.php" >Suppression des offres d'emplois</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Vie de l'établissement</a></li>
-                            <li><a href="#">International</a></li>
-                            <li><a href="#">Erasmus+</a></li>
-
+                            <li class="has-dropdown">
+                                <a href="gestionRDV.php">RDV entreprise-étudiant</a>
+                                <ul class="dropdown">
+                                    <li><a href="organiserRdv.php">Création de RDV</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-dropdown">
+                                <a href="../entreprise/profil.php">Profil</a>
+                                <ul class="dropdown">
+                                    <li><a href="../entreprise/modifProfil.php">Modifier Profil</a></li>
+                                </ul>
+                            </li>
                             <li><a href="../contact.php">Contact</a></li>
                             <li class="btn-cta"><a href="../entreprise/deconnexion.php"><span>Se déconnecter</span></a></li>
                         </ul>
@@ -101,15 +209,72 @@
         </div>
     </nav>
 
-    <!-- Affichage des rdv -->
+    <aside id="fh5co-hero">
+        <div class="flexslider">
+            <ul class="slides">
+                <li style="background-image: url(../../style/images/img_bg_4.jpg);">
+                    <div class="overlay-gradient"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center slider-text">
+                                <div class="slider-text-inner">
+                                    <h1 class="heading-section">RDV</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
 
-    <p> Les RDV </p>
+    <div id="fh5co-contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 align-self-start"></div>
+                <div class="col-md-6 align-self-center">
 
-    <?php
+                    <h3 class="text-center">Les RDV </h3>
 
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <div class="main-block">
+                                <div class="left-part">
+                                    <table id="table_id" class="display">
+                                        <thead>
+                                        <tr>
+                                            <th>id de rdv</th>
+                                            <th>Horaire</th>
+                                            <th>Lieu</th>
+                                            <th>accepte</th>s
+                                            <!-- <th>Type</th>-->
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        $bdd = new Bdd();
+                                        $bdd=$bdd->getBdd();
+                                        $rdv = new Rdv(array('ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']));
+                                        $donnees = $rdv->affichage($bdd);
 
+                                        foreach($donnees as $value){
 
-    ?>
+                                            echo "<tr><td>".$value['id_offre']."</td><td>"
+                                                .$value['titre']."</td><td>".$value['description']."</td><td>"
+                                                .$value['domaine']./*"</td><td>".$value['type'].*/"</td></tr>";
+
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Partie du bas -->
 
     <footer id="fh5co-footer" role="contentinfo" style="background-image: url(../../style/images/img_bg_4.jpg);">
@@ -198,5 +363,8 @@
         enableUtc: false
     });
 </script>
+<script> $(document).ready( function () {
+        $('#table_id').DataTable();
+    } );</script>
 </body>
 </html>
