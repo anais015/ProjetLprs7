@@ -18,6 +18,7 @@ $message2='';
 
 $tblisteRdvs = '';
 $tblisteHistoriques = '';
+$tblisteDecline='';
 
 if(isset($_POST['accepter'])){
     $rdv=new Rdv(array(
@@ -71,13 +72,31 @@ else {
     }
 }
 
+$liste_declines=$rdv->rdvDecline($bdd);
+if (empty($liste_declines))$message2 = "Aucun rendez-vous décliné";
+else {
+    foreach ($liste_declines as $value){
+        $date=explode(" ",$value['horaire'])[0];
+        $date=date_format(date_create($date),"d/m/Y");
+        $heure=explode(" ",$value['horaire'])[1];
+        $heure=date_format(date_create($heure),"H:i");
+        $tblisteDecline .="<tr>
+                        <form  action='fiche_job.php' method='get'>
+                            <td><button class='pricing__feature btn-link' name='ref_offre' value='".$value['id_offre']."'>".$value['titre']."</button></td>                            
+                        </form>
+                        <td>".$value['nom_entreprise']."</td>
+                        <td>$date</td>
+                        <td>$heure</td>
+                        <td>".$value['domaine']."</td>
+                        <td>".$value['nom_type']."</td>
+                    </tr>";
+    }
+}
+
 $liste_historiques=$rdv->historiqueRdv($bdd);
 if (empty($liste_historiques))$message2 = "Aucun rendez-vous passé";
 else {
     foreach ($liste_historiques as $value){
-        if (is_null($value['accepte'])) $statut="--";
-        elseif (!$value['accepte']) $statut="Décliné";
-        else $statut = "Accepté";
         $date=explode(" ",$value['horaire'])[0];
         $date=date_format(date_create($date),"d/m/Y");
         $heure=explode(" ",$value['horaire'])[1];
@@ -96,77 +115,7 @@ else {
 }
 
 ?>
-<!--    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../../style/style.css">
-    </head>
-    <body>
-    <nav>
-        <div class="bottom-row">
-            <a href="accueil.php">Accueil</a>
-            <a href="trouverJob.php">Chercher un job</a>
-            <a href="trouverEvenement.php">Chercher un événement</a>
-            <a href="organizerEvenement.php">Organizer un événement</a>
-            <a href="#">Contact</a>
 
-            <a href="listeEvenement.php">Mes événements</a>
-            <a href="candidature.php">Mes candidatures</a>
-            <a href="rdv.php">Mes rendez-vous</a>
-            <a href="monCompte.php">Mon compte</a>
-            <a href="deconnexion.php">Se déconnecter</a>
-        </div>
-    </nav>
-    <h2>Mes rendez-vous</h2>
-
-    <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'À venir')">À venir</button>
-        <button class="tablinks" onclick="openTab(event, 'Historique')">Historique</button>
-    </div>
-
-    <div id="À venir" class="tabcontent">
-        <h3>Rendez-vous à venir</h3>
-        <?/*=$message1;*/?>
-        <table>
-            <tr>
-                <th scope="col">Titre</th>
-                <th scope="col">Entreprise</th>
-                <th scope="col">Date</th>
-                <th scope="col">Horaire</th>
-                <th scope="col">Description</th>
-                <th scope="col">Domaine</th>
-                <th scope="col">Type de contrat</th>
-                <th scope="col">Adresse</th>
-                <th scope="col">Statut</th>
-                <th scope="col">Action</th>
-            </tr>
-            <?/*=$tblisteRdvs*/?>
-        </table>
-    </div>
-
-    <div id="Historique" class="tabcontent">
-        <h3>Historique</h3>
-        <table>
-            <tr>
-                <th scope="col">Titre</th>
-                <th scope="col">Entreprise</th>
-                <th scope="col">Date</th>
-                <th scope="col">Horaire</th>
-                <th scope="col">Description</th>
-                <th scope="col">Domaine</th>
-                <th scope="col">Type de contrat</th>
-                <th scope="col">Adresse</th>
-            </tr>
-            <?/*=$tblisteHistoriques;*/?>
-        </table>
-    </div>
-
-    </body>
-
-    </html>
-
--->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -368,6 +317,9 @@ else {
                                 <a href="#tab-table1" data-toggle="tab">À venir</a>
                             </li>
                             <li>
+                                <a href="#tab-table3" data-toggle="tab">Décliné</a>
+                            </li>
+                            <li>
                                 <a href="#tab-table2" data-toggle="tab">Historique</a>
                             </li>
                         </ul>
@@ -389,6 +341,25 @@ else {
                                     <tbody>
                                     <?=$tblisteRdvs?>
                                     <tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="tab-table3">
+                                <table id="myTable3" class="table" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                    <tr>
+                                        <th scope="col">Titre</th>
+                                        <th scope="col">Entreprise</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Horaire</th>
+                                        <th scope="col">Domaine</th>
+                                        <th scope="col">Contrat</th>
+                                    </tr>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?=$tblisteDecline;?>
+                                    </tbody>
                                 </table>
                             </div>
                             <div class="tab-pane" id="tab-table2">
