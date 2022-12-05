@@ -1,37 +1,8 @@
 <?php
 session_start();
 require_once "../../model/bdd/Bdd.php";
-require_once "../../model/Utilisateur.php";
-require_once "../../model/entreprise/Entreprise.php";
-require_once "../../model/Connexion.php";
+require_once "../../model/administrateur/Type.php";
 require_once "../../model/evenement/Evenement.php";
-
-$cnx = new Bdd();
-$bdd = $cnx->getBdd();
-$h2=''; $msg='';
-$supprimer=false;
-$annuler=false;
-$erreur=false;
-
-if(isset($_POST['annuler'])) {
-    $h2 = 'Annuler un événement';
-    $event = new Evenement(array(
-        'id' => $_POST['annuler']
-    ));
-    $annuler = $event->supprimerEvenement($bdd);
-    if ($annuler) $msg = 'Événement annulé';
-    else $msg = "Erreur : Votre annulation n'a pas été prise en compte.";
-}
-
-if(isset($_POST['supprimer'])){
-    $h2='Supprimer un événement';
-    $event = new Evenement(array(
-        'id'=>$_POST['supprimer']
-    ));
-    $supprimer=$event->supprimerEvenement($bdd);
-    if($supprimer) $msg='Événement supprimé';
-    else $msg="Erreur : Votre suppression n'a pas été prise en compte.";
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,7 +44,7 @@ if(isset($_POST['supprimer'])){
     <script src="../../style/js/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<div>
 <div id="page">
     <nav class="fh5co-nav" role="navigation">
         <div class="top">
@@ -130,7 +101,6 @@ if(isset($_POST['supprimer'])){
         </div>
     </nav>
 </div>
-<h2><?=$h2;?></h2>
 
 <div id="fh5co-contact">
     <div class="container">
@@ -142,28 +112,28 @@ if(isset($_POST['supprimer'])){
 
                 <div class="row form-group">
                     <div class="col-md-12">
+                        <form action='../../traitement/evenement/traitementSupprimerEventEntreprise.php' method='POST'>
+                            <select name="id_evenement" class="form-control">
+                                <option value="" disabled selected> Choississez l'événement à supprimer </option>
 
-                        <div>
-                            <div>
-                                <div class="container" id="alert"
                                 <?php
-                                if (!$erreur) echo 'style="display:none;"';
-                                else echo 'style="display:block; background-color:#f8bdc1; text-align: center"';
-                                ?>
-                                <input type="hidden"> &#9888; <?=$msg;?>
-                                <a href="../../view/evenement/evenement.php">Revenir aux événements</a>
-                            </div>
-                            <div class="container" id="alert"
-                            <?php
-                            if (!$annuler) echo 'style="display:none;"';
-                            if ($annuler) echo 'style="display:block; background-color:#D3DEA5; text-align: center"';
-                            if (!$supprimer) echo 'style="display:none;"';
-                            if ($supprimer) echo 'style="display:block; background-color:#D3DEA5; text-align: center"';
-                            ?>
-                            <input type="hidden"> &#10003; <?=$msg;?>
-                            <a href="../../view/evenement/evenement.php">Revenir aux événements</a>
-                        </div>
+                                $bdd = new Bdd();
+                                $bdd=$bdd->getBdd();
+                                $event = new Evenement(array('ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']));
 
+                                $donnees = $event->choisirParIdEvent($bdd);
+
+                                foreach($donnees as $value) {
+
+                                    echo "<option value=".$value['id_evenement'].">".$value['nom_event']."</option>";
+                                }
+                                ?>
+                            </select>
+                            <div class="form-group text-center">
+                            <br/>
+                                <input type='submit' value="Supprimer un événement" name='supprimerEvenement' id='supprimerEvenement' class="btn btn-primary"></input>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -171,7 +141,7 @@ if(isset($_POST['supprimer'])){
     </div>
 </div>
 
-<!--<footer id="fh5co-footer" role="contentinfo" style="background-image: url(../../style/images/img_bg_4.jpg);">
+<footer id="fh5co-footer" role="contentinfo" style="background-image: url(../../style/images/img_bg_4.jpg);">
     <div class="overlay"></div>
     <div class="container">
         <div class="row row-pb-md">
@@ -210,7 +180,7 @@ if(isset($_POST['supprimer'])){
 
     </div>
 </footer>
-</div>-->
+</div>
 
 <div class="gototop js-top">
     <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>

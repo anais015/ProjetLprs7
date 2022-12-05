@@ -18,7 +18,6 @@ if(isset($_POST['connexion'])) {
     ));
     //var_dump($etudiant);
     $connexion=$etudiant->connexion($bdd,$_POST['password']);
-    //var_dump($connexion);
 
     if ($connexion){
         $_SESSION['etudiant']=$connexion;

@@ -26,17 +26,15 @@ class Offre
         }
     }
 
-    public function listOffreEntreprise(PDO $bdd){
-        $sql='
-            SELECT o.id_offre, o.titre, o.description, o.domaine, t.nom_type
-            FROM offre AS o 
-            JOIN type AS t ON t.id_type = o.ref_type
-            WHERE o.ref_entreprise=:ref_entreprise';
-        $request = $bdd->prepare($sql);
-        $request->execute(array('ref_entreprise'=>$this->ref_entreprise));
-        $result=$request->fetchAll(PDO::FETCH_ASSOC);
-        if (is_array($result)&&count($result)>0) return $result;
-        return false;
+    public function affichage($bdd){
+        $sql='SELECT * FROM offre WHERE ref_entreprise=:ref_entreprise';
+        $request= $bdd->prepare($sql);
+        $request->execute(array(
+            'ref_entreprise'=> $this->ref_entreprise
+        ));
+        $result = $request->fetchAll();
+        if(is_array($result)) return $result;
+        else return false;
     }
 
     public function entrepriseCreerOffre(PDO $bdd){
@@ -53,11 +51,24 @@ class Offre
     }
 
     public function entrepriseModifierOffre(PDO $bdd){
-
+        $sql='UPDATE offre SET titre=:titre, description=:description,  domaine=:domaine, ref_type=:refType
+        WHERE id_offre=:id';
+        $req = $bdd->prepare($sql);
+        $execute=$req->execute(array(
+            'titre' => $this->titre,
+            'description' => $this->description,
+            'refType'=>$this->refType,
+            'domaine' =>$this->domaine,
+            'id'=>$this->id
+        ));
     }
 
     public function entrepriseSupprimerOffre(PDO $bdd){
-
+        $sql='DELETE FROM offre WHERE id_offre=:id';
+        $request=$bdd->prepare($sql);
+        $execute=$request->execute(array(
+            'id'=>$this->id
+        ));
     }
 
     public function getId()

@@ -15,11 +15,13 @@ if(isset($_POST['connexion'])) {
         'email' => $_POST['email']
     ));
 
+    var_dump($_POST);
     $co = $entreprise->connexion($bdd, $_POST['password']);
+    var_dump($co);
     if ($co) {
 
         $_SESSION['entreprise'] = $co;
-        header("Location: ../../view/entreprise/page_accueil.php");
+        //header("Location: ../../view/entreprise/page_accueil.php");
         //
 
     } else {
