@@ -167,7 +167,7 @@ if(isset($_POST['selectIdentity'])) {
                     <div class="row form-group">
                         <div class="col-md-12">
                             <form action="" method="post">
-                                <select name="selectIdentity" id="selectIdentity" class="form-control" onchange="this.form.submit()" required="required">
+                                <select name="selectIdentity" id="selectIdentity" class="form-control" onchange="this.form.submit()" required>
                                     <option selected hidden disabled><?=$placeHolder;?></option>
                                     <option value="administrateur">Administrateur</option>
                                     <option value="entreprise">Entreprise</option>
@@ -179,17 +179,25 @@ if(isset($_POST['selectIdentity'])) {
 
                     <div class="row form-group">
                         <div class="col-md-12">
-                            <!-- <label for="subject">Subject</label> -->
                             <form action='<?=$cible?>' method='POST'>
-<!--                                    <label for='email'><b>Email</b></label>-->
-                                <input type='email' class="form-control" placeholder='Email' name='email' required='required'>
+                                <input type='email' class="form-control" placeholder='Email' name='email' required>
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-12">
-<!--                                    <label for='password'><b>Mot de passe</b></label>-->
-                                <input type='password' class="form-control" placeholder='Password' name='password' required='required'>
+                            <input type='password' class="form-control" placeholder='Password' name='password' id="password" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <span class="col-md-1 text-left form-check-input mt-0"><input type="checkbox" onclick="myFunction()"></span>
+                            <span class="form-group col-md-11 text-left"> Afficher le mot de passe</span>
+                        </div>
+                    </div>
 
+                    <div class="row form-group text-center">
+                        <div class="col-md-12">
+                            <button type='submit' class="btn btn-link" name='mdp_oublie'>Mot de passe oublié?</button>
                         </div>
                     </div>
 
@@ -277,22 +285,12 @@ if(isset($_POST['selectIdentity'])) {
 <!-- Main -->
 <script src="../style/js/main.js"></script>
 <script>
-    var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
-
-    // default example
-    simplyCountdown('.simply-countdown-one', {
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate()
-    });
-
-    //jQuery example
-    $('#simply-countdown-losange').simplyCountdown({
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate(),
-        enableUtc: false
-    });
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") x.type = "text";
+        else x.type = "password";
+    }
 </script>
+
 </body>
 </html>
