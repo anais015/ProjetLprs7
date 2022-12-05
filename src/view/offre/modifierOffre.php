@@ -1,6 +1,7 @@
 <?php
 require_once "../../model/bdd/Bdd.php";
 require_once "../../model/administrateur/Type.php";
+require_once "../../model/offre/Offre.php";
 ?>
 <!doctype html>
 <html lang="fr">
