@@ -370,3 +370,10 @@ AS SELECT R.id_rdv, O.id_offre, O.titre AS nom_offre, R.horaire AS date_horaire,
           R.lieu, E.nom AS nom_etu, E.prenom AS prenom_etu, R.accepte, O.ref_entreprise
    FROM rdv as R, offre as O, etudiant as E
    WHERE R.ref_etudiant = E.id_etudiant AND R.ref_offre = O.id_offre;
+
+
+CREATE VIEW VuePostule(id_offre, nom_offre, id_etu, nom_etu, prenom_etu, ref_entreprise)
+AS SELECT P.ref_offre AS id_offre, O.titre AS nom_offre, E.id_etudiant AS id_etu,
+          E.nom AS nom_etu, E.prenom AS prenom_etu, O.ref_entreprise
+   FROM offre as O, etudiant as E, postule as P
+        WHERE P.ref_offre = O.id_offre AND P.ref_etudiant = E.id_etudiant;
