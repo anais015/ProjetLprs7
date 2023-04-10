@@ -9,7 +9,7 @@ session_start();
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Gestion des RDV </title>
+    <title>Gestionnaire des RDV </title>
     <!--<link rel="stylesheet" href="../../style/styleEntreprise.css">-->
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
@@ -58,13 +58,27 @@ session_start();
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
     <style>
         table{
-            background-color: #fd7e14;
-            table-layout: auto;
-            width: 250px;
+            table-layout: fixed;
+            width: 100%;
+            border-radius: 5px;
+            border: 5px;
+        }
+        th {
+            height: 70px;
+            text-align: center;
         }
         td, th{
+            border-bottom: 1px solid #4f4f4f;
+            background-color: #fd7e14;
             color: #1e2125;
             font-family: "Rage Italic";
+        }
+        td:nth-child(even) {
+            background-color: #ffe4b3;
+        }
+
+        td:nth-child(odd) {
+            background-color: #FFF;
         }
         .main-block {
             display: flex;
@@ -243,11 +257,14 @@ session_start();
                                     <table id="table_id" class="display">
                                         <thead>
                                         <tr>
-                                            <th>id de rdv</th>
-                                            <th>Horaire</th>
+                                            <th>id du rdv</th>
+                                            <th>id de l'offre</th>
+                                            <th>Nom de l'offre</th>
+                                            <th>Date et Horaire</th>
                                             <th>Lieu</th>
-                                            <th>accepte</th>
-                                            <!-- <th>Type</th>-->
+                                            <th>Nom de l'étudiant</th>
+                                            <th>Prénom de l'étudiant</th>
+                                            <th>Accepté ?</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -255,13 +272,15 @@ session_start();
                                         $bdd = new Bdd();
                                         $bdd=$bdd->getBdd();
                                         $rdv = new Rdv(array('ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']));
-                                        $donnees = $rdv->affichage($bdd);
+                                        $donnees = $rdv->affichageRDV($bdd);
 
                                         foreach($donnees as $value){
 
-                                            echo "<tr><td>".$value['id_offre']."</td><td>"
-                                                .$value['titre']."</td><td>".$value['description']."</td><td>"
-                                                .$value['domaine']./*"</td><td>".$value['type'].*/"</td></tr>";
+                                            echo "<tr><td>".$value['id_rdv']."</td><td>"
+                                                .$value['id_offre']."</td><td>".$value['nom_offre']."</td><td>"
+                                                .$value['date_horaire']."</td><td>".$value['lieu']."</td><td>"
+                                                .$value['prenom_etu']."</td><td>".$value['nom_etu']."</td><td>"
+                                                .$value['accepte']."</td></tr>";
 
                                         }
                                         ?>
