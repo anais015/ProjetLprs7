@@ -362,3 +362,11 @@ END
 &&
 
 ALTER TABLE `offre` CHANGE `accepte` `accepte` TINYINT(1) NOT NULL DEFAULT '0';
+
+
+CREATE VIEW VueRDV(id_rdv, id_offre, nom_offre, date_horaire, lieu, nom_etu, prenom_etu,
+                   accepte, ref_entreprise)
+AS SELECT R.id_rdv, O.id_offre, O.titre AS nom_offre, R.horaire AS date_horaire,
+          R.lieu, E.nom AS nom_etu, E.prenom AS prenom_etu, R.accepte, O.ref_entreprise
+   FROM rdv as R, offre as O, etudiant as E
+   WHERE R.ref_etudiant = E.id_etudiant AND R.ref_offre = O.id_offre;
