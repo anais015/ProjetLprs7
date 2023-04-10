@@ -9,7 +9,7 @@ require_once "../../model/bdd/Bdd.php";
 
 $connexion = new Bdd();
 $bdd = $connexion->getBdd();
-var_dump($_POST);
+//var_dump($_POST);
 if(isset($_POST['modifierEvenement'])) {
 
     $event = new Evenement(array(
@@ -19,9 +19,9 @@ if(isset($_POST['modifierEvenement'])) {
         'fin'=> $_POST['fin'],
         'id'=>$_POST['id_evenement']
     ));
-
+    //var_dump($eve);
     $eve = $event->modifierEvenement($bdd);
-    var_dump($eve);
+
 
 
        echo "<script>
