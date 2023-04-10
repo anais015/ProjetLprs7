@@ -15,19 +15,25 @@ if(isset($_POST['connexion'])) {
         'email' => $_POST['email']
     ));
 
-    var_dump($_POST);
+    //var_dump($_POST);
     $co = $entreprise->connexion($bdd, $_POST['password']);
-    var_dump($co);
-    if ($co) {
+    //var_dump($co);
 
         $_SESSION['entreprise'] = $co;
-        //header("Location: ../../view/entreprise/page_accueil.php");
-        //
+
+        echo "<script>
+            window.location.href = \"../../view/entreprise/page_accueil.php\";
+            alert(\"Connexion !\")
+            </script>";
+
 
     } else {
-        echo "Email ou Mot de passe incorrecte, réessayer !";
-        //header('Location: ../../view/connexion.php');
-    }
+
+        echo "<script>
+            window.location.href = \"../../view/connexion.php\";
+            alert(\"Echec de la connection, Email ou Mot de passe incorrecte, réessayer !\")
+             </script>";
+
 }
 
 ?>
