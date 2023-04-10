@@ -19,7 +19,7 @@ $offre = new Offre(array(
     'refType'=>$_POST['type'],
     'ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']
 ));
-var_dump($offre);
+//var_dump($offre);
 $uneoffre = $offre->entrepriseCreerOffre($bdd);
 
 echo "<script>

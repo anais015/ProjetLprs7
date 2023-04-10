@@ -2,6 +2,7 @@
 require_once "../../model/bdd/Bdd.php";
 require_once "../../model/administrateur/Type.php";
 require_once "../../model/offre/Offre.php";
+session_start();
 ?>
 
 <!doctype html>
@@ -59,8 +60,8 @@ require_once "../../model/offre/Offre.php";
     <style>
         table{
             background-color: #fd7e14;
-            table-layout: auto;
-            width: 250px;
+            table-layout: fixed;
+            width: 100%;
         }
         td, th{
             color: #1e2125;
@@ -270,21 +271,21 @@ require_once "../../model/offre/Offre.php";
                                             <th>Nom de offre</th>
                                             <th>Description</th>
                                             <th>Domaine</th>
-                                           <!-- <th>Type</th>-->
+                                            <th>Type</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php
                                         $bdd = new Bdd();
                                         $bdd=$bdd->getBdd();
-                                        $offre = new Offre(array('ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']));
+                                        $offre = new Offre(array('ref_entreprise'=> $_SESSION['entreprise']['id_entreprise']));
                                         $donnees = $offre->affichage($bdd);
 
                                         foreach($donnees as $value){
 
                                             echo "<tr><td>".$value['id_offre']."</td><td>"
                                                 .$value['titre']."</td><td>".$value['description']."</td><td>"
-                                                .$value['domaine']./*"</td><td>".$value['type'].*/"</td></tr>";
+                                                .$value['domaine']."</td><td>".$value['ref_type']."</td></tr>";
 
                                         }
                                         ?>

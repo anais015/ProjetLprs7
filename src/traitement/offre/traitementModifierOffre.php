@@ -9,7 +9,7 @@ require_once "../../model/bdd/Bdd.php";
 
 $connexion = new Bdd();
 $bdd = $connexion->getBdd();
-
+//var_dump($_POST);
 if(isset($_POST['modifierOffre'])) {
 
     $offre = new Offre(array(
@@ -19,9 +19,9 @@ if(isset($_POST['modifierOffre'])) {
         'refType'=>$_POST['type'],
         'id'=>$_POST['id_offre']
         ));
-    var_dump($offre);
+    //var_dump($offre);
     $uneoffre = $offre->entrepriseModifierOffre($bdd);
-
+    //exit();
     echo "<script>
         window.location.href = \"../../view/offre/modifierOffre.php\";
         alert(\"Modification effectuée !\")

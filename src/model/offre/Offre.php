@@ -8,7 +8,7 @@ class Offre
     private ?string $domaine;
     private ?bool $accepte;
     private ?int $refType;
-    private $ref_entreprise;
+    private ?int $ref_entreprise;
     private ?int $ref_etudiant;
 
     public function __construct(array $donnees)
@@ -41,7 +41,7 @@ class Offre
         $sql='INSERT INTO offre (titre, description, domaine, ref_type, ref_entreprise) 
         VALUES (:titre, :description, :domaine, :refType, :ref_entreprise)';
         $req = $bdd->prepare($sql);
-        $execute=$req->execute(array(
+        $execute = $req->execute(array(
             'titre' => $this->titre,
             'description' => $this->description,
             'refType'=>$this->refType,
@@ -51,7 +51,8 @@ class Offre
     }
 
     public function entrepriseModifierOffre(PDO $bdd){
-        $sql='UPDATE offre SET titre=:titre, description=:description,  domaine=:domaine, ref_type=:refType
+        $sql='UPDATE offre SET titre=:titre, description=:description,
+                 domaine=:domaine, ref_type=:refType
         WHERE id_offre=:id';
         $req = $bdd->prepare($sql);
         $execute=$req->execute(array(
@@ -61,14 +62,16 @@ class Offre
             'domaine' =>$this->domaine,
             'id'=>$this->id
         ));
+        if ($execute) return true;
+        else return false;
     }
 
     public function entrepriseSupprimerOffre(PDO $bdd){
         $sql='DELETE FROM offre WHERE id_offre=:id';
         $request=$bdd->prepare($sql);
-        $execute=$request->execute(array(
-            'id'=>$this->id
-        ));
+        $execute=$request->execute(array('id'=>$this->id));
+        if($execute) return true;
+        else return false;
     }
 
     public function getId()
