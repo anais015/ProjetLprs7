@@ -59,13 +59,27 @@ session_start();
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
     <style>
         table{
-            background-color: #fd7e14;
             table-layout: fixed;
             width: 100%;
+            border-radius: 5px;
+            border: 5px;
+        }
+        th {
+            height: 70px;
+            text-align: center;
         }
         td, th{
+            border-bottom: 1px solid #4f4f4f;
+            background-color: #fd7e14;
             color: #1e2125;
             font-family: "Rage Italic";
+        }
+        td:nth-child(even) {
+            background-color: #ffe4b3;
+        }
+
+        td:nth-child(odd) {
+            background-color: #FFF;
         }
         .main-block {
             display: flex;
