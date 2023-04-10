@@ -7,20 +7,22 @@ require_once "../../model/entreprise/Entreprise.php";
 require_once "../../model/etudiant/Etudiant.php";
 require_once "../../model/rdv/Rdv.php";
 require_once "../../model/bdd/Bdd.php";
+require_once "../../model/offre/Offre.php";
 
 $connexion = new Bdd();
 $bdd = $connexion->getBdd();
 
-if(isset($_POST['creerRDV'])) {
+if(isset($_POST['OrgRDV'])) {
 
     $rdv = new Rdv(array(
         'horaire' => $_POST['horaire'],
         'lieux' =>$_POST['lieux'],
-        'refEtudiant'=>$_POST['ref_etudiant'],
-        'refOffre'=>$_POST['ref_offre']
+        'refEtudiant'=>$_POST['id_etudiant'],
+        'refOffre'=>$_POST['id_offre']
     ));
 
-    $LesRDV = $rdv->creation($bdd);
+    $LesRDV = $rdv->creationRDV($bdd);
+
     echo "<script>
         window.location.href = \"../../view/rdv/organiserRDV\";
         alert(\"RDV enregistré\")

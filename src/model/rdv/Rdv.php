@@ -6,9 +6,9 @@ class Rdv
     private $horaire;
     private ?string $lieux='';
     private ?bool $accepte=false;
-    private ?int$refOffre=null;
-    private ?int$ref_entreprise=null;
-    private ?int$refEtudiant=null;
+    private ?int $refOffre=null;
+    private ?int $ref_entreprise=null;
+    private ?int $refEtudiant=null;
 
     public function __construct(array $donnees)
     {
@@ -25,8 +25,8 @@ class Rdv
         }
     }
 
-    public function affichage($bdd){
-        $sql='SELECT * FROM rdv WHERE ref_entreprise=:ref_entreprise';
+    public function affichageRDV($bdd){
+        $sql='SELECT * FROM vuerdv WHERE ref_entreprise=:ref_entreprise';
         $request= $bdd->prepare($sql);
         $request->execute(array(
             'ref_entreprise'=> $this->ref_entreprise
@@ -36,9 +36,9 @@ class Rdv
         else return false;
     }
 
-    public function creation($bdd){
+    public function creationRDV($bdd){
         $sql='INSERT INTO rdv (horaire, lieux, ref_etudiant, ref_offre) 
-VALUES (:horaire,:lieux, :refEtudiant, :refOffre)';
+        VALUES (:horaire,:lieux, :refEtudiant, :refOffre)';
         $req = $bdd->prepare($sql);
         $execute=$req->execute(array(
             'horaire' => $this->horaire,
@@ -46,6 +46,30 @@ VALUES (:horaire,:lieux, :refEtudiant, :refOffre)';
             'refEtudiant'=>$this->refEtudiant,
             'refOffre'=>$this->refOffre
         ));
+        if ($execute) return true;
+        else return false;
+    }
+
+    public function ListeOffresPostule($bdd){
+        $sql='SELECT id_offre, nom_offre FROM vuePostule Where ref_entreprise=:ref_entreprise';
+        $request= $bdd->prepare($sql);
+        $request->execute(array(
+            'ref_entreprise'=> $this->ref_entreprise
+        ));
+        $result = $request->fetchAll();
+        if(is_array($result)) return $result;
+        else return false;
+    }
+
+    public function ListeEtudiantsPostule($bdd){
+        $sql='SELECT id_etu, nom_etu, prenom_etu FROM vuePostule where ref_entreprise=:ref_entreprise';
+        $request= $bdd->prepare($sql);
+        $request->execute(array(
+            'ref_entreprise'=> $this->ref_entreprise
+        ));
+        $result = $request->fetchAll();
+        if(is_array($result)) return $result;
+        else return false;
     }
 
     public function getId() {

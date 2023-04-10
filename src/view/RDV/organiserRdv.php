@@ -4,6 +4,9 @@ require_once "../../model/Utilisateur.php";
 require_once "../../model/administrateur/Type.php";
 require_once "../../model/etudiant/Etudiant.php";
 require_once "../../model/offre/Offre.php";
+require_once "../../model/rdv/Rdv.php";
+
+session_start();
 ?>
 
 <!doctype html>
@@ -112,53 +115,72 @@ require_once "../../model/offre/Offre.php";
         </div>
     </nav>
 
-    <!-- création d'un rdv -->
+    <div id="fh5co-contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 align-self-start"></div>
+                <div class="col-md-6 align-self-center">
 
-    <p> Création d'un rdv</p>
+                    <h3 class="text-center"> Organiser d'un rdv</h3>
 
-    <form action='../../traitement/rdv/traitementCreerRDV.php' method='POST'>
-        <label for="choix-etudiant">Etudiant :</label>
-        <select name="etudiant" id="choix-etudiant">
-            <option value="">Choisissez l'étudiant</option>
-            <?php
-            $bdd = new Bdd();
-            $etu = new Etudiant(array());
-            $donnees = $etu->selectParId($bdd);
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <form action='../../traitement/rdv/traitementCreerRDV.php' method='POST'>
 
-            foreach($donnees as $value) {
+                                <label for="choix-offre">Offre :</label>
+                                <select name="id_offre" id="choix-offre">
+                                    <option value="" disabled selected>Choisissez l'offre :</option>
+                                    <?php
+                                    $bdd = new Bdd();
+                                    $bdd=$bdd->getBdd();
+                                    $rdv = new Rdv(array('ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']));
+                                    $donnees = $rdv->ListeOffresPostule($bdd);
 
-                echo "<option value=".$value['id_etudiant'].">".$value['nom']."</option>";
-            }
-            ?>
-        </select>
-        <br/><br/>
-        <label for="choix-offre">Offre :</label>
-        <select name="offre" id="choix-offre">
-            <option value="">Choisissez l'offre</option>
-            <?php
-            $bdd = new Bdd();
-            $offre = new Offre(array());
-            $donnees = $offre->affichage($bdd);
+                                    foreach($donnees as $value) {
 
-            foreach($donnees as $value) {
+                                        echo "<option value=".$value['id_offre'].">".$value['id_offre']."<p> - </p>".$value['nom_offre']."</option>";
+                                    }
+                                    ?>
+                                </select>
+                                <br/><br/>
+                                <label for="choix-etudiant">Etudiant :</label>
+                                <select name="id_etudiant" id="choix-etudiant">
+                                    <option value="" disabled selected>Choisissez l'étudiant</option>
+                                    <?php
+                                    $bdd = new Bdd();
+                                    $bdd = $bdd->getBdd();
+                                    $etu = new Rdv(array('ref_entreprise'=>$_SESSION['entreprise']['id_entreprise']));
+                                    $donnees = $etu->ListeEtudiantsPostule($bdd);
 
-                echo "<option value=".$value['id_offre'].">".$value['titre']."</option>";
-            }
-            ?>
-        </select>
+                                    foreach($donnees as $value) {
 
-        <br/><br/>
-        <label for="choix-horaire">Horaire :</label>
-        <input type="time" id="choix-horaire" name="horaire"
-               min="06:00" max="22:00" required>
-        <br/><br/>
-        <label for="choix-lieux">Lieux :</label>
-        <input type='text' placeholder='Lieux' name='lieux'  required>
-    </form>
+                                        echo "<option value=".$value['id_etu'].">".$value['id_etu']." ".$value['nom_etu']." ".$value['prenom_etu']."</option>";
+                                    }
+                                    ?>
+                                </select>
+                                <br/><br/>
+                                <label for="choix-horaire">Date et Horaire :</label>
+                                <input type="datetime-local" id="choix-horaire" name="horaire"
+                                       min="06:00" max="22:00" required><p><b> Veuillez choisir l'heure entre 6h et 22h </b></p>
 
-    <!-- Partie du bas -->
+                                <label for="choix-lieux">Lieux :</label>
+                                <input type='text' placeholder='Lieux' name='lieux'  required>
+                                <br/><br/>
+                                <div class="form-group text-center">
+                                    <input type='submit' value="Organiser RDV" name='OrgRDV' id='OrgRDV' class="btn btn-primary"></input>
+                            </form>
+                        </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <footer id="fh5co-footer" role="contentinfo" style="background-image: url(../../style/images/img_bg_4.jpg);">
+                            <!-- Partie du bas -->
+
+        <footer id="fh5co-footer" role="contentinfo" style="background-image: url(../../style/images/img_bg_4.jpg);">
         <div class="overlay"></div>
         <div class="container">
             <div class="row row-pb-md">
