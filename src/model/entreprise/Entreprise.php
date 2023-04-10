@@ -217,7 +217,7 @@ class Entreprise extends Utilisateur
             "code"=>$code,
             "email"=>$this->getEmail()
         ));
-        $mail->sendMail($this->getEmail(),"Code Mot de passe oublié","Votre code pour modifer votre mot de passe est : ".$code);
+        $mail->sendMail($this->getEmail(),"Code Mot de passe oublié","Votre code pour modifier votre mot de passe est : ".$code);
     }
 
     public function ListeOffresPostule($bdd){
@@ -225,6 +225,18 @@ class Entreprise extends Utilisateur
         $request= $bdd->prepare($sql);
         $request->execute(array(
             'ref_entreprise'=> $this->ref_entreprise
+        ));
+        $result = $request->fetchAll();
+        if(is_array($result)) return $result;
+        else return false;
+    }
+
+    public function ListeEtudiantsPostule($bdd){
+        $sql='SELECT e.nom, e.prenom, e.email FROM `etudiant` as e 
+        INNER JOIN postule as p on ref_etudiant=id_etudiant WHERE ref_offre=:ref_offre';
+        $request= $bdd->prepare($sql);
+        $request->execute(array(
+            'ref_offre'=> $this->ref_offre
         ));
         $result = $request->fetchAll();
         if(is_array($result)) return $result;
